@@ -13,5 +13,3 @@ if __name__ == '__main__':
     # fetch individual stocks and the S&P index
     symbols = ["GS", "AAPL", "IBM", "GOOG", "T", "^GSPC"]
     fetchDataFromYahoo(symbols).to_csv("data.csv")
-
-
