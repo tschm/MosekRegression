@@ -10,10 +10,8 @@ def normalize(ts):
     return ts/np.linalg.norm(ts.values,2)
 
 def lasso(X, y, lamb):
-    e = np.eye(X.shape[1])
-    print e
     return pd.Series(index=X.columns,
-                     data=mp.lsqSparse(X.values, y.values, e, lamb, np.zeros(len(y))))
+                     data=mp.lasso(X.values, y.values, lamb))
 
 
 if __name__ == '__main__':
@@ -25,8 +23,8 @@ if __name__ == '__main__':
     r = computeReturn(apple)
 
     d = dict()
-    for c in [3, 5, 8, 13, 21, 34, 55]:
-        d["m" + str(c)] = pd.ewma(r, com=c, min_periods=15)
+    for c in [3, 5, 8, 13, 21, 34, 55, 89]:
+        d[str(c)] = pd.ewma(r, com=c, min_periods=15)
 
     X = pd.DataFrame(d)
     # shift returns as we are trying to predict the next day return...
@@ -37,7 +35,7 @@ if __name__ == '__main__':
 
     X = X.apply(normalize)
     y = normalize(y)
-    print lasso(X,y,0.0)
+    print lasso(X,y,0.005)
     
     
     

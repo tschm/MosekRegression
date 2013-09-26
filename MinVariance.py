@@ -5,9 +5,9 @@ def computeReturn(ts):
     ts = ts.dropna()
     return ts.diff() / ts.shift(1)
 
-def lsqPosFull(X, y):
+def lsq(X, y):
     return pd.Series(index=X.columns,
-                     data=ms.lsqPosFull(X.values, y.values))
+                     data=ms.lsqPosFullInv(X.values, y.values))
 
 def AnnualizedSharpeRatio(ts):
     return 16*ts.mean()/ts.std()
@@ -25,8 +25,8 @@ if __name__ == '__main__':
     # construct a rhs
     rhsZero = pd.TimeSeries(index=retStocks.index, data=0.0)
     
-    wMin = lsqPosFull(X=retStocks, y=rhsZero)
-    wTrack = lsqPosFull(X=retStocks, y=retIndex)
+    wMin = lsq(X=retStocks, y=rhsZero)
+    wTrack = lsq(X=retStocks, y=retIndex)
 
     d = dict()
     d["Min Variance"] = (retStocks * wMin).sum(axis=1)

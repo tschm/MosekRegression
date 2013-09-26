@@ -1,86 +1,78 @@
 from mosek.fusion import *
-import sys
 
-
-def lsqPosFull(X, y):
-    X = DenseMatrix(X)
-    M = Model('lsqPos')
-    # variables
-    w = M.variable('w', X.numColumns(), 
-                        Domain.greaterThan(0.0))
-    v = M.variable('v', 1, Domain.unbounded())
-
+def __unitsum__(M,w):
     # e'*w = 1
     M.constraint(Expr.sum(w), Domain.equalsTo(1.0))
+    
+def __abs__(M,w):
+    t = M.variable('t', int(w.size()), Domain.unbounded())
+                        
+    # (t_i, w_i) \in Q2
+    for i in range(0, w.size()):
+        M.constraint(Expr.vstack(t.index(i),w.index(i)), 
+                                 Domain.inQCone())
 
-    # (v, X*w-y) \in Qn
-    M.constraint(Expr.vstack(v.asExpr(),
-                 Expr.sub(Expr.mul(X, w), y)),
-                 Domain.inQCone())
+    return t
 
-    # Minimize v (norm of X*w - y)
-    M.objective(ObjectiveSense.Minimize, v)
-    # Solve the problem
+def __lsq__(M,X,w,y):
+    v = M.variable('v', 1, Domain.unbounded())
+    
+    # (v, 1/2, Xw-y) \in Qr
+    M.constraint(Expr.vstack(0.5,
+                             v, 
+                             Expr.sub(Expr.mul(X,w),y) ), 
+                             Domain.inRotatedQCone())
+    
+    return v
+
+def __minimise__(M, expr):
+    M.objective(ObjectiveSense.Minimize, expr)
     M.solve()
+    
+                
+def lsqPosFullInv(X, y):
+    X = DenseMatrix(X)
+    M = Model('lsqPos')
+    
+    # weight-variables
+    w = M.variable('w', X.numColumns(), Domain.greaterThan(0.0))
+                        
+    # e'*w = 1
+    __unitsum__(M,w)
+       
+    # (v, 1/2, Xw-y) \in Qr
+    __minimise__(M, __lsq__(M,X,w,y))
+    
     return w.level()
 
 
-def lsqSparse(X, y, Gamma, lamb):
+def lsqPosFullInvPenalty(X, y, Gamma, lamb):
     X = DenseMatrix(X) 
     Gamma = DenseMatrix(Gamma)     
     M = Model('lsqSparse') 
     # variables 
     w = M.variable('w', X.numColumns(), 
                         Domain.greaterThan(0.0)) 
-    v = M.variable('v', 1, Domain.unbounded()) 
-    t = M.variable('t', X.numColumns(), 
-                        Domain.unbounded())
+
+    __unitsum__(M,w)
     
-    # e'*w = 1 
-    M.constraint(Expr.sum(w), Domain.equalsTo(1.0)) 
-    # (v, 1/2, Xw-y) \in Qr
-    M.constraint(Expr.vstack(0.5,
-                             v, 
-                             Expr.sub(Expr.mul(X,w),y) ), 
-                             Domain.inRotatedQCone())
-    # (t_i, [Gamma*(w-w0)]_i) \in Q2
-    M.constraint(Expr.hstack(t.asExpr(), 
-                             Expr.mul(Gamma,w)), 
-                             Domain.inQCone())
+    v = __lsq__(M,X,w,y)
+    t = Expr.sum(__abs__(M, Expr.mul(Gamma,w)))
     
-    # Minimize v + lambda * sum(t)
-    M.objective(ObjectiveSense.Minimize, 
-                Expr.add(v, Expr.mul(lamb, Expr.sum(t)))) 
-    # Solve the problem 
-    M.solve() 
+    # Minimize v + lambda * t
+    __minimise__(M, Expr.add(v, Expr.mul(lamb, t)))
     return w.level() 
 
 
-def lasso2(X, y, lamb):
+def lasso(X, y, lamb):
     X = DenseMatrix(X) 
     M = Model('lasso') 
     # variables 
-    w = M.variable('w', X.numColumns(), 
-                        Domain.unbounded()) 
-    v = M.variable('v', 1, 
-                        Domain.unbounded()) 
+    w = M.variable('w', X.numColumns(), Domain.unbounded()) 
     
-    t = M.variable('t', X.numColumns(), 
-                        Domain.unbounded())
-                        
-    # (v, 1/2, Xw-y) \in Qr
-    M.constraint(Expr.vstack(0.5,
-                             v, 
-                             Expr.sub(Expr.mul(X,w),y) ), 
-                             Domain.inRotatedQCone())
-    # (t_i, w_i) \in Q2
-    M.constraint(Expr.hstack(t.asExpr(), 
-                             w.asExpr(), 
-                             Domain.inQCone()))
-    
-    # Minimize v + lambda * sum(t)
-    M.objective(ObjectiveSense.Minimize, 
-                Expr.add(v, Expr.mul(lamb, Expr.sum(t)))) 
-    # Solve the problem 
-    M.solve() 
+    v = __lsq__(M,X,w,y)   
+    t = Expr.sum(__abs__(M, w))
+        
+    # Minimize v + lambda*t
+    __minimise__(M, Expr.add(v, Expr.mul(lamb, t))) 
     return w.level() 
