@@ -25,16 +25,16 @@ def lsqPosFull(X, y):
     return w.level()
 
 
-def lsqSparse(X, y, Gamma, lamb, w0):
+def lsqSparse(X, y, Gamma, lamb):
     X = DenseMatrix(X) 
     Gamma = DenseMatrix(Gamma)     
     M = Model('lsqSparse') 
     # variables 
     w = M.variable('w', X.numColumns(), 
                         Domain.greaterThan(0.0)) 
-    v = M.variable('v', 1, Domain.unbounded(0.0)) 
+    v = M.variable('v', 1, Domain.unbounded()) 
     t = M.variable('t', X.numColumns(), 
-                        Domain.unbounded(0.0))
+                        Domain.unbounded())
     
     # e'*w = 1 
     M.constraint(Expr.sum(w), Domain.equalsTo(1.0)) 
@@ -45,7 +45,7 @@ def lsqSparse(X, y, Gamma, lamb, w0):
                              Domain.inRotatedQCone())
     # (t_i, [Gamma*(w-w0)]_i) \in Q2
     M.constraint(Expr.hstack(t.asExpr(), 
-                             Expr.mul(Gamma,Expr.sub(w,w0))), 
+                             Expr.mul(Gamma,w)), 
                              Domain.inQCone())
     
     # Minimize v + lambda * sum(t)
@@ -56,14 +56,18 @@ def lsqSparse(X, y, Gamma, lamb, w0):
     return w.level() 
 
 
-def lasso(X, y, lamb):
+def lasso2(X, y, lamb):
     X = DenseMatrix(X) 
     M = Model('lasso') 
     # variables 
     w = M.variable('w', X.numColumns(), 
-                        Domain.unbounded(0.0)) 
-    v = M.variable('v', 1, Domain.unbounded(0.0)) 
+                        Domain.unbounded()) 
+    v = M.variable('v', 1, 
+                        Domain.unbounded()) 
     
+    t = M.variable('t', X.numColumns(), 
+                        Domain.unbounded())
+                        
     # (v, 1/2, Xw-y) \in Qr
     M.constraint(Expr.vstack(0.5,
                              v, 
@@ -71,7 +75,7 @@ def lasso(X, y, lamb):
                              Domain.inRotatedQCone())
     # (t_i, w_i) \in Q2
     M.constraint(Expr.hstack(t.asExpr(), 
-                             w, 
+                             w.asExpr(), 
                              Domain.inQCone()))
     
     # Minimize v + lambda * sum(t)

@@ -36,5 +36,7 @@ if __name__ == '__main__':
     frame = pd.DataFrame(d)
 
     # apply some simple diagnostics
+    print "Annualized Sharpe ratio"
     print frame.apply(AnnualizedSharpeRatio)
+    print "Standard deviation of returns"
     print frame.std()
