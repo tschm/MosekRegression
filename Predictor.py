@@ -19,12 +19,12 @@ if __name__ == '__main__':
     data = pd.read_csv("data.csv", index_col=0, 
                                    parse_dates=True)
 
-    apple = data["AAPL"]
-    r = computeReturn(apple)
-
+    stock = data["GS"]
+    r = computeReturn(stock)
+    
     d = dict()
-    for c in [3, 5, 8, 13, 21, 34, 55, 89]:
-        d[str(c)] = pd.ewma(r, com=c, min_periods=15)
+    for c in [2,3,5,8,13, 21, 34, 55, 89]:
+        d[str(c)] = pd.ewma(r, com=c, min_periods=30)
 
     X = pd.DataFrame(d)
     # shift returns as we are trying to predict the next day return...
@@ -35,8 +35,15 @@ if __name__ == '__main__':
 
     X = X.apply(normalize)
     y = normalize(y)
-    print lasso(X,y,0.005)
+    w = lasso(X,y,0.005)
     
+    print w
+    print np.corrcoef((X*w).sum(axis=1), y)
     
-    
+    #position = 1000000*(X*w).sum(axis=1)
+    #profit = position*y
+    #print position.mean()
+    #print profit.mean()
+    #profit.cumsum().plot()
+    #plt.show()
     
