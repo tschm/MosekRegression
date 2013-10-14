@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 
 from mosekTools.solver import solver as ms
@@ -9,12 +8,15 @@ def computeReturn(ts):
     ts = ts.dropna()
     return ts.diff() / ts.shift(1)
 
+
 def lsq(X, y):
     return pd.Series(index=X.columns,
                      data=ms.lsqPosFullInv(X.values, y.values))
 
+
 def AnnualizedSharpeRatio(ts):
     return 16*ts.mean()/ts.std()
+
 
 if __name__ == '__main__':
     # load data from csv file
