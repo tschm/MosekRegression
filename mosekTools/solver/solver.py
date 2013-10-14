@@ -1,5 +1,5 @@
 from mosek.fusion import *
-import mosekTools.util.util as util
+import mosekTools.util.util as Util
 
 
 # min 2-norm (Xw - y)**
@@ -7,17 +7,17 @@ import mosekTools.util.util as util
 #               w >= 0    
 def lsqPosFullInv(X, y):
     # define model
-    M = Model('lsqPos')
+    m = Model('lsqPos')
     # weight-variables
-    w = M.variable('w', X.shape[1], Domain.greaterThan(0.0))
+    w = m.variable('w', X.shape[1], Domain.greaterThan(0.0))
 
     # e'*w = 1
-    M.constraint(Expr.sum(w), Domain.equalsTo(1.0))
+    m.constraint(Expr.sum(w), Domain.equalsTo(1.0))
 
     # sum of squared residuals
-    v = util.lsq(M, 'ssqr', X, w, y)
+    v = Util.lsq(m, 'ssqr', X, w, y)
 
-    util.minimise(M, v)
+    Util.minimise(m, v)
     return w.level()
 
 # min 2-norm (Xw - y)** + 1-norm(Gamma*(w-w0))
@@ -25,34 +25,35 @@ def lsqPosFullInv(X, y):
 #               w >= 0  
 def lsqPosFullInvPenalty(X, y, Gamma, lamb, w0):
 # define model
-    M = Model('lsqSparse')
+    m = Model('lsqSparse')
     # introduce variable and constraints
-    w = M.variable('w', X.shape[1], Domain.greaterThan(0.0))
+    w = m.variable('w', X.shape[1], Domain.greaterThan(0.0))
 
     # e'*w = 1
-    M.constraint(Expr.sum(w), Domain.equalsTo(1.0))
+    m.constraint(Expr.sum(w), Domain.equalsTo(1.0))
 
     # sum of squared residuals
-    v = util.lsq(M, 'ssqr', X, w, y)
+    v = Util.lsq(m, 'ssqr', X, w, y)
 
     # \Gamma*(w - w0), p is an expression
     p = Expr.mul(DenseMatrix(Gamma), Expr.sub(w, w0))
-    t = Expr.sum(util.abs(M, 'abs(weights)', p))
+    t = Expr.sum(Util.abs(m, 'abs(weights)', p))
 
     # Minimise v + lambda * t
-    util.minimise(M, Expr.add(v, Expr.mul(lamb, t)))
+    Util.minimise(m, Expr.add(v, Expr.mul(lamb, t)))
     return w.level()
+
 
 # min 2-norm (Xw -y)** + 1-norm(w)
 def lasso(X, y, lamb):
     # define model	
-    M = Model('lasso')
+    m = Model('lasso')
     # introduce variables and constraints 
-    w = M.variable('w', X.shape[1], Domain.unbounded())
-    v = util.lsq(M, 'ssqr', X, w, y)
-    t = Expr.sum(util.abs(M, 'abs(weights)', w))
+    w = m.variable('w', X.shape[1], Domain.unbounded())
+    v = Util.lsq(m, 'ssqr', X, w, y)
+    t = Expr.sum(Util.abs(m, 'abs(weights)', w))
 
     # Minimise v + lambda * t
-    util.minimise(M, Expr.add(v, Expr.mul(lamb, t)))
+    Util.minimise(m, Expr.add(v, Expr.mul(lamb, t)))
 
     return w.level()     
