@@ -41,10 +41,3 @@ if __name__ == '__main__':
     print w
     print np.corrcoef((X*w).sum(axis=1), y)
     
-    #position = 1000000*(X*w).sum(axis=1)
-    #profit = position*y
-    #print position.mean()
-    #print profit.mean()
-    #profit.cumsum().plot()
-    #plt.show()
-    
