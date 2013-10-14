@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-import MosekSolver as mp
+from mosekTools.solver import solver as mp
+
 
 def computeReturn(ts):
     ts = ts.dropna()
@@ -16,8 +17,8 @@ def lasso(X, y, lamb):
 
 if __name__ == '__main__':
     # load data from csv files
-    data = pd.read_csv("data.csv", index_col=0, 
-                                   parse_dates=True)
+    data = pd.read_csv("data/data.csv", index_col=0,
+                       parse_dates=True)
 
     stock = data["GS"]
     r = computeReturn(stock)

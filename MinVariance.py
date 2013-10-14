@@ -1,5 +1,9 @@
+import os
+
 import pandas as pd
-import MosekSolver as ms
+
+from mosekTools.solver import solver as ms
+
 
 def computeReturn(ts):
     ts = ts.dropna()
@@ -14,8 +18,8 @@ def AnnualizedSharpeRatio(ts):
 
 if __name__ == '__main__':
     # load data from csv file
-    data = pd.read_csv("data.csv", index_col=0,
-                                   parse_dates=True)
+    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0,
+                       parse_dates=True)
 
     stocks = data[["GOOG", "T", "AAPL", "GS", "IBM"]]
     index = data["^GSPC"]
@@ -40,3 +44,9 @@ if __name__ == '__main__':
     print frame.apply(AnnualizedSharpeRatio)
     print "Standard deviation of returns"
     print frame.std()
+
+    import matplotlib.pyplot as plt
+
+    (frame + 1.0).cumprod().plot()
+    plt.show()
+
