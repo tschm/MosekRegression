@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # mosekTools documentation build configuration file, created by
-# sphinx-quickstart on Mon Oct 14 12:08:42 2013.
+# sphinx-quickstart on Wed Oct 16 19:10:40 2013.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.

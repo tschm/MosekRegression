@@ -1,36 +1,85 @@
 from mosek.fusion import *
 
 
-def QCone(model, expr1, expr2):
+def build_model(name):
+    return Model(name)
+
+
+def quad_cone(model, expr1, expr2):
     model.constraint(Expr.vstack(expr1, expr2),
                      Domain.inQCone())
 
 
-def rotQCone(model, expr1, expr2, expr3):
+def rotated_quad_cone(model, expr1, expr2, expr3):
     model.constraint(Expr.vstack(expr1, expr2, expr3),
                      Domain.inRotatedQCone())
 
 
-def abs(model, name, expr):
+def absolute(model, name, expr):
     t = model.variable(name, int(expr.size()),
                        Domain.unbounded())
 
     # (t_i, w_i) \in Q2
     for i in range(0, int(expr.size())):
-        QCone(model, t.index(i), expr.index(i))
+        quad_cone(model, t.index(i), expr.index(i))
 
     return t
 
 
-# squared residual, e.g. v = (2-norm [X*w - y])**
-def lsq(model, name, X, w, y):
-    v = model.variable(name, 1, Domain.unbounded())
-
-    # (1/2, v, Xw-y) \in Qr
-    res = Expr.sub(Expr.mul(DenseMatrix(X), w), y)
-    rotQCone(model, 0.5, v, res)
-
+def l1_norm(model, name, expr):
+    """
+    Given an expression (e.g. a vector) this returns the L1-norm of this vector as an expression.
+    It also introduces n (where n is the size of the expression) auxiliary variables. Mosek requires a name
+    for any variable that is added to a model. The user has to specify this name explicitly.
+    This requirement may disappear in future version of this API.
+    """
+    v = Expr.sum(absolute(model, name, expr))
     return v
+
+
+def residual(X, y, w):
+    """
+    Introduce the residual X*w - y
+    """
+    return Expr.sub(Expr.mul(DenseMatrix(X), w), y)
+
+
+def l2_norm(model, name, expr):
+    """
+    Given an expression (e.g. a vector) this returns the L2-norm of this vector as an expression.
+    It also introduces an auxiliary variables. Mosek requires a name
+    for any variable that is added to a model. The user has to specify this name explicitly.
+    This requirement may disappear in future version of this API.
+    """
+    t = model.variable(name, 1, Domain.unbounded())
+    quad_cone(model, t, expr)
+    return t
+
+
+def l2_norm_squared(model, name, expr):
+    """
+    Given an expression (e.g. a vector) this returns the squared L2-norm of this vector as an expression.
+    It also introduces an auxiliary variables. Mosek requires a name
+    for any variable that is added to a model. The user has to specify this name explicitly.
+    This requirement may disappear in future version of this API.
+    """
+    t = model.variable(name, 1, Domain.unbounded())
+    rotated_quad_cone(model, 0.5, t, expr)
+    return t
+
+
+def linfty_norm(model, name, expr):
+    t = model.variable(name, 1, Domain.unbounded())
+
+    # (t, w_i) \in Q2
+    for i in range(0, int(expr.size())):
+        quad_cone(model, t, expr.index(i))
+
+    return t
+
+
+def sum_weighted(c1, expr1, c2, expr2):
+    return Expr.add(Expr.mul(c1, expr1), Expr.mul(c2, expr2))
 
 
 def minimise(model, expr):

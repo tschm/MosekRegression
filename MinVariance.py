@@ -1,21 +1,23 @@
 import os
+
 import pandas as pd
+import matplotlib.pyplot as mPlot
 
 from mosekTools.solver import solver as ms
 
 
-def computeReturn(ts):
+def compute_return(ts):
     ts = ts.dropna()
     return ts.diff() / ts.shift(1)
 
 
 def lsq(X, y):
     return pd.Series(index=X.columns,
-                     data=ms.lsqPosFullInv(X.values, y.values))
+                     data=ms.lsq_pos(X.values, y.values))
 
 
-def AnnualizedSharpeRatio(ts):
-    return 16*ts.mean()/ts.std()
+def ann_Sharpe_ratio(ts):
+    return 16 * ts.mean() / ts.std()
 
 
 if __name__ == '__main__':
@@ -26,13 +28,13 @@ if __name__ == '__main__':
     stocks = data[["GOOG", "T", "AAPL", "GS", "IBM"]]
     index = data["^GSPC"]
 
-    retStocks = stocks.apply(computeReturn).fillna(value=0.0)
-    retIndex = computeReturn(index).fillna(value=0.0)
+    retStocks = stocks.apply(compute_return).fillna(value=0.0)
+    retIndex = compute_return(index).fillna(value=0.0)
     # construct a rhs
     rhsZero = pd.TimeSeries(index=retStocks.index, data=0.0)
-    
+
     wMin = lsq(X=retStocks, y=rhsZero)
-    wTrack = lsq(X=retStocks, y=retIndex)
+    wTrack = lsq(X=retStocks.cumsum(), y=retIndex.cumsum())
 
     d = dict()
     d["Min Variance"] = (retStocks * wMin).sum(axis=1)
@@ -43,12 +45,10 @@ if __name__ == '__main__':
 
     # apply some simple diagnostics
     print "Annualized Sharpe ratio"
-    print frame.apply(AnnualizedSharpeRatio)
+    print frame.apply(ann_Sharpe_ratio)
     print "Standard deviation of returns"
     print frame.std()
 
-    import matplotlib.pyplot as plt
-
     (frame + 1.0).cumprod().plot()
-    plt.show()
+    mPlot.show()
 
