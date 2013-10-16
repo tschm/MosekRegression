@@ -2,25 +2,25 @@ from mosek.fusion import *
 import mosekTools.util.util as Util
 
 
-def fully_invested(model, w):
+def fully_invested(model, weights):
     """
     Enforce that the sum of weights is 1.0
     """
-    model.constraint(Expr.sum(w), Domain.equalsTo(1.0))
+    model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
 
 
-def market_neutral(model, w):
+def market_neutral(model, weights):
     """
     Enforce that the sum of weights is 0.0
     """
-    model.constraint(Expr.sum(w), Domain.equalsTo(0.0))
+    model.constraint(Expr.sum(weights), Domain.equalsTo(0.0))
 
 
-def max_leverage(model, w, bound):
+def max_leverage(model, weights, bound):
     """
     This is a bound for the 1-norm of the weights
     """
-    t = Util.l1_norm(model, "leverage", w)
+    t = Util.l1_norm(model, "leverage", weights)
     model.constraint(t, Domain.lessThan(bound))
 
 

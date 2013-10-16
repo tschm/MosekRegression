@@ -1,10 +1,6 @@
 mosekTools.solver package
 =========================
 
-
-Submodules
-----------
-
 mosekTools.solver.finance module
 --------------------------------
 
@@ -21,11 +17,3 @@ mosekTools.solver.solver module
         :undoc-members:
         :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: mosekTools.solver
-:members:
-        :undoc-members:
-        :show-inheritance:

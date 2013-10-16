@@ -2,9 +2,6 @@ mosekTools.data package
 =======================
 
 
-Submodules
-----------
-
 mosekTools.data.yahoo module
 ----------------------------
 
@@ -14,10 +11,3 @@ mosekTools.data.yahoo module
         :show-inheritance:
 
 
-Module contents
----------------
-
-.. automodule:: mosekTools.data
-:members:
-        :undoc-members:
-        :show-inheritance:

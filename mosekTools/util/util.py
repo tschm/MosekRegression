@@ -37,11 +37,11 @@ def l1_norm(model, name, expr):
     return v
 
 
-def residual(X, y, w):
+def residual(matrix, rhs, w):
     """
-    Introduce the residual X*w - y
+    Introduce the residual matrix*w - rhs
     """
-    return Expr.sub(Expr.mul(DenseMatrix(X), w), y)
+    return Expr.sub(Expr.mul(DenseMatrix(matrix), w), rhs)
 
 
 def l2_norm(model, name, expr):

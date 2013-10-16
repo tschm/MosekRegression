@@ -11,9 +11,9 @@ def compute_return(ts):
     return ts.diff() / ts.shift(1)
 
 
-def lsq(X, y):
-    return pd.Series(index=X.columns,
-                     data=ms.lsq_pos(X.values, y.values))
+def lsq(matrix, rhs):
+    return pd.Series(index=matrix.columns,
+                     data=ms.lsq_pos(matrix.values, rhs.values))
 
 
 def ann_Sharpe_ratio(ts):
@@ -33,8 +33,8 @@ if __name__ == '__main__':
     # construct a rhs
     rhsZero = pd.TimeSeries(index=retStocks.index, data=0.0)
 
-    wMin = lsq(X=retStocks, y=rhsZero)
-    wTrack = lsq(X=retStocks.cumsum(), y=retIndex.cumsum())
+    wMin = lsq(matrix=retStocks, rhs=rhsZero)
+    wTrack = lsq(matrix=retStocks.cumsum(), rhs=retIndex.cumsum())
 
     d = dict()
     d["Min Variance"] = (retStocks * wMin).sum(axis=1)
@@ -51,4 +51,3 @@ if __name__ == '__main__':
 
     (frame + 1.0).cumprod().plot()
     mPlot.show()
-

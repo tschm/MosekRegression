@@ -1,18 +1,12 @@
 Welcome to mosekTools's documentation!
 ======================================
 
-Contents:
 
 .. toctree::
-:maxdepth: 4
+:maxdepth: 3
 
-       mosekTools
+       mosekTools.data
+       mosekTools.solver
+       mosekTools.util
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
