@@ -1,9 +1,10 @@
-from mosekTools.data.yahoo import get_data_yahoo
 import datetime as dt
-
 from nose.tools import raises, assert_almost_equal
 
-s = dt.datetime(2012,  1,  1)
+from mosekTools.data.yahoo import get_data_yahoo
+
+
+s = dt.datetime(2012, 1, 1)
 e = dt.datetime(2012, 12, 31)
 
 
