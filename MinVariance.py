@@ -6,11 +6,6 @@ import matplotlib.pyplot as mPlot
 from mosekTools.solver import solver as ms
 
 
-def compute_return(ts):
-    ts = ts.dropna()
-    return ts.diff() / ts.shift(1)
-
-
 def lsq(matrix, rhs):
     return pd.Series(index=matrix.columns,
                      data=ms.lsq_pos(matrix.values, rhs.values))
@@ -20,27 +15,32 @@ def ann_Sharpe_ratio(ts):
     return 16 * ts.mean() / ts.std()
 
 
+def returns(frame):
+    def __compute_return(ts):
+        ts = ts.dropna()
+        return ts.diff() / ts.shift(1)
+
+    return frame.apply(__compute_return).fillna(value=0.0)
+
+
 if __name__ == '__main__':
     # load data from csv file
-    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0,
-                       parse_dates=True)
+    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True)
 
-    stocks = data[["GOOG", "T", "AAPL", "GS", "IBM"]]
-    index = data["^GSPC"]
+    stocks = returns(data[["GOOG", "T", "AAPL", "GS", "IBM"]])
+    index = returns(data[["^GSPC"]])["^GSPC"]
 
-    retStocks = stocks.apply(compute_return).fillna(value=0.0)
-    retIndex = compute_return(index).fillna(value=0.0)
     # construct a rhs
-    rhsZero = pd.TimeSeries(index=retStocks.index, data=0.0)
+    rhsZero = pd.TimeSeries(index=stocks.index, data=0.0)
 
-    wMin = lsq(matrix=retStocks, rhs=rhsZero)
-    wTrack = lsq(matrix=retStocks.cumsum(), rhs=retIndex.cumsum())
+    wMin = lsq(matrix=stocks, rhs=rhsZero)
+    wTrack = lsq(matrix=stocks.cumsum(), rhs=index.cumsum())
 
     d = dict()
-    d["Min Variance"] = (retStocks * wMin).sum(axis=1)
-    d["Index"] = retIndex
-    d["1/N"] = retStocks.mean(axis=1)
-    d["Tracking"] = (retStocks * wTrack).sum(axis=1)
+    d["Min Variance"] = (stocks * wMin).sum(axis=1)
+    d["Index"] = index
+    d["1/N"] = stocks.mean(axis=1)
+    d["Tracking"] = (stocks * wTrack).sum(axis=1)
     frame = pd.DataFrame(d)
 
     # apply some simple diagnostics
