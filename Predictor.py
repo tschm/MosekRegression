@@ -7,8 +7,10 @@ def computeReturn(ts):
     ts = ts.dropna()
     return ts.diff() / ts.shift(1)
 
+
 def normalize(ts):
     return ts/np.linalg.norm(ts.values,2)
+
 
 def lasso(X, y, lamb):
     return pd.Series(index=X.columns,
@@ -36,8 +38,7 @@ if __name__ == '__main__':
 
     X = X.apply(normalize)
     y = normalize(y)
-    w = lasso(X,y,0.005)
-    
+    w = lasso(X, y, 0.005)
+
     print w
     print np.corrcoef((X*w).sum(axis=1), y)
-    

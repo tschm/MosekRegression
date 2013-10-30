@@ -76,17 +76,17 @@ def lasso(matrix, rhs, lamb):
     model = mModel.build_model('lasso')
 
     # introduce variables and constraints
-    w = mModel.weights(model, "weights", matrix.shape[1])
-    v = mMath.l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, w))
-    t = mMath.l1_norm(model, "1-norm(w)", w)
+    weights = mModel.weights(model, "weights", matrix.shape[1])
+    v = mMath.l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
+    t = mMath.l1_norm(model, "1-norm(w)", weights)
 
     # Minimise 1.0*v + lambda * t
     mModel.minimise(model=model, expr=__sum_weighted(c1=1.0, expr1=v, c2=lamb, expr2=t))
 
-    return np.array(w.level())
+    return np.array(weights.level())
 
 
-def mean_variance(exp_ret, covariance_mat, bound):
+def markowitz_riskobjective(exp_ret, covariance_mat, bound):
     # define model
     model = mModel.build_model("mean_var")
 
@@ -94,12 +94,26 @@ def mean_variance(exp_ret, covariance_mat, bound):
     weights = mModel.weights(model, "weights", n=len(exp_ret))
 
     # standard deviation induced by covariance matrix
-    # note that
-    # stdev = sqrt(w'Cw) = sqrt(w'L*L'*w)=sqrt(w'A'*Aw)=2-norm(Aw) if A=L'
-    a = np.linalg.cholesky(covariance_mat)
-    stdev = mMath.l2_norm(model, "std", expr=mMath.mat_vec_prod(np.transpose(a), weights))
+    stdev = mMath.stdev(model, "std", weights, covariance_mat)
 
     # impose a bound on this standard deviation
     mBound.upper(model, stdev, bound)
 
-    return {"model": model, "expression": Expr.dot(exp_ret, weights), "variable": weights, "objective": mModel.maximise}
+    mModel.maximise(model=model, expr=Expr.dot(exp_ret, weights))
+    return np.array(weights.level())
+
+
+def markowitz(exp_ret, covariance_mat, aversion):
+    # define model
+    model = mModel.build_model("mean_var")
+
+    # set of n weights (unconstrained)
+    weights = mModel.weights(model, "weights", n=len(exp_ret))
+
+    mBound.equal(model, Expr.sum(weights), 1.0)
+
+    # standard deviation induced by covariance matrix
+    var = mMath.variance(model, "var", weights, covariance_mat)
+
+    mModel.maximise(model=model, expr=Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)))
+    return np.array(weights.level())
