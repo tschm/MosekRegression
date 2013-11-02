@@ -44,6 +44,9 @@ ipython notebook --pylab inline
 This should open the notebook and give you access to the notebooks (*.ipynb files).
 
 
+http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Minimum%20Variance.ipynb
+http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Data.ipynb
+
 Further Topics
 --------------
 Some links for next steps:
