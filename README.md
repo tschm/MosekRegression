@@ -1,51 +1,57 @@
-MosekRegression
----------------
-
-We created this package to support the experiments given in the paper by Schmelzer, Hauser, Dahl and Andersen. 
-Here's a link to the paper http://arxiv.org/abs/1310.3397
+# MosekRegression
+#### Building tools on the shoulders of [Mosek](http://www.mosek.com).
 
 
-Mosek
------
+## Motivation
 
-You need to install Mosek before you can rerun those experiments or create your own ones. We refer to
-http://mosek.com/resources/download/
+We created this package to support the experiments given in the [paper](http://arxiv.org/abs/1310.3397) 
+by Schmelzer, Hauser, Dahl and Andersen. 
 
+
+## Mosek
+
+You need to [install Mosek](http://mosek.com/resources/download/) before you can use this package.
 Mosek is commercial software but you can evaluate the product using a 30-day license.
 
-Mosek 7 comes with a new interface called Mosek Fusion. We make heavy use of this interface and solve problems
+Mosek 7 comes with a new interface called Mosek Fusion. We make heavy use of this interface and solve common problems
 arising in quantitative finance.
 
-Installation
-------------
+## Installation
 
-We provide a setup.py and requirements.txt.
+To install this package type at your bash or command line 
 
-To install this package type python setup.py install.
+```
+python setup.py install. 
+```
 
-For more details on this topic see http://docs.python.org/2/install/index.html
-
-
-Tests
------
-We have created some basic tests. They are available by running nosetests.
-
-Documentation
--------------
-Please run makedoc.py to generate the documentation for this product.
+For more details see [here](http://docs.python.org/2/install/index.html)
 
 
-IPython Notebooks
------------------
-We also support this package with ipython notebooks. So please try on your bash:
+## Tests
+We have created some basic tests. Execute on your bash or command line
 
-ipython notebook --pylab inline
+```
+nosetests
+```
 
-This should open the notebook and give you access to the notebooks (*.ipynb files).
+## Documentation
+Run 
+```
+python makedoc.py
+```
+to generate the documentation for this product.
 
 
-http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Minimum%20Variance.ipynb
-http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Data.ipynb
+## Applications
+
+* [**Data**](http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Data.ipynb)
+   
+   We have created a small tool based on pandas and yahoo finance to extract financial time series data. 
+   Fetching data from the web is slow and hence we recommend to store the data locally and reuse it for experiments.
+
+* [**Minimum Variance portfolios**] (http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Minimum%20Variance.ipynb)
+
+   Such portfolios have gained interest by academics and practioners. We construct such a portfolio here.
 
 Further Topics
 --------------
