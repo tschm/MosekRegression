@@ -54,4 +54,4 @@ This package has been developed by Thomas Schmelzer with the help of Joachim Dah
 
 ## API Documentation
 
-See [/doc/_build/html/index.html]
+See [API](http://raw.github.com/tschm/MosekRegression/master/doc/_build/html/index.html)
