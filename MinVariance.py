@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as mPlot
 
 from mosekTools.solver import solver as ms
+import mosekTools.util.stats as mStats
 
 
 def lsq(matrix, rhs):
@@ -11,24 +12,12 @@ def lsq(matrix, rhs):
                      data=ms.lsq_pos(matrix.values, rhs.values))
 
 
-def ann_Sharpe_ratio(ts):
-    return 16 * ts.mean() / ts.std()
-
-
-def returns(frame):
-    def __compute_return(ts):
-        ts = ts.dropna()
-        return ts.diff() / ts.shift(1)
-
-    return frame.apply(__compute_return).fillna(value=0.0)
-
-
 if __name__ == '__main__':
     # load data from csv file
     data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True)
 
-    stocks = returns(data[["GOOG", "T", "AAPL", "GS", "IBM"]])
-    index = returns(data[["^GSPC"]])["^GSPC"]
+    stocks = mStats.returns(data[["GOOG", "T", "AAPL", "GS", "IBM"]])
+    index = mStats.returns(data[["^GSPC"]])["^GSPC"]
 
     # construct a rhs
     rhsZero = pd.TimeSeries(index=stocks.index, data=0.0)
@@ -45,7 +34,7 @@ if __name__ == '__main__':
 
     # apply some simple diagnostics
     print "Annualized Sharpe ratio"
-    print frame.apply(ann_Sharpe_ratio)
+    print frame.apply(mStats.ann_Sharpe_ratio)
     print "Standard deviation of returns"
     print frame.std()
 
