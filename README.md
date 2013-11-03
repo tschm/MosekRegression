@@ -1,4 +1,4 @@
-# MosekRegression
+# MosekTools
 #### Building tools on the shoulders of [Mosek](http://www.mosek.com).
 
 
