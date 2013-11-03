@@ -1,8 +1,6 @@
 mosekTools.solver.model package
 ===============================
 
-Submodules
-----------
 
 mosekTools.solver.model.bound module
 ------------------------------------
@@ -28,11 +26,3 @@ mosekTools.solver.model.model module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: mosekTools.solver.model
-    :members:
-    :undoc-members:
-    :show-inheritance:

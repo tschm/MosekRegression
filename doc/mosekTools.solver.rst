@@ -8,22 +8,12 @@ Subpackages
 
     mosekTools.solver.model
 
-Submodules
-----------
 
 mosekTools.solver.solver module
 -------------------------------
 
 .. automodule:: mosekTools.solver.solver
 :members:
-        :undoc-members:
+            :undoc-members:
         :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: mosekTools.solver
-:members:
-        :undoc-members:
-        :show-inheritance:
