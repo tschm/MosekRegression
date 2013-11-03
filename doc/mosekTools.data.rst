@@ -7,5 +7,5 @@ mosekTools.data.yahoo module
 .. automodule:: mosekTools.data.yahoo
 :members:
             :undoc-members:
-        :show-inheritance:
+            :show-inheritance:
 
