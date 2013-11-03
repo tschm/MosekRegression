@@ -48,10 +48,5 @@ nosetests
    Common equity portfolios
 
 
-## Contact us
+[API](/docs/_build/html/index.html)
 
-This package has been developed by Thomas Schmelzer with the help of Joachim Dahl
-
-## API Documentation
-
-See [API](http://raw.github.com/tschm/MosekRegression/master/doc/_build/html/index.html)
