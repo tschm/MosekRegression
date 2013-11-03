@@ -34,12 +34,6 @@ We have created some basic tests. Execute on your bash or command line
 nosetests
 ```
 
-## Documentation
-Run 
-```
-python makedoc.py
-```
-to generate the documentation for this product.
 
 
 ## Applications
@@ -53,3 +47,11 @@ to generate the documentation for this product.
 
    Common equity portfolios
 
+
+## Contact us
+
+This package has been developed by Thomas Schmelzer with the help of Joachim Dahl
+
+## API Documentation
+
+See [/doc/_build/html/index.html]
