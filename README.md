@@ -49,16 +49,7 @@ to generate the documentation for this product.
    We have created a small tool based on pandas and yahoo finance to extract financial time series data. 
    Fetching data from the web is slow and hence we recommend to store the data locally and reuse it for experiments.
 
-* [**Minimum Variance portfolios**] (http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/Minimum%20Variance.ipynb)
+* [**Equity Portfolios**] (http://nbviewer.ipython.org/urls/raw.github.com/tschm/MosekRegression/master/EquityPortfolios.ipynb)
 
-   Such portfolios have gained interest by academics and practioners. We construct such a portfolio here.
-
-Further Topics
---------------
-Some links for next steps:
-
-* http://stackoverflow.com/questions/5246843/how-to-get-a-complete-list-of-ticker-symbols-from-yahoo-finance
-* http://blog.miguelgrinberg.com/post/the-package-dependency-blues
-* http://stackoverflow.com/questions/15422527/best-practices-how-do-you-list-required-dependencies-in-your-setup-py
-* http://penandpants.com/2013/04/25/data-provenance-with-gitpython/
+   Common equity portfolios
 
