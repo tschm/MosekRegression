@@ -48,5 +48,3 @@ nosetests
    Common equity portfolios
 
 
-[API](/docs/_build/html/index.html)
-

@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='MosekRegression',
-    version='1.0',
+    version='1.2',
     packages=['mosekTools'],
     url='https://github.com/tschm/MosekRegression',
     license='',
