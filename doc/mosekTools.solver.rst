@@ -1,6 +1,8 @@
 mosekTools.solver package
 =========================
 
+Subpackages
+-----------
 
 .. toctree::
 
@@ -12,6 +14,5 @@ mosekTools.solver.solver module
 
 .. automodule:: mosekTools.solver.solver
 :members:
-            :undoc-members:
-            :show-inheritance:
-
+        :undoc-members:
+        :show-inheritance:

@@ -5,7 +5,7 @@ mosekTools.util.stats module
 ----------------------------
 
 .. automodule:: mosekTools.util.stats
-        :members:
-        :undoc-members:
-        :show-inheritance:
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
