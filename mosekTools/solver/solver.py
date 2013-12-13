@@ -18,6 +18,28 @@ def __residual(matrix, rhs, expr):
     return Expr.sub(mMath.mat_vec_prod(matrix, expr), rhs)
 
 
+def lsq_ls(matrix, rhs):
+    """
+    min 2-norm (matrix*w - rhs)^2
+    s.t. e'w = 1
+    """
+    # define model
+    model = mModel.build_model('lsqPos')
+
+    # introduce n non-negative weight variables
+    weights = mModel.weights(model, "weights", n=matrix.shape[1])
+
+    # e'*w = 1
+    mBound.equal(model, Expr.sum(weights), 1.0)
+
+    v = mMath.l2_norm(model, "2-norm(res)", expr=__residual(matrix, rhs, weights))
+
+    # minimization of the residual
+    mModel.minimise(model=model, expr=v)
+
+    return np.array(weights.level())
+
+
 def lsq_pos(matrix, rhs):
     """
     min 2-norm (matrix*w - rhs)^2
