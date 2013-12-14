@@ -26,6 +26,8 @@ def l1_norm(model, name, expr):
     It also introduces n (where n is the size of the expression) auxiliary variables. Mosek requires a name
     for any variable that is added to a model. The user has to specify this name explicitly.
     This requirement may disappear in future version of this API.
+
+    ATTENTION: THIS WORKS ONLY IF expr is a VARIABLE
     """
     return Expr.sum(absolute(model, name, expr))
 

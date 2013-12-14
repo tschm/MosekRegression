@@ -17,6 +17,11 @@ def test_lasso():
     npTest.assert_array_almost_equal(w, [0.8763256773171494, 0.09210753016243604], 7)
 
 
+def test_xxx():
+    w = sol.lsq_pos_l1_penalty(matrix=get_X(), rhs=get_y(), cost_multiplier=np.array([[1.0, 0.0], [0.0, 2.0]]),
+                               weights_0=np.array([1.0, 2.0]))
+
+
 def test_lsq_pos():
     w = sol.lsq_pos(matrix=get_X(), rhs=get_y())
     npTest.assert_array_almost_equal(w, [0.88334, 0.116655], 5)

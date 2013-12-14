@@ -80,7 +80,9 @@ def lsq_pos_l1_penalty(matrix, rhs, cost_multiplier, weights_0):
 
     # sum of squared residuals
     v = mMath.l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
-
+    print matrix.shape[1]
+    print weights_0
+    print weights
     # \Gamma*(w - w0), p is an expression
     p = mMath.mat_vec_prod(cost_multiplier, Expr.sub(weights, weights_0))
     t = mMath.l1_norm(model, 'abs(weights)', p)
