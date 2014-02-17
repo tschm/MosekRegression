@@ -2,3 +2,4 @@ matplotlib
 nose
 pandas
 mosek.fusion
+numpy
