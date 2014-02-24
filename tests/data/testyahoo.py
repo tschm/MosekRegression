@@ -1,7 +1,7 @@
 import datetime as dt
 from nose.tools import raises, assert_almost_equal
 
-from mosekTools.data.yahoo import get_data_yahoo
+from mosekTools.data.Data import get_data_yahoo
 
 
 s = dt.datetime(2012, 1, 1)
