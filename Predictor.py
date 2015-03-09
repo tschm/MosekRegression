@@ -1,3 +1,7 @@
+import os
+os.environ["MOSEKLM_LICENSE_FILE"]="27000@quantsrv"
+
+
 import pandas as pd
 import numpy as np
 from mosekTools.solver import solver as mp

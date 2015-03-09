@@ -1,7 +1,7 @@
 import os
+os.environ["MOSEKLM_LICENSE_FILE"]="27000@quantsrv"
 
 import pandas as pd
-import matplotlib.pyplot as mPlot
 
 from mosekTools.solver import solver as ms
 
@@ -46,9 +46,5 @@ if __name__ == '__main__':
     print "Standard deviation of returns"
     print frame.std()
 
-    (frame + 1.0).cumprod().plot()
-    mPlot.show()
 
-    #import mosekTools.util.Model as Model
-    #Model.plot(frame)
-    #mPlot.show()
+

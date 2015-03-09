@@ -1,6 +1,6 @@
 import numpy as np
 
-from mosek.fusion import Expr
+from mosek.fusion import Expr, Domain
 
 import model.model as mModel
 import model.math as mMath
@@ -80,12 +80,16 @@ def lsq_pos_l1_penalty(matrix, rhs, cost_multiplier, weights_0):
 
     # sum of squared residuals
     v = mMath.l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
-    print matrix.shape[1]
-    print weights_0
-    print weights
+
     # \Gamma*(w - w0), p is an expression
-    p = mMath.mat_vec_prod(cost_multiplier, Expr.sub(weights, weights_0))
-    t = mMath.l1_norm(model, 'abs(weights)', p)
+    p = Expr.mulElm(cost_multiplier, Expr.sub(weights, weights_0))
+
+    cost = model.variable("cost", matrix.shape[1], Domain.unbounded())
+    #f = Expr.sub(cost, p)
+
+    model.constraint(Expr.sub(cost, p), Domain.equalsTo(0.0))
+
+    t = mMath.l1_norm(model, 'abs(weights)', cost)
 
     # Minimise v + t
     mModel.minimise(model, __sum_weighted(1.0, v, 1.0, t))

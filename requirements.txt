@@ -1,5 +1,1 @@
-matplotlib
-nose
-pandas
-mosek.fusion
-numpy
+git+http://github.com/MOSEK/Mosek.pip

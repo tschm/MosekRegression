@@ -1,9 +1,9 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
     name='MosekRegression',
-    version='1.2',
-    packages=['mosekTools'],
+    version='1.3',
+    packages=find_packages(include='mosekTools*'),
     url='https://github.com/tschm/MosekRegression',
     license='',
     author='Thomas Schmelzer, Joachim Dahl',
