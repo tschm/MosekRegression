@@ -15,11 +15,13 @@ def minimum_variance(a):
     #         w >= 0
     #     sum[w] = 1
 
+    # This is the left-most point on the efficiency frontier in the classic Markowitz theory
+
     # build the model
     with Model("Minimum Variance") as model:
         # introduce the weight variable
         weights = model.variable("weights", int(a.shape[1]), Domain.inRange(0.0, 1.0))
-        # sum of weights have to be 1
+        # sum of weights has to be 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
         # returns
         r = Expr.mul(DenseMatrix(a), weights)
