@@ -17,6 +17,10 @@ Mosek is commercial software but you can evaluate the product using a 30-day lic
 Mosek 7 comes with a new interface called Mosek Fusion. We make heavy use of this interface and solve common problems
 arising in quantitative finance.
 
+## License
+
+To use Mosek you need to install a Mosek license. An easy way to achieve that is to dump a file called mosek.lic in the folder license.
+
 ## Applications
 
 You can solve various (un)constrained regression and Markowitz problems.

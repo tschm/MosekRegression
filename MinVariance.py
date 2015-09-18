@@ -1,5 +1,6 @@
+from config import MOSEKLICENSEFILE, DATAPATH
 import os
-os.environ["MOSEKLM_LICENSE_FILE"]="27000@quantsrv"
+os.environ["MOSEKLM_LICENSE_FILE"]=MOSEKLICENSEFILE
 
 import pandas as pd
 
@@ -17,7 +18,7 @@ def Sharpe_Ratio(ts):
 
 if __name__ == '__main__':
     # load data from csv file
-    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True)
+    data = pd.read_csv(os.path.join(DATAPATH, "data.csv"), index_col=0, parse_dates=True)
 
     returns = data.pct_change(fill_method="ffill").fillna(0.0)
 

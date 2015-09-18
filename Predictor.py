@@ -1,5 +1,7 @@
 import os
-os.environ["MOSEKLM_LICENSE_FILE"]="27000@quantsrv"
+from config import MOSEKLICENSEFILE
+
+os.environ["MOSEKLM_LICENSE_FILE"]=MOSEKLICENSEFILE
 
 
 import pandas as pd
