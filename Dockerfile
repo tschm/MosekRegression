@@ -13,7 +13,7 @@ WORKDIR /mosekreg
 RUN conda install -y -q -c mosek mosek
 
 # new license for Mosek 8
-ENV MOSEKLM_LICENSE_FILE /geneva_talk/license/mosek.lic
+ENV MOSEKLM_LICENSE_FILE /mosekreg/license/mosek.lic
 
 # create the default profile for ipython
 RUN ipython profile create

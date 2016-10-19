@@ -67,7 +67,7 @@ def linfty_norm(model, name, expr):
 
 
 def mat_vec_prod(matrix, expr):
-    return Expr.mul(DenseMatrix(matrix), expr)
+    return Expr.mul(Matrix.dense(matrix), expr)
 
 
 def stdev(model, name, weights, covar):

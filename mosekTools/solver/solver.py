@@ -2,9 +2,9 @@ import numpy as np
 
 from mosek.fusion import Expr, Domain
 
-import model.model as mModel
-import model.math as mMath
-import model.bound as mBound
+import mosekTools.solver.model.model as mModel
+import mosekTools.solver.model.math as mMath
+import mosekTools.solver.model.bound as mBound
 
 
 def __sum_weighted(c1, expr1, c2, expr2):
