@@ -1,9 +1,8 @@
-from unittest import TestCase
-
 import numpy as np
 import numpy.testing as npTest
+from unittest import TestCase
 
-import mosekTools.solver.solver as sol
+import books.mosekTools.solver as sol
 
 
 class TestSolver(TestCase):
