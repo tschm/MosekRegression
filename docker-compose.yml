@@ -1,0 +1,12 @@
+version: '2'
+services:
+  pymosek:
+     build:
+        context: .
+        dockerfile: Dockerfile
+     expose:
+        - "9999"
+     volumes:
+        - ./books:/jupyter
+     command: jupyter-notebook --config=config.py
+

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='MosekRegression',
-    version="v1.2",
+    version="v1.3",
     packages=find_packages(include='mosekTools*'),
     url='https://github.com/tschm/MosekRegression',
     license='',

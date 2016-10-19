@@ -1,5 +1,7 @@
-import os
-BASEPATH = os.path.dirname(__file__)
-MOSEKLICENSEFILE = os.path.join(BASEPATH, "license", "mosek.lic")
+c = get_config()
 
-DATAPATH = os.path.join(BASEPATH, "data")
+c.NotebookApp.ip = '*'
+c.NotebookApp.open_browser = True
+c.NotebookApp.port = 9999
+c.NotebookApp.notebook_dir = u'/jupyter'
+
