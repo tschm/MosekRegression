@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name='MosekRegression',
     version="v1.3",
-    packages=find_packages(include='mosekTools*'),
+    packages=find_packages(include='books/mosekTools*'),
     url='https://github.com/tschm/MosekRegression',
     license='',
     author='Thomas Schmelzer, Joachim Dahl',
