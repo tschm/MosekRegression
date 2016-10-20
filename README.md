@@ -14,7 +14,7 @@ We provide a build.sh file that creates a local environment using the popular (m
 Using this approach we install Mosek on the fly (via pip).
 Mosek is commercial software but you can evaluate the product using a 30-day license.
 
-Mosek 7 comes with a new interface called Mosek Fusion. We make heavy use of this interface and solve common problems
+Mosek 8 comes with a new interface called Mosek Fusion. We make heavy use of this interface and solve common problems
 arising in quantitative finance.
 
 ## License
