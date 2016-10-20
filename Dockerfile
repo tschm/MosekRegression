@@ -18,5 +18,5 @@ ENV MOSEKLM_LICENSE_FILE /mosekreg/license/mosek.lic
 # create the default profile for ipython
 RUN ipython profile create
 
-
+RUN rm .dockerignore
 

@@ -1,2 +1,6 @@
 start.sh
 README.md
+.gitignore
+.git
+tag.sh
+

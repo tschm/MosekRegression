@@ -10,16 +10,25 @@ by Schmelzer, Hauser, Dahl and Andersen.
 
 ## Installation
 
-We provide a build.sh file that creates a local environment using the popular (mini)conda package. 
-Using this approach we install Mosek on the fly (via pip).
-Mosek is commercial software but you can evaluate the product using a 30-day license.
+A first glimpse of the notebooks we provide is given here:
+http://nbviewer.jupyter.org/github/tschm/MosekRegression/tree/master/books/
 
-Mosek 8 comes with a new interface called Mosek Fusion. We make heavy use of this interface and solve common problems
-arising in quantitative finance.
+For reproducing our results in exactly the environment we have used clone the underlying repository
+
+    git clone git@github.com:tschm/MosekRegression.git
+
+and build the pymosek docker container with
+
+    docker-compose build pymosek
+    
+Docker will download all the required dependencies. Start the container with
+    
+    docker-compose run -d -p 2016:9999 pymosek
+    
 
 ## License
 
-To use Mosek you need to install a Mosek license. An easy way to achieve that is to dump a file called mosek.lic in the folder license.
+If you have a valid Mosek license you may want to edit the Dockerfile and adjust the definition of the environment variable in there.
 
 ## Applications
 
