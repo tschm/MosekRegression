@@ -1,11 +1,10 @@
 import numpy as np
 import pandas as pd
-
 from mosek.fusion import Expr
 
-import mosekTools.solver.model.model as mModel
-import mosekTools.solver.model.math as mMath
-import mosekTools.solver.model.bound as mBound
+import books.mosekTools.solver.model.bound as mBound
+import books.mosekTools.solver.model.math as mMath
+import books.mosekTools.solver.model.model as mModel
 
 
 def report(w):
@@ -20,8 +19,8 @@ def experiment1(returns):
     mu = returns.mean().values
     covariance_mat = returns.cov().values
 
-    print "Condition number of covariance matrix"
-    print np.linalg.cond(covariance_mat, 2)
+    print("Condition number of covariance matrix")
+    print(np.linalg.cond(covariance_mat, 2))
 
     model = mModel.build_model("PFP")
     # set of n weights (unconstrained)
@@ -44,8 +43,8 @@ def experiment2(returns, lev=np.infty):
     mu = returns.mean().values
     covariance_mat = returns.cov().values
 
-    print "Condition number of covariance matrix"
-    print np.linalg.cond(covariance_mat, 2)
+    print("Condition number of covariance matrix")
+    print(np.linalg.cond(covariance_mat, 2))
 
     model = mModel.build_model("PFP")
     # set of n weights (unconstrained)

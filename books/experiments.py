@@ -4,13 +4,10 @@ import pandas as pd
 
 import solver as sl
 
-from config import MOSEKLICENSEFILE, DATAPATH
-
-os.environ["MOSEKLM_LICENSE_FILE"] = MOSEKLICENSEFILE
 
 
 ### load data from csv files
-data = pd.read_csv(os.path.join(DATAPATH, "data.csv"), index_col=0, parse_dates=True)
+data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True)
 
 ### compute returns
 returns = data.pct_change(fill_method="ffill").fillna(0.0)
@@ -22,8 +19,8 @@ w["b"] = sl.experiment2(returns.truncate(before=datetime(2010, 1, 1), after=date
 w = pd.DataFrame(w)
 
 ### weights
-print w
-print w.apply(sl.report)
+print(w)
+print(w.apply(sl.report))
 
 ### profit per strategy
 profit = pd.DataFrame(

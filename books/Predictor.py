@@ -1,6 +1,7 @@
-import pandas as pd
 import numpy as np
-from mosekTools.solver import solver as mp
+import pandas as pd
+
+from books.mosekTools import solver as mp
 
 
 def normalize(ts):

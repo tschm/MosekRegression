@@ -1,6 +1,7 @@
 import os
 import pandas as pd
-from mosekTools.solver import solver as ms
+
+from books.mosekTools import solver as ms
 
 
 def lsq(matrix, rhs):
