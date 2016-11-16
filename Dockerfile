@@ -4,9 +4,11 @@ FROM continuumio/miniconda3
 # File Author / Maintainer
 MAINTAINER Thomas Schmelzer "thomas.schmelzer@gmail.com"
 
-RUN conda install -q -y pandas=0.18.1 ipython-notebook=4.0.4 matplotlib pandas-datareader
+RUN conda install -q -y pandas=0.18.1 ipython-notebook=4.0.4 matplotlib
 
-ADD . /mosekreg
+ADD ./license /mosekreg/license
+ADD config.py /mosekreg/config.py
+
 WORKDIR /mosekreg
 
 # build the environment
@@ -18,5 +20,5 @@ ENV MOSEKLM_LICENSE_FILE /mosekreg/license/mosek.lic
 # create the default profile for ipython
 RUN ipython profile create
 
-RUN rm .dockerignore
+#RUN rm .dockerignore
 
