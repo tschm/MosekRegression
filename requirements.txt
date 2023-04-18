@@ -1,0 +1,4 @@
+mosek
+pandas
+plotly
+
