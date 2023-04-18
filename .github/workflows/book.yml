@@ -19,23 +19,13 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install jupyter-book
-    
-    - name: Clean Font-Manager
-      run: |
-        sudo echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
-        sudo apt-get install -y ttf-mscorefonts-installer
-        sudo fc-cache -vr
-        rm ~/.cache/matplotlib -fr
-        fc list
-        fc-match Arial 
-        
+
     # Build the book
     - name: Build the book
       run: |
         jupyter-book clean book
         jupyter-book build book
-        cp -r book/_build/html ./docs
-    
+
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
