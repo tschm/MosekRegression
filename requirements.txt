@@ -1,4 +1,4 @@
 mosek
 pandas
 plotly
-
+pandas_datareader
