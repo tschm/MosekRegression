@@ -3,7 +3,6 @@
 format: jb-book
 root: docs/index
 chapters:
-    - file: docs/SMI/Fun
-    - file: docs/US Names/Elvis
-
-    #- file: docs/notebooks/Rotation3d
+    - file: docs/MinVariance
+    - file: docs/Predictor
+    - file: docs/loadData
