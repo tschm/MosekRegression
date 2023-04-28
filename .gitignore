@@ -6,4 +6,5 @@ toDo
 env
 private
 .venv
+book/_build
 
