@@ -20,10 +20,10 @@ def __rotated_quad_cone(model, expr1, expr2, expr3):
 
 
 def __absolute(model, name, expr):
-    t = model.variable(name, expr.size(), Domain.unbounded())
+    t = model.variable(name, expr.getShape(), Domain.unbounded())
 
     # (t_i, w_i) \in Q2
-    for i in range(0, int(expr.size())):
+    for i in range(0, int(expr.getShape())):
         __quad_cone(model, t.index(i), expr.index(i))
 
     return t
@@ -120,7 +120,7 @@ def lsq_pos(matrix, rhs):
     # define model
     with Model('lsqPos') as model:
         # introduce n non-negative weight variables
-        weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, +np.infty))
+        weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, 1.0))
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
