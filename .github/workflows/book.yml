@@ -19,6 +19,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install jupyter-book
+        python -m ipykernel install --user --name="mosek"
 
     # Build the book
     - name: Build the book
