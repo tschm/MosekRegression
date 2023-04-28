@@ -2,9 +2,6 @@
 *.pyc
 ~*.*
 .ipynb_checkpoints
-toDo
-env
-private
 .venv
 book/_build
 
