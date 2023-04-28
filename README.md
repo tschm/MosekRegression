@@ -1,6 +1,6 @@
-# MosekTools
-#### Building tools on the shoulders of [Mosek](http://www.mosek.com).
+# [MosekTools](http://tschm.github.io/MosekRegression/)
 
+Building tools on the shoulders of [Mosek](http://www.mosek.com).
 
 ## Motivation
 
@@ -10,7 +10,7 @@ by Schmelzer, Hauser, Dahl and Andersen.
 
 ## License
 
-If you have a valid Mosek license you may want to edit the Dockerfile and adjust the definition of the environment variable in there.
+You need a valid Mosek license.
 
 ## Applications
 
