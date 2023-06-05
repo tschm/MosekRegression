@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "mosektools"
+version = "0.0.0"
+description = "..."
+authors = ["Thomas Schmelzer"]
+readme = "README.md"
+repository = "https://github.com/tschm/mosekregression"
+packages = [{include = "mosektools"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+pandas = "*"   # unfortunately otherwise crash with quantstats
+#scikit-learn = "*"
+mosek = "*"
+#plotly
+#yfinance
+scipy = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "7.2.0"
+pytest-cov = "4.0.0"
+yfinance = "*"
+#quantstats = "*"
+plotly = "*"
+#cvxpy = "*"
+jupyterlab = "*"
+#loguru = "*"
+#cvxsimulator = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
