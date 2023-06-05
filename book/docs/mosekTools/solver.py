@@ -1,5 +1,14 @@
+# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import numpy as np
-from mosek.fusion import Expr, Domain, Model, ObjectiveSense, Matrix, BaseModel
+from mosek.fusion import BaseModel
+from mosek.fusion import Domain
+from mosek.fusion import Expr
+from mosek.fusion import Matrix
+from mosek.fusion import Model
+from mosek.fusion import ObjectiveSense
+
 
 def __sum_weighted(c1, expr1, c2, expr2):
     return Expr.add(Expr.mul(c1, expr1), Expr.mul(c2, expr2))
@@ -10,6 +19,7 @@ def __residual(matrix, rhs, expr):
     Introduce the residual matrix*expr - rhs
     """
     return Expr.sub(__mat_vec_prod(matrix, expr), rhs)
+
 
 def __quad_cone(model, expr1, expr2):
     model.constraint(Expr.vstack(expr1, expr2), Domain.inQCone())
@@ -95,8 +105,10 @@ def lsq_ls(matrix, rhs):
     s.t. e'w = 1
     """
     # define model
-    with Model('lsqPos') as model:
-        weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty))
+    with Model("lsqPos") as model:
+        weights = model.variable(
+            "weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty)
+        )
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -118,7 +130,7 @@ def lsq_pos(matrix, rhs):
            w >= 0
     """
     # define model
-    with Model('lsqPos') as model:
+    with Model("lsqPos") as model:
         # introduce n non-negative weight variables
         weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, 1.0))
 
@@ -142,9 +154,11 @@ def lsq_pos_l1_penalty(matrix, rhs, cost_multiplier, weights_0):
            w >= 0
     """
     # define model
-    with Model('lsqSparse') as model:
+    with Model("lsqSparse") as model:
         # introduce n non-negative weight variables
-        weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, +np.infty))
+        weights = model.variable(
+            "weights", matrix.shape[1], Domain.inRange(0.0, +np.infty)
+        )
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -158,7 +172,7 @@ def lsq_pos_l1_penalty(matrix, rhs, cost_multiplier, weights_0):
         cost = model.variable("cost", matrix.shape[1], Domain.unbounded())
         model.constraint(Expr.sub(cost, p), Domain.equalsTo(0.0))
 
-        t = __l1_norm(model, 'abs(weights)', cost)
+        t = __l1_norm(model, "abs(weights)", cost)
 
         # Minimise v + t
         model.objective(ObjectiveSense.Minimize, __sum_weighted(1.0, v, 1.0, t))
@@ -172,15 +186,19 @@ def lasso(matrix, rhs, lamb):
     """
     min 2-norm (matrix*w - rhs)^2 + lamb * 1-norm(w)
     """
-    # define model	
+    # define model
     with Model("lasso") as model:
-        weights = model.variable("weights", matrix.shape[1]) #, Domain.inRange(-np.infty, +np.infty))
+        weights = model.variable(
+            "weights", matrix.shape[1]
+        )  # , Domain.inRange(-np.infty, +np.infty))
         # introduce variables and constraints
 
         v = __l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
         t = __l1_norm(model, "1-norm(w)", weights)
 
-        model.objective(ObjectiveSense.Minimize, __sum_weighted(c1=1.0, expr1=v, c2=lamb, expr2=t))
+        model.objective(
+            ObjectiveSense.Minimize, __sum_weighted(c1=1.0, expr1=v, c2=lamb, expr2=t)
+        )
         # solve the problem
         model.solve()
 
@@ -197,10 +215,10 @@ def markowitz_riskobjective(exp_ret, covariance_mat, bound):
         stdev = __stdev(model, "std", weights, covariance_mat)
 
         # impose a bound on this standard deviation
-        #mBound.upper(model, stdev, bound)
+        # mBound.upper(model, stdev, bound)
         model.constraint(stdev, Domain.lessThan(bound))
 
-        #mModel.maximise(model=model, expr=Expr.dot(exp_ret, weights))
+        # mModel.maximise(model=model, expr=Expr.dot(exp_ret, weights))
         model.objective(ObjectiveSense.Maximize, Expr.dot(exp_ret, weights))
         # solve the problem
         model.solve()
@@ -212,17 +230,23 @@ def markowitz(exp_ret, covariance_mat, aversion):
     # define model
     with Model("mean var") as model:
         # set of n weights (unconstrained)
-        weights = model.variable("weights", len(exp_ret), Domain.inRange(-np.infty, +np.infty))
+        weights = model.variable(
+            "weights", len(exp_ret), Domain.inRange(-np.infty, +np.infty)
+        )
 
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
 
         # standard deviation induced by covariance matrix
         var = __variance(model, "var", weights, covariance_mat)
 
-        model.objective(ObjectiveSense.Maximize, Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)))
+        model.objective(
+            ObjectiveSense.Maximize,
+            Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)),
+        )
         model.solve()
-        #mModel.maximise(model=model, expr=Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)))
+        # mModel.maximise(model=model, expr=Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)))
         return np.array(weights.level())
+
 
 def minimum_variance(matrix):
     # Given the matrix of returns a (each column is a series of returns) this method
@@ -246,23 +270,24 @@ def minimum_variance(matrix):
         r = Expr.mul(Matrix.dense(matrix), weights)
         # compute l2_norm squared of those returns
         # minimize this l2_norm
-        model.objective(ObjectiveSense.Minimize, __l2_norm_squared(model, "2-norm^2(r)", expr=r))
+        model.objective(
+            ObjectiveSense.Minimize, __l2_norm_squared(model, "2-norm^2(r)", expr=r)
+        )
         # solve the problem
         model.solve()
         # return the series of weights
         return np.array(weights.level())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # MOSEK (often) requires that the environment variable MOSEKLM_LICENSE_FILE is defined and set to the port on the server
     # that is exposed by the license management program.
     from numpy.random import randn
     import mosek
 
-
     A = randn(5, 3)
 
-    print (minimum_variance(matrix=A))
-
+    print(minimum_variance(matrix=A))
 
     # please note that the Mosek License may still be in cache which could interfere/block subsequent programs running
     # One way to make sure the license is no longer in cache is to use the trick:

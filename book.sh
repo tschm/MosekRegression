@@ -11,4 +11,3 @@ ipython kernel install --name $NAME --user
 
 jupyter-book clean book
 jupyter-book build book
-
