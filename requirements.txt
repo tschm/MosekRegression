@@ -1,5 +1,0 @@
-mosek
-pandas
-plotly
-yfinance
-scipy
