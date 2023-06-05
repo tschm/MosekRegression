@@ -5,26 +5,20 @@ description = "..."
 authors = ["Thomas Schmelzer"]
 readme = "README.md"
 repository = "https://github.com/tschm/mosekregression"
-packages = [{include = "mosektools"}]
+packages = [{include = "mosek_tools"}]
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-pandas = "*"   # unfortunately otherwise crash with quantstats
-#scikit-learn = "*"
+pandas = "*"   # unfortunately otherwise crash with quantstats"
 mosek = "*"
-#plotly
-#yfinance
 scipy = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "7.2.0"
 pytest-cov = "4.0.0"
 yfinance = "*"
-#quantstats = "*"
 plotly = "*"
-#cvxpy = "*"
 jupyterlab = "*"
-#loguru = "*"
 #cvxsimulator = "*"
 
 [build-system]
