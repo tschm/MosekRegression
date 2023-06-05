@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import os
+import pandas as pd
+
+from mosekTools.solver import lsq_pos as ll
+
+
+def lsq_pos(matrix, rhs):
+    return pd.Series(index=matrix.columns,
+                     data=ll(matrix.values, rhs.values))
+
+
+def Sharpe_Ratio(ts):
+    return 16 * ts.mean() / ts.std()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 4[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mos[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+[0;32m----> 4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmosekTools[39;00m[38;5;21;01m.[39;00m[38;5;21;01msolver[39;00m [38;5;28;01mimport[39;00m lsq_pos [38;5;28;01mas[39;00m ll
+[1;32m      7[0m [38;5;28;01mdef[39;00m [38;5;21mlsq_pos[39m(matrix, rhs):
+[1;32m      8[0m     [38;5;28;01mreturn[39;00m pd[38;5;241m.[39mSeries(index[38;5;241m=[39mmatrix[38;5;241m.[39mcolumns,
+[1;32m      9[0m                      data[38;5;241m=[39mll(matrix[38;5;241m.[39mvalues, rhs[38;5;241m.[39mvalues))
+
+[0;31mModuleNotFoundError[0m: No module named 'mosekTools'
+
