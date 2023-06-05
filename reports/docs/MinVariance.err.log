@@ -15,31 +15,95 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import os
-import pandas as pd
+# construct a rhs
+rhsZero = pd.Series(index=data.index, data=0.0)
 
-from mosekTools.solver import lsq_pos as ll
+wMin = lsq_pos(matrix=data[stocks].pct_change().fillna(0.0), rhs=rhsZero)
+wTrack = lsq_pos(matrix=data[stocks], rhs=data[index])
 
+d = dict()
+d["Min Variance"] = (returns[stocks] * wMin).sum(axis=1)
+d["Index"] = returns[index]
+d["1/N"] = returns[stocks].mean(axis=1)
+d["Tracking"] = (returns[stocks] * wTrack).sum(axis=1)
+frame = pd.DataFrame(d)
 
-def lsq_pos(matrix, rhs):
-    return pd.Series(index=matrix.columns,
-                     data=ll(matrix.values, rhs.values))
-
-
-def Sharpe_Ratio(ts):
-    return 16 * ts.mean() / ts.std()
+# apply some simple diagnostics
+print("Annualized Sharpe ratio")
+print(frame.apply(Sharpe_Ratio))
+print("Standard deviation of returns")
+print(frame.std())
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 4[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mos[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
-[0;32m----> 4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmosekTools[39;00m[38;5;21;01m.[39;00m[38;5;21;01msolver[39;00m [38;5;28;01mimport[39;00m lsq_pos [38;5;28;01mas[39;00m ll
-[1;32m      7[0m [38;5;28;01mdef[39;00m [38;5;21mlsq_pos[39m(matrix, rhs):
-[1;32m      8[0m     [38;5;28;01mreturn[39;00m pd[38;5;241m.[39mSeries(index[38;5;241m=[39mmatrix[38;5;241m.[39mcolumns,
-[1;32m      9[0m                      data[38;5;241m=[39mll(matrix[38;5;241m.[39mvalues, rhs[38;5;241m.[39mvalues))
+[0;31mError[0m                                     Traceback (most recent call last)
+[0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self, remote, server, port)[0m
+[1;32m   3989[0m           [0mself[0m[0;34m.[0m[0m_sol_itr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3990[0m           [0mself[0m[0;34m.[0m[0m_sol_bas[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 3991[0;31m           [0mself[0m[0;34m.[0m[0m_sol_itg[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/__init__.py[0m in [0;36m?[0;34m(self, *args, **kwds)[0m
+[1;32m  10775[0m         [0;34m[[0m[0mtrmcode[0m [0;34m:[0m [0mmosek[0m[0;34m.[0m[0mrescode[0m[0;34m][0m  [0mIs[0m [0meither[0m [0mOK[0m [0;32mor[0m [0ma[0m [0mtermination[0m [0mresponse[0m [0mcode[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10776[0m       """
+[0;32m> 10777[0;31m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m__optimizetrm__1[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m[0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/__init__.py[0m in [0;36m?[0;34m(self)[0m
+[1;32m  10764[0m       [0;32mif[0m [0m_res_optimizetrm[0m [0;34m!=[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10765[0m         [0m_[0m[0;34m,[0m[0m_msg_optimizetrm[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m__getlasterror[0m[0;34m([0m[0m_res_optimizetrm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m> 10766[0;31m         [0;32mraise[0m [0mError[0m[0;34m([0m[0mrescode[0m[0;34m([0m[0m_res_optimizetrm[0m[0;34m)[0m[0;34m,[0m[0m_msg_optimizetrm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m  10767[0m       [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mModuleNotFoundError[0m: No module named 'mosekTools'
+[0;31mError[0m: rescode.err_missing_license_file(1008): License cannot be located. The default search path is ':/home/runner/mosek/mosek.lic:'.
+
+During handling of the above exception, another exception occurred:
+
+[0;31mOptimizeError[0m                             Traceback (most recent call last)
+[0;32m/tmp/ipykernel_1976/2664935975.py[0m in [0;36m?[0;34m()[0m
+[1;32m      1[0m [0;31m# construct a rhs[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0mrhsZero[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mSeries[0m[0;34m([0m[0mindex[0m[0;34m=[0m[0mdata[0m[0;34m.[0m[0mindex[0m[0;34m,[0m [0mdata[0m[0;34m=[0m[0;36m0.0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0;34m[0m[0m
+[0;32m----> 4[0;31m [0mwMin[0m [0;34m=[0m [0mlsq_pos[0m[0;34m([0m[0mmatrix[0m[0;34m=[0m[0mdata[0m[0;34m[[0m[0mstocks[0m[0;34m][0m[0;34m.[0m[0mpct_change[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mfillna[0m[0;34m([0m[0;36m0.0[0m[0;34m)[0m[0;34m,[0m [0mrhs[0m[0;34m=[0m[0mrhsZero[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      5[0m [0mwTrack[0m [0;34m=[0m [0mlsq_pos[0m[0;34m([0m[0mmatrix[0m[0;34m=[0m[0mdata[0m[0;34m[[0m[0mstocks[0m[0;34m][0m[0;34m,[0m [0mrhs[0m[0;34m=[0m[0mdata[0m[0;34m[[0m[0mindex[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      6[0m [0;34m[0m[0m
+[1;32m      7[0m [0md[0m [0;34m=[0m [0mdict[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/tmp/ipykernel_1976/1309650864.py[0m in [0;36m?[0;34m(matrix, rhs)[0m
+[1;32m      7[0m [0;32mdef[0m [0mlsq_pos[0m[0;34m([0m[0mmatrix[0m[0;34m,[0m [0mrhs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m     return pd.Series(index=matrix.columns,
+[0;32m----> 9[0;31m                      data=ll(matrix.values, rhs.values))
+[0m
+[0;32m~/work/MosekRegression/MosekRegression/mosek_tools/solver.py[0m in [0;36m?[0;34m(matrix, rhs)[0m
+[1;32m    141[0m [0;34m[0m[0m
+[1;32m    142[0m         [0;31m# minimization of the residual[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    143[0m         [0mmodel[0m[0;34m.[0m[0mobjective[0m[0;34m([0m[0mObjectiveSense[0m[0;34m.[0m[0mMinimize[0m[0;34m,[0m [0mv[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    144[0m         [0;31m# solve the problem[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 145[0;31m         [0mmodel[0m[0;34m.[0m[0msolve[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    146[0m [0;34m[0m[0m
+[1;32m    147[0m         [0;32mreturn[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mweights[0m[0;34m.[0m[0mlevel[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self, *args)[0m
+[1;32m   4361[0m   [0;32mdef[0m [0msolve[0m[0;34m([0m[0mself[0m[0;34m,[0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4362[0m     [0;32mif[0m [0;32mFalse[0m[0;34m:[0m [0;32mpass[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4363[0m     [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m#[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 4364[0;31m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   4365[0m     [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_alt_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m#[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4366[0m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_solve_alt_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4367[0m     [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_solve_SS[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m# string,string[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self)[0m
+[1;32m   6165[0m   [0;32mdef[0m [0m_solve_[0m[0;34m([0m[0mself[0m[0;34m,[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   6166[0m    [0mself[0m[0;34m.[0m[0m_flushSolutions_[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   6167[0m    [0mself[0m[0;34m.[0m[0m__flush_1parameters_[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 6168[0;31m    [0mself[0m[0;34m.[0m[0m_task_1solve_ZSS[0m[0;34m([0m[0;32mFalse[0m[0;34m,[0m[0;34m""[0m[0;34m,[0m[0;34m""[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   6169[0m    [0mself[0m[0;34m.[0m[0m_task_1post_1solve_[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self, remote, server, port)[0m
+[1;32m   3987[0m       [0;32mfinally[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3988[0m         [0;32mif[0m [0;32mnot[0m [0mok[0m[0;34m:[0m [0;31m# means exception, post-solve won't be called[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3989[0m           [0mself[0m[0;34m.[0m[0m_sol_itr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3990[0m           [0mself[0m[0;34m.[0m[0m_sol_bas[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 3991[0;31m           [0mself[0m[0;34m.[0m[0m_sol_itg[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mOptimizeError[0m: rescode.err_missing_license_file(1008): License cannot be located. The default search path is ':/home/runner/mosek/mosek.lic:'.
 
