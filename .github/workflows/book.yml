@@ -14,7 +14,7 @@ jobs:
       - uses: cvxgrp/.github/actions/book@main
         with:
           os: ${{ runner.os }}
-          python-version: "3.11"
+          python-version: "3.10"
           sphinx-folder: "book/sphinx/"
           source-folder: "cvx"
           kernel: "risk"
