@@ -6,7 +6,7 @@ author: Thomas Schmelzer
 only_build_toc_files: true
 
 execute:
-  execute_notebooks: force
+  execute_notebooks: 'off'   # notebooks would need a Mosek license
   timeout: 240
 
 parse:
