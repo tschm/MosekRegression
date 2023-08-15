@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Minimum Variance &#8212; Mosek Regression with Fusion</title>
   
@@ -410,27 +410,28 @@ document.write(`
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">Error</span><span class="g g-Whitespace">                                     </span>Traceback (most recent call last)
 <span class="nn">~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py</span> in <span class="ni">?</span><span class="nt">(self, remote, server, port)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3989</span>           <span class="bp">self</span><span class="o">.</span><span class="n">_sol_itr</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">3990</span>           <span class="bp">self</span><span class="o">.</span><span class="n">_sol_bas</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">3991</span>           <span class="bp">self</span><span class="o">.</span><span class="n">_sol_itg</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">4492</span>           <span class="bp">self</span><span class="o">.</span><span class="n">_sol_itr</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">4493</span>           <span class="bp">self</span><span class="o">.</span><span class="n">_sol_bas</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">4494</span>           <span class="bp">self</span><span class="o">.</span><span class="n">_sol_itg</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="nn">~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/__init__.py</span> in <span class="ni">?</span><span class="nt">(self, *args, **kwds)</span>
-<span class="g g-Whitespace">  </span><span class="mi">10775</span>         <span class="p">[</span><span class="n">trmcode</span> <span class="p">:</span> <span class="n">mosek</span><span class="o">.</span><span class="n">rescode</span><span class="p">]</span>  <span class="n">Is</span> <span class="n">either</span> <span class="n">OK</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">termination</span> <span class="n">response</span> <span class="n">code</span><span class="o">.</span>
-<span class="g g-Whitespace">  </span><span class="mi">10776</span>       <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">&gt; </span><span class="mi">10777</span><span class="s2">       return self.__optimizetrm__1(*args,**kwds)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10783</span>         <span class="p">[</span><span class="n">trmcode</span> <span class="p">:</span> <span class="n">mosek</span><span class="o">.</span><span class="n">rescode</span><span class="p">]</span>  <span class="n">Is</span> <span class="n">either</span> <span class="n">OK</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">termination</span> <span class="n">response</span> <span class="n">code</span><span class="o">.</span>
+<span class="g g-Whitespace">  </span><span class="mi">10784</span>       <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">&gt; </span><span class="mi">10785</span><span class="s2">       return self.__optimizetrm__1(*args,**kwds)</span>
 
 <span class="nn">~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/__init__.py</span> in <span class="ni">?</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">  </span><span class="mi">10764</span><span class="s2">       if _res_optimizetrm != 0:</span>
-<span class="g g-Whitespace">  </span><span class="mi">10765</span><span class="s2">         _,_msg_optimizetrm = self.__getlasterror(_res_optimizetrm)</span>
-<span class="ne">&gt; </span><span class="mi">10766</span><span class="s2">         raise Error(rescode(_res_optimizetrm),_msg_optimizetrm)</span>
-<span class="g g-Whitespace">  </span><span class="mi">10767</span><span class="s2">       else:</span>
+<span class="g g-Whitespace">  </span><span class="mi">10772</span><span class="s2">       if _res_optimizetrm != 0:</span>
+<span class="g g-Whitespace">  </span><span class="mi">10773</span><span class="s2">         _,_msg_optimizetrm = self.__getlasterror(_res_optimizetrm)</span>
+<span class="ne">&gt; </span><span class="mi">10774</span><span class="s2">         raise Error(rescode(_res_optimizetrm),_msg_optimizetrm)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10775</span><span class="s2">       else:</span>
 
 <span class="ne">Error</span>: rescode.err_missing_license_file(1008): License cannot be located. The default search path is &#39;:/home/runner/mosek/mosek.lic:&#39;.
+
 
 <span class="s2">During handling of the above exception, another exception occurred:</span>
 
 <span class="ne">OptimizeError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="nn">/tmp/ipykernel_1976/2664935975.py</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="nn">/tmp/ipykernel_1936/2664935975.py</span> in <span class="ni">?</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span><span class="s2"> # construct a rhs</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span><span class="s2"> rhsZero = pd.Series(index=data.index, data=0.0)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span><span class="s2"> </span>
@@ -439,42 +440,44 @@ document.write(`
 <span class="g g-Whitespace">      </span><span class="mi">6</span><span class="s2"> </span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span><span class="s2"> d = dict()</span>
 
-<span class="nn">/tmp/ipykernel_1976/1309650864.py</span> in <span class="ni">?</span><span class="nt">(matrix, rhs)</span>
+<span class="nn">/tmp/ipykernel_1936/1309650864.py</span> in <span class="ni">?</span><span class="nt">(matrix, rhs)</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span><span class="s2"> def lsq_pos(matrix, rhs):</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2">     return pd.Series(index=matrix.columns,</span>
 <span class="ne">----&gt; </span><span class="mi">9</span><span class="s2">                      data=ll(matrix.values, rhs.values))</span>
 
 <span class="nn">~/work/MosekRegression/MosekRegression/mosek_tools/solver.py</span> in <span class="ni">?</span><span class="nt">(matrix, rhs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span><span class="s2">         # minimization of the residual</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span><span class="s2">         model.objective(ObjectiveSense.Minimize, v)</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span><span class="s2">         # solve the problem</span>
+<span class="ne">--&gt; </span><span class="mi">140</span><span class="s2">         model.solve()</span>
 <span class="g g-Whitespace">    </span><span class="mi">141</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span><span class="s2">         # minimization of the residual</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span><span class="s2">         model.objective(ObjectiveSense.Minimize, v)</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span><span class="s2">         # solve the problem</span>
-<span class="ne">--&gt; </span><span class="mi">145</span><span class="s2">         model.solve()</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span><span class="s2">         return np.array(weights.level())</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span><span class="s2">         return np.array(weights.level())</span>
 
 <span class="nn">~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py</span> in <span class="ni">?</span><span class="nt">(self, *args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4361</span><span class="s2">   def solve(self,*args):</span>
-<span class="g g-Whitespace">   </span><span class="mi">4362</span><span class="s2">     if False: pass</span>
-<span class="g g-Whitespace">   </span><span class="mi">4363</span><span class="s2">     elif mosek_fusion_Model._match_solve_(*args): #</span>
-<span class="ne">-&gt; </span><span class="mi">4364</span><span class="s2">       return self._solve_(*args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4365</span><span class="s2">     elif mosek_fusion_Model._match_alt_solve_(*args): #</span>
-<span class="g g-Whitespace">   </span><span class="mi">4366</span><span class="s2">       return self._solve_alt_(*args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4367</span><span class="s2">     elif mosek_fusion_Model._match_solve_SS(*args): # string,string</span>
+<span class="g g-Whitespace">   </span><span class="mi">5297</span><span class="s2">     def solve(self,*args):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5298</span><span class="s2">       if False: pass</span>
+<span class="g g-Whitespace">   </span><span class="mi">5299</span><span class="s2">       elif mosek_fusion_Model._match_solve_(*args): #</span>
+<span class="ne">-&gt; </span><span class="mi">5300</span><span class="s2">         return self._solve_(*args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5301</span><span class="s2">       elif mosek_fusion_Model._match_alt_solve_(*args): #</span>
+<span class="g g-Whitespace">   </span><span class="mi">5302</span><span class="s2">         return self._solve_alt_(*args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5303</span><span class="s2">       elif mosek_fusion_Model._match_solve_SS(*args): # string,string</span>
 
 <span class="nn">~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py</span> in <span class="ni">?</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6165</span><span class="s2">   def _solve_(self,):</span>
-<span class="g g-Whitespace">   </span><span class="mi">6166</span><span class="s2">    self._flushSolutions_()</span>
-<span class="g g-Whitespace">   </span><span class="mi">6167</span><span class="s2">    self.__flush_1parameters_()</span>
-<span class="ne">-&gt; </span><span class="mi">6168</span><span class="s2">    self._task_1solve_ZSS(False,&quot;&quot;,&quot;&quot;)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6169</span><span class="s2">    self._task_1post_1solve_()</span>
+<span class="g g-Whitespace">   </span><span class="mi">7132</span><span class="s2">     def _solve_(self,):</span>
+<span class="g g-Whitespace">   </span><span class="mi">7133</span><span class="s2">       # Start scope @ bld/docker-centos-8/final/default/src/fusion/Model.mbi:3767:6-3772:7</span>
+<span class="g g-Whitespace">   </span><span class="mi">7134</span><span class="s2">       self._flushSolutions_() # bld/docker-centos-8/final/default/src/fusion/Model.mbi:3768:8-25</span>
+<span class="g g-Whitespace">   </span><span class="mi">7135</span><span class="s2">       self.__flush_1parameters_() # bld/docker-centos-8/final/default/src/fusion/Model.mbi:3769:8-27</span>
+<span class="ne">-&gt; </span><span class="mi">7136</span><span class="s2">       self._task_1solve_ZSS(False,&quot;&quot;,&quot;&quot;) # bld/docker-centos-8/final/default/src/fusion/Model.mbi:3770:8-34</span>
+<span class="g g-Whitespace">   </span><span class="mi">7137</span><span class="s2">       self._task_1post_1solve_() # bld/docker-centos-8/final/default/src/fusion/Model.mbi:3771:8-26</span>
+<span class="g g-Whitespace">   </span><span class="mi">7138</span><span class="s2">       # End   scope @ bld/docker-centos-8/final/default/src/fusion/Model.mbi:3767:6-3772:7</span>
 
 <span class="nn">~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py</span> in <span class="ni">?</span><span class="nt">(self, remote, server, port)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3987</span><span class="s2">       finally:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3988</span><span class="s2">         if not ok: # means exception, post-solve won&#39;t be called</span>
-<span class="g g-Whitespace">   </span><span class="mi">3989</span><span class="s2">           self._sol_itr = None</span>
-<span class="g g-Whitespace">   </span><span class="mi">3990</span><span class="s2">           self._sol_bas = None</span>
-<span class="ne">-&gt; </span><span class="mi">3991</span><span class="s2">           self._sol_itg = None</span>
+<span class="g g-Whitespace">   </span><span class="mi">4490</span><span class="s2">       finally:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4491</span><span class="s2">         if not ok: # means exception, post-solve won&#39;t be called</span>
+<span class="g g-Whitespace">   </span><span class="mi">4492</span><span class="s2">           self._sol_itr = None</span>
+<span class="g g-Whitespace">   </span><span class="mi">4493</span><span class="s2">           self._sol_bas = None</span>
+<span class="ne">-&gt; </span><span class="mi">4494</span><span class="s2">           self._sol_itg = None</span>
 
 <span class="ne">OptimizeError</span>: rescode.err_missing_license_file(1008): License cannot be located. The default search path is &#39;:/home/runner/mosek/mosek.lic:&#39;.
 </pre></div>

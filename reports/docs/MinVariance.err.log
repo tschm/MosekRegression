@@ -5,7 +5,7 @@ Traceback (most recent call last):
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
   File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
     return loop.run_until_complete(inner)
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
   File "/home/runner/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
@@ -39,27 +39,28 @@ print(frame.std())
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mError[0m                                     Traceback (most recent call last)
 [0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self, remote, server, port)[0m
-[1;32m   3989[0m           [0mself[0m[0;34m.[0m[0m_sol_itr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   3990[0m           [0mself[0m[0;34m.[0m[0m_sol_bas[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 3991[0;31m           [0mself[0m[0;34m.[0m[0m_sol_itg[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4492[0m           [0mself[0m[0;34m.[0m[0m_sol_itr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4493[0m           [0mself[0m[0;34m.[0m[0m_sol_bas[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 4494[0;31m           [0mself[0m[0;34m.[0m[0m_sol_itg[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/__init__.py[0m in [0;36m?[0;34m(self, *args, **kwds)[0m
-[1;32m  10775[0m         [0;34m[[0m[0mtrmcode[0m [0;34m:[0m [0mmosek[0m[0;34m.[0m[0mrescode[0m[0;34m][0m  [0mIs[0m [0meither[0m [0mOK[0m [0;32mor[0m [0ma[0m [0mtermination[0m [0mresponse[0m [0mcode[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
-[1;32m  10776[0m       """
-[0;32m> 10777[0;31m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m__optimizetrm__1[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m[0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10783[0m         [0;34m[[0m[0mtrmcode[0m [0;34m:[0m [0mmosek[0m[0;34m.[0m[0mrescode[0m[0;34m][0m  [0mIs[0m [0meither[0m [0mOK[0m [0;32mor[0m [0ma[0m [0mtermination[0m [0mresponse[0m [0mcode[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10784[0m       """
+[0;32m> 10785[0;31m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m__optimizetrm__1[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m[0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/__init__.py[0m in [0;36m?[0;34m(self)[0m
-[1;32m  10764[0m       [0;32mif[0m [0m_res_optimizetrm[0m [0;34m!=[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m  10765[0m         [0m_[0m[0;34m,[0m[0m_msg_optimizetrm[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m__getlasterror[0m[0;34m([0m[0m_res_optimizetrm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m> 10766[0;31m         [0;32mraise[0m [0mError[0m[0;34m([0m[0mrescode[0m[0;34m([0m[0m_res_optimizetrm[0m[0;34m)[0m[0;34m,[0m[0m_msg_optimizetrm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m  10767[0m       [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10772[0m       [0;32mif[0m [0m_res_optimizetrm[0m [0;34m!=[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10773[0m         [0m_[0m[0;34m,[0m[0m_msg_optimizetrm[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m__getlasterror[0m[0;34m([0m[0m_res_optimizetrm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m> 10774[0;31m         [0;32mraise[0m [0mError[0m[0;34m([0m[0mrescode[0m[0;34m([0m[0m_res_optimizetrm[0m[0;34m)[0m[0;34m,[0m[0m_msg_optimizetrm[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m  10775[0m       [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mError[0m: rescode.err_missing_license_file(1008): License cannot be located. The default search path is ':/home/runner/mosek/mosek.lic:'.
+
 
 During handling of the above exception, another exception occurred:
 
 [0;31mOptimizeError[0m                             Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1976/2664935975.py[0m in [0;36m?[0;34m()[0m
+[0;32m/tmp/ipykernel_1936/2664935975.py[0m in [0;36m?[0;34m()[0m
 [1;32m      1[0m [0;31m# construct a rhs[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0mrhsZero[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mSeries[0m[0;34m([0m[0mindex[0m[0;34m=[0m[0mdata[0m[0;34m.[0m[0mindex[0m[0;34m,[0m [0mdata[0m[0;34m=[0m[0;36m0.0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      3[0m [0;34m[0m[0m
@@ -68,42 +69,45 @@ During handling of the above exception, another exception occurred:
 [1;32m      6[0m [0;34m[0m[0m
 [1;32m      7[0m [0md[0m [0;34m=[0m [0mdict[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m/tmp/ipykernel_1976/1309650864.py[0m in [0;36m?[0;34m(matrix, rhs)[0m
+[0;32m/tmp/ipykernel_1936/1309650864.py[0m in [0;36m?[0;34m(matrix, rhs)[0m
 [1;32m      7[0m [0;32mdef[0m [0mlsq_pos[0m[0;34m([0m[0mmatrix[0m[0;34m,[0m [0mrhs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      8[0m     return pd.Series(index=matrix.columns,
 [0;32m----> 9[0;31m                      data=ll(matrix.values, rhs.values))
 [0m
 [0;32m~/work/MosekRegression/MosekRegression/mosek_tools/solver.py[0m in [0;36m?[0;34m(matrix, rhs)[0m
-[1;32m    141[0m [0;34m[0m[0m
-[1;32m    142[0m         [0;31m# minimization of the residual[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    143[0m         [0mmodel[0m[0;34m.[0m[0mobjective[0m[0;34m([0m[0mObjectiveSense[0m[0;34m.[0m[0mMinimize[0m[0;34m,[0m [0mv[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    144[0m         [0;31m# solve the problem[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 145[0;31m         [0mmodel[0m[0;34m.[0m[0msolve[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    146[0m [0;34m[0m[0m
-[1;32m    147[0m         [0;32mreturn[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mweights[0m[0;34m.[0m[0mlevel[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    136[0m [0;34m[0m[0m
+[1;32m    137[0m         [0;31m# minimization of the residual[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    138[0m         [0mmodel[0m[0;34m.[0m[0mobjective[0m[0;34m([0m[0mObjectiveSense[0m[0;34m.[0m[0mMinimize[0m[0;34m,[0m [0mv[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    139[0m         [0;31m# solve the problem[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 140[0;31m         [0mmodel[0m[0;34m.[0m[0msolve[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    141[0m [0;34m[0m[0m
+[1;32m    142[0m         [0;32mreturn[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mweights[0m[0;34m.[0m[0mlevel[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self, *args)[0m
-[1;32m   4361[0m   [0;32mdef[0m [0msolve[0m[0;34m([0m[0mself[0m[0;34m,[0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   4362[0m     [0;32mif[0m [0;32mFalse[0m[0;34m:[0m [0;32mpass[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   4363[0m     [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m#[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 4364[0;31m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   4365[0m     [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_alt_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m#[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   4366[0m       [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_solve_alt_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   4367[0m     [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_solve_SS[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m# string,string[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   5297[0m     [0;32mdef[0m [0msolve[0m[0;34m([0m[0mself[0m[0;34m,[0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   5298[0m       [0;32mif[0m [0;32mFalse[0m[0;34m:[0m [0;32mpass[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   5299[0m       [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m#[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 5300[0;31m         [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   5301[0m       [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_alt_solve_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m#[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   5302[0m         [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_solve_alt_[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   5303[0m       [0;32melif[0m [0mmosek_fusion_Model[0m[0;34m.[0m[0m_match_solve_SS[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m:[0m [0;31m# string,string[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self)[0m
-[1;32m   6165[0m   [0;32mdef[0m [0m_solve_[0m[0;34m([0m[0mself[0m[0;34m,[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   6166[0m    [0mself[0m[0;34m.[0m[0m_flushSolutions_[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   6167[0m    [0mself[0m[0;34m.[0m[0m__flush_1parameters_[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 6168[0;31m    [0mself[0m[0;34m.[0m[0m_task_1solve_ZSS[0m[0;34m([0m[0;32mFalse[0m[0;34m,[0m[0;34m""[0m[0;34m,[0m[0;34m""[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   6169[0m    [0mself[0m[0;34m.[0m[0m_task_1post_1solve_[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   7132[0m     [0;32mdef[0m [0m_solve_[0m[0;34m([0m[0mself[0m[0;34m,[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   7133[0m       [0;31m# Start scope @ bld/docker-centos-8/final/default/src/fusion/Model.mbi:3767:6-3772:7[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   7134[0m       [0mself[0m[0;34m.[0m[0m_flushSolutions_[0m[0;34m([0m[0;34m)[0m [0;31m# bld/docker-centos-8/final/default/src/fusion/Model.mbi:3768:8-25[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   7135[0m       [0mself[0m[0;34m.[0m[0m__flush_1parameters_[0m[0;34m([0m[0;34m)[0m [0;31m# bld/docker-centos-8/final/default/src/fusion/Model.mbi:3769:8-27[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 7136[0;31m       [0mself[0m[0;34m.[0m[0m_task_1solve_ZSS[0m[0;34m([0m[0;32mFalse[0m[0;34m,[0m[0;34m""[0m[0;34m,[0m[0;34m""[0m[0;34m)[0m [0;31m# bld/docker-centos-8/final/default/src/fusion/Model.mbi:3770:8-34[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   7137[0m       [0mself[0m[0;34m.[0m[0m_task_1post_1solve_[0m[0;34m([0m[0;34m)[0m [0;31m# bld/docker-centos-8/final/default/src/fusion/Model.mbi:3771:8-26[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   7138[0m       [0;31m# End   scope @ bld/docker-centos-8/final/default/src/fusion/Model.mbi:3767:6-3772:7[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/work/MosekRegression/MosekRegression/.venv/lib/python3.10/site-packages/mosek/fusion/impl/_implementation.py[0m in [0;36m?[0;34m(self, remote, server, port)[0m
-[1;32m   3987[0m       [0;32mfinally[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   3988[0m         [0;32mif[0m [0;32mnot[0m [0mok[0m[0;34m:[0m [0;31m# means exception, post-solve won't be called[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   3989[0m           [0mself[0m[0;34m.[0m[0m_sol_itr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   3990[0m           [0mself[0m[0;34m.[0m[0m_sol_bas[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 3991[0;31m           [0mself[0m[0;34m.[0m[0m_sol_itg[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4490[0m       [0;32mfinally[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4491[0m         [0;32mif[0m [0;32mnot[0m [0mok[0m[0;34m:[0m [0;31m# means exception, post-solve won't be called[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4492[0m           [0mself[0m[0;34m.[0m[0m_sol_itr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   4493[0m           [0mself[0m[0;34m.[0m[0m_sol_bas[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 4494[0;31m           [0mself[0m[0;34m.[0m[0m_sol_itg[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;31mOptimizeError[0m: rescode.err_missing_license_file(1008): License cannot be located. The default search path is ':/home/runner/mosek/mosek.lic:'.
+
 

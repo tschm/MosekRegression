@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Load Data &#8212; Mosek Regression with Fusion</title>
   
@@ -369,31 +369,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[************          25%                       ]  2 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[******************    38%                       ]  3 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  4 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************62%*****                  ]  5 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  6 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************88%*****************      ]  7 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  8 of 8 completed
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span> <span class="o">=</span> <span class="s2">&quot;SPY AAPL GOOG MSFT GS IBM T ^GSPC&quot;</span><span class="p">,</span>  <span class="c1"># list of tickers</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>                    <span class="n">period</span> <span class="o">=</span> <span class="s2">&quot;10y&quot;</span><span class="p">,</span>                  <span class="c1"># time period</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>                    <span class="n">interval</span> <span class="o">=</span> <span class="s2">&quot;1d&quot;</span><span class="p">,</span>                 <span class="c1"># trading interval</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>                    <span class="n">prepost</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>                 <span class="c1"># download pre/post market hours data?</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>                    <span class="n">repair</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>                   <span class="c1"># repair obvious price errors e.g. 100x?</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">prices</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Adj Close&quot;</span><span class="p">]</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yfinance&#39;
 </pre></div>
 </div>
 </div>
