@@ -9,7 +9,7 @@ packages = [{include = "mosek_tools"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
-pandas = "*"  
+pandas = "*"
 mosek = "*"
 scipy = "*"
 
@@ -26,3 +26,11 @@ pyyaml = "6.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+select = ["E", "F", "I"]
+line-length = 160
+target-version = "py310"
+exclude = [
+    "*__init__.py"
+]

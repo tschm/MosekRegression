@@ -2,12 +2,7 @@
 from __future__ import annotations
 
 import numpy as np
-from mosek.fusion import BaseModel
-from mosek.fusion import Domain
-from mosek.fusion import Expr
-from mosek.fusion import Matrix
-from mosek.fusion import Model
-from mosek.fusion import ObjectiveSense
+from mosek.fusion import BaseModel, Domain, Expr, Matrix, Model, ObjectiveSense
 
 
 def __sum_weighted(c1, expr1, c2, expr2):
@@ -282,8 +277,8 @@ def minimum_variance(matrix):
 if __name__ == "__main__":
     # MOSEK (often) requires that the environment variable MOSEKLM_LICENSE_FILE is defined and set to the port on the server
     # that is exposed by the license management program.
-    from numpy.random import randn
     import mosek
+    from numpy.random import randn
 
     A = randn(5, 3)
 
