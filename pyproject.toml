@@ -8,18 +8,16 @@ repository = "https://github.com/tschm/mosekregression"
 packages = [{include = "mosek_tools"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8"
-pandas = "*"   # unfortunately otherwise crash with quantstats"
+python = ">=3.9"
+pandas = "*"  
 mosek = "*"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]
-pytest = "7.2.0"
-pytest-cov = "4.0.0"
+pytest = "7.4.0"
+pytest-cov = "4.1.0"
 yfinance = "*"
 plotly = "*"
-jupyterlab = "*"
-#cvxsimulator = "*"
 
 [build-system]
 requires = ["poetry-core"]
