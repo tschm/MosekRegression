@@ -109,13 +109,13 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mosek_tools.solver.__l1_norm" title="mosek_tools.solver.__l1_norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__l1_norm</span></code></a>(model, name, expr)</p></td>
-<td><p>Given an expression (e.g. a vector) this returns the L1-norm of this vector as an expression.</p></td>
+<td><p>Given an expression (e.g. a vector) this returns the L1-norm of this vector</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mosek_tools.solver.__l2_norm" title="mosek_tools.solver.__l2_norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__l2_norm</span></code></a>(model, name, expr)</p></td>
-<td><p>Given an expression (e.g. a vector) this returns the L2-norm of this vector as an expression.</p></td>
+<td><p>Given an expression (e.g. a vector) this returns the L2-norm of</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mosek_tools.solver.__l2_norm_squared" title="mosek_tools.solver.__l2_norm_squared"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__l2_norm_squared</span></code></a>(model, name, expr)</p></td>
-<td><p>Given an expression (e.g. a vector) this returns the squared L2-norm of this vector as an expression.</p></td>
+<td><p>Given an expression (e.g. a vector) this returns the squared</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mosek_tools.solver.__linfty_norm" title="mosek_tools.solver.__linfty_norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__linfty_norm</span></code></a>(model, name, expr)</p></td>
 <td><p></p></td>
@@ -195,9 +195,12 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="mosek_tools.solver.__l1_norm">
 <span class="sig-prename descclassname"><span class="pre">mosek_tools.solver.</span></span><span class="sig-name descname"><span class="pre">__l1_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/mosek_tools/solver.html#__l1_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mosek_tools.solver.__l1_norm" title="Permalink to this definition"></a></dt>
-<dd><p>Given an expression (e.g. a vector) this returns the L1-norm of this vector as an expression.
-It also introduces n (where n is the size of the expression) auxiliary variables. Mosek requires a name
-for any variable that is added to a model. The user has to specify this name explicitly.
+<dd><p>Given an expression (e.g. a vector) this returns the L1-norm of this vector
+as an expression.
+It also introduces n (where n is the size of the expression) auxiliary
+variables. Mosek requires a name
+for any variable that is added to a model. The user has to specify
+this name explicitly.
 This requirement may disappear in future version of this API.</p>
 <p>ATTENTION: THIS WORKS ONLY IF expr is a VARIABLE</p>
 </dd></dl>
@@ -205,18 +208,23 @@ This requirement may disappear in future version of this API.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mosek_tools.solver.__l2_norm">
 <span class="sig-prename descclassname"><span class="pre">mosek_tools.solver.</span></span><span class="sig-name descname"><span class="pre">__l2_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/mosek_tools/solver.html#__l2_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mosek_tools.solver.__l2_norm" title="Permalink to this definition"></a></dt>
-<dd><p>Given an expression (e.g. a vector) this returns the L2-norm of this vector as an expression.
+<dd><p>Given an expression (e.g. a vector) this returns the L2-norm of
+this vector as an expression.
 It also introduces an auxiliary variables. Mosek requires a name
-for any variable that is added to a model. The user has to specify this name explicitly.
+for any variable that is added to a model. The user has to specify
+this name explicitly.
 This requirement may disappear in future version of this API.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mosek_tools.solver.__l2_norm_squared">
 <span class="sig-prename descclassname"><span class="pre">mosek_tools.solver.</span></span><span class="sig-name descname"><span class="pre">__l2_norm_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/mosek_tools/solver.html#__l2_norm_squared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mosek_tools.solver.__l2_norm_squared" title="Permalink to this definition"></a></dt>
-<dd><p>Given an expression (e.g. a vector) this returns the squared L2-norm of this vector as an expression.
-It also introduces an auxiliary variables. Mosek requires a name
-for any variable that is added to a model. The user has to specify this name explicitly.
+<dd><p>Given an expression (e.g. a vector) this returns the squared
+L2-norm of this vector as an expression.
+It also introduces an auxiliary variables.
+Mosek requires a name
+for any variable that is added to a model. The user has to
+specify this name explicitly.
 This requirement may disappear in future version of this API.</p>
 </dd></dl>
 
