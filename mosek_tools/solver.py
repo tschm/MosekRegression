@@ -36,9 +36,12 @@ def __absolute(model, name, expr):
 
 def __l1_norm(model, name, expr):
     """
-    Given an expression (e.g. a vector) this returns the L1-norm of this vector as an expression.
-    It also introduces n (where n is the size of the expression) auxiliary variables. Mosek requires a name
-    for any variable that is added to a model. The user has to specify this name explicitly.
+    Given an expression (e.g. a vector) this returns the L1-norm of this vector
+    as an expression.
+    It also introduces n (where n is the size of the expression) auxiliary
+    variables. Mosek requires a name
+    for any variable that is added to a model. The user has to specify
+    this name explicitly.
     This requirement may disappear in future version of this API.
 
     ATTENTION: THIS WORKS ONLY IF expr is a VARIABLE
@@ -48,9 +51,11 @@ def __l1_norm(model, name, expr):
 
 def __l2_norm(model, name, expr):
     """
-    Given an expression (e.g. a vector) this returns the L2-norm of this vector as an expression.
+    Given an expression (e.g. a vector) this returns the L2-norm of
+    this vector as an expression.
     It also introduces an auxiliary variables. Mosek requires a name
-    for any variable that is added to a model. The user has to specify this name explicitly.
+    for any variable that is added to a model. The user has to specify
+    this name explicitly.
     This requirement may disappear in future version of this API.
     """
     t = model.variable(name, 1, Domain.unbounded())
@@ -60,9 +65,12 @@ def __l2_norm(model, name, expr):
 
 def __l2_norm_squared(model, name, expr):
     """
-    Given an expression (e.g. a vector) this returns the squared L2-norm of this vector as an expression.
-    It also introduces an auxiliary variables. Mosek requires a name
-    for any variable that is added to a model. The user has to specify this name explicitly.
+    Given an expression (e.g. a vector) this returns the squared
+    L2-norm of this vector as an expression.
+    It also introduces an auxiliary variables.
+    Mosek requires a name
+    for any variable that is added to a model. The user has to
+    specify this name explicitly.
     This requirement may disappear in future version of this API.
     """
     t = model.variable(name, 1, Domain.unbounded())
@@ -239,7 +247,6 @@ def markowitz(exp_ret, covariance_mat, aversion):
             Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)),
         )
         model.solve()
-        # mModel.maximise(model=model, expr=Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)))
         return np.array(weights.level())
 
 
@@ -252,7 +259,8 @@ def minimum_variance(matrix):
     #         w >= 0
     #     sum[w] = 1
 
-    # This is the left-most point on the efficiency frontier in the classic Markowitz theory
+    # This is the left-most point on the efficiency frontier in the classic
+    # Markowitz theory
 
     # build the model
     with Model("Minimum Variance") as model:
@@ -275,7 +283,8 @@ def minimum_variance(matrix):
 
 
 if __name__ == "__main__":
-    # MOSEK (often) requires that the environment variable MOSEKLM_LICENSE_FILE is defined and set to the port on the server
+    # MOSEK (often) requires that the environment variable
+    # MOSEKLM_LICENSE_FILE is defined and set to the port on the server
     # that is exposed by the license management program.
     import mosek
     from numpy.random import randn
@@ -284,7 +293,8 @@ if __name__ == "__main__":
 
     print(minimum_variance(matrix=A))
 
-    # please note that the Mosek License may still be in cache which could interfere/block subsequent programs running
+    # please note that the Mosek License may still be in cache which could
+    # interfere/block subsequent programs running
     # One way to make sure the license is no longer in cache is to use the trick:
     for feat in mosek.feature.values:
         BaseModel._global_env.checkinlicense(feat)
