@@ -37,4 +37,3 @@ make jupyter
 ```
 
 will install and start the jupyter lab.
-
