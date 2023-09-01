@@ -43,8 +43,10 @@ repos:
       - id: poetry-check
       - id: poetry-lock
 
-  - repo: https://github.com/leoll2/copyright_notice_precommit
-    rev: 0.1.1
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.4
     hooks:
-      - id: copyright-notice
-        args: [--notice=copyright.txt]
+        - id: insert-license
+          files: ^(mosek_tools)
+          args:
+            ['--license-filepath', 'copyright.txt', '--no-extra-eol']
