@@ -35,14 +35,6 @@ Functions
 
 
 
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   mosek_tools.solver.A
-
-
 .. py:function:: __sum_weighted(c1, expr1, c2, expr2)
 
 
@@ -139,9 +131,4 @@ Attributes
 
 .. py:function:: minimum_variance(matrix)
 
-
-.. py:data:: A
-   
-
-   
 
