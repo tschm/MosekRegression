@@ -292,21 +292,3 @@ def minimum_variance(matrix):
         model.solve()
         # return the series of weights
         return np.array(weights.level())
-
-
-if __name__ == "__main__":
-    # MOSEK (often) requires that the environment variable
-    # MOSEKLM_LICENSE_FILE is defined and set to the port on the server
-    # that is exposed by the license management program.
-    import mosek
-    from numpy.random import randn
-
-    A = randn(5, 3)
-
-    print(minimum_variance(matrix=A))
-
-    # please note that the Mosek License may still be in cache which could
-    # interfere/block subsequent programs running
-    # One way to make sure the license is no longer in cache is to use the trick:
-    for feat in mosek.feature.values:
-        BaseModel._global_env.checkinlicense(feat)
