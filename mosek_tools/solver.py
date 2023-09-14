@@ -14,7 +14,7 @@
 from __future__ import annotations
 
 import numpy as np
-from mosek.fusion import BaseModel, Domain, Expr, Matrix, Model, ObjectiveSense
+from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense
 
 
 def __sum_weighted(c1, expr1, c2, expr2):
