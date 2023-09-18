@@ -6,6 +6,7 @@ authors = ["Thomas Schmelzer"]
 readme = "README.md"
 repository = "https://github.com/tschm/mosekregression"
 packages = [{include = "mosek_tools"}]
+homepage = "https://tschm.github.io/mosekregression"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
