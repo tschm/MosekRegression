@@ -12,11 +12,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -27,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Mosek Tools
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Mosek Tools
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -57,9 +61,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>mosek_tools.solver</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mosek_tools.solver</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -88,26 +92,40 @@
 <span class="kn">from</span> <span class="nn">mosek.fusion</span> <span class="kn">import</span> <span class="n">Domain</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">ObjectiveSense</span>
 
 
-<div class="viewcode-block" id="__sum_weighted"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__sum_weighted">[docs]</a><span class="k">def</span> <span class="nf">__sum_weighted</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">expr2</span><span class="p">):</span>
+<div class="viewcode-block" id="__sum_weighted">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__sum_weighted">[docs]</a>
+<span class="k">def</span> <span class="nf">__sum_weighted</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">expr2</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">expr1</span><span class="p">),</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">expr2</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="__residual"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__residual">[docs]</a><span class="k">def</span> <span class="nf">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__residual">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__residual">[docs]</a>
+<span class="k">def</span> <span class="nf">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Introduce the residual matrix*expr - rhs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">__mat_vec_prod</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">expr</span><span class="p">),</span> <span class="n">rhs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="__quad_cone"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__quad_cone">[docs]</a><span class="k">def</span> <span class="nf">__quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__quad_cone">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__quad_cone">[docs]</a>
+<span class="k">def</span> <span class="nf">__quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inQCone</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="__rotated_quad_cone"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__rotated_quad_cone">[docs]</a><span class="k">def</span> <span class="nf">__rotated_quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">,</span> <span class="n">expr3</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__rotated_quad_cone">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__rotated_quad_cone">[docs]</a>
+<span class="k">def</span> <span class="nf">__rotated_quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">,</span> <span class="n">expr3</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">,</span> <span class="n">expr3</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRotatedQCone</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="__absolute"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__absolute">[docs]</a><span class="k">def</span> <span class="nf">__absolute</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__absolute">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__absolute">[docs]</a>
+<span class="k">def</span> <span class="nf">__absolute</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">getShape</span><span class="p">(),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
 
     <span class="c1"># (t_i, w_i) \in Q2</span>
@@ -117,7 +135,10 @@
     <span class="k">return</span> <span class="n">t</span></div>
 
 
-<div class="viewcode-block" id="__l1_norm"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l1_norm">[docs]</a><span class="k">def</span> <span class="nf">__l1_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__l1_norm">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l1_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">__l1_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given an expression (e.g. a vector) this returns the L1-norm of this vector</span>
 <span class="sd">    as an expression.</span>
@@ -132,7 +153,10 @@
     <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">__absolute</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="__l2_norm"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l2_norm">[docs]</a><span class="k">def</span> <span class="nf">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__l2_norm">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l2_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given an expression (e.g. a vector) this returns the L2-norm of</span>
 <span class="sd">    this vector as an expression.</span>
@@ -146,7 +170,10 @@
     <span class="k">return</span> <span class="n">t</span></div>
 
 
-<div class="viewcode-block" id="__l2_norm_squared"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l2_norm_squared">[docs]</a><span class="k">def</span> <span class="nf">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__l2_norm_squared">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l2_norm_squared">[docs]</a>
+<span class="k">def</span> <span class="nf">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given an expression (e.g. a vector) this returns the squared</span>
 <span class="sd">    L2-norm of this vector as an expression.</span>
@@ -161,7 +188,10 @@
     <span class="k">return</span> <span class="n">t</span></div>
 
 
-<div class="viewcode-block" id="__linfty_norm"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__linfty_norm">[docs]</a><span class="k">def</span> <span class="nf">__linfty_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__linfty_norm">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__linfty_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">__linfty_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
 
     <span class="c1"># (t, w_i) \in Q2</span>
@@ -171,21 +201,33 @@
     <span class="k">return</span> <span class="n">t</span></div>
 
 
-<div class="viewcode-block" id="__mat_vec_prod"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__mat_vec_prod">[docs]</a><span class="k">def</span> <span class="nf">__mat_vec_prod</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__mat_vec_prod">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__mat_vec_prod">[docs]</a>
+<span class="k">def</span> <span class="nf">__mat_vec_prod</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">Matrix</span><span class="o">.</span><span class="n">dense</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="n">expr</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="__stdev"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__stdev">[docs]</a><span class="k">def</span> <span class="nf">__stdev</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covar</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__stdev">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__stdev">[docs]</a>
+<span class="k">def</span> <span class="nf">__stdev</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covar</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">covar</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">__mat_vec_prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">weights</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="__variance"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__variance">[docs]</a><span class="k">def</span> <span class="nf">__variance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covar</span><span class="p">):</span>
+
+<div class="viewcode-block" id="__variance">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__variance">[docs]</a>
+<span class="k">def</span> <span class="nf">__variance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covar</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">covar</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">__mat_vec_prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">weights</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="lsq_ls"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_ls">[docs]</a><span class="k">def</span> <span class="nf">lsq_ls</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="lsq_ls">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_ls">[docs]</a>
+<span class="k">def</span> <span class="nf">lsq_ls</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    min 2-norm (matrix*w - rhs)^2</span>
 <span class="sd">    s.t. e&#39;w = 1</span>
@@ -209,7 +251,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="lsq_pos"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_pos">[docs]</a><span class="k">def</span> <span class="nf">lsq_pos</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="lsq_pos">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_pos">[docs]</a>
+<span class="k">def</span> <span class="nf">lsq_pos</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    min 2-norm (matrix*w - rhs)^2</span>
 <span class="sd">    s.t. e&#39;w = 1</span>
@@ -233,7 +278,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="lsq_pos_l1_penalty"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_pos_l1_penalty">[docs]</a><span class="k">def</span> <span class="nf">lsq_pos_l1_penalty</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">cost_multiplier</span><span class="p">,</span> <span class="n">weights_0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="lsq_pos_l1_penalty">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_pos_l1_penalty">[docs]</a>
+<span class="k">def</span> <span class="nf">lsq_pos_l1_penalty</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">cost_multiplier</span><span class="p">,</span> <span class="n">weights_0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    min 2-norm (matrix*w - rhs)** + 1-norm(cost_multiplier*(w-w0))</span>
 <span class="sd">    s.t. e&#39;w = 1</span>
@@ -268,7 +316,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="lasso"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lasso">[docs]</a><span class="k">def</span> <span class="nf">lasso</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">lamb</span><span class="p">):</span>
+
+<div class="viewcode-block" id="lasso">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lasso">[docs]</a>
+<span class="k">def</span> <span class="nf">lasso</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">lamb</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    min 2-norm (matrix*w - rhs)^2 + lamb * 1-norm(w)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -291,7 +342,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="markowitz_riskobjective"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.markowitz_riskobjective">[docs]</a><span class="k">def</span> <span class="nf">markowitz_riskobjective</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+
+<div class="viewcode-block" id="markowitz_riskobjective">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.markowitz_riskobjective">[docs]</a>
+<span class="k">def</span> <span class="nf">markowitz_riskobjective</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
     <span class="c1"># define model</span>
     <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;mean var&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
         <span class="c1"># set of n weights (unconstrained)</span>
@@ -312,7 +366,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="markowitz"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.markowitz">[docs]</a><span class="k">def</span> <span class="nf">markowitz</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">,</span> <span class="n">aversion</span><span class="p">):</span>
+
+<div class="viewcode-block" id="markowitz">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.markowitz">[docs]</a>
+<span class="k">def</span> <span class="nf">markowitz</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">,</span> <span class="n">aversion</span><span class="p">):</span>
     <span class="c1"># define model</span>
     <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;mean var&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
         <span class="c1"># set of n weights (unconstrained)</span>
@@ -333,7 +390,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="minimum_variance"><a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.minimum_variance">[docs]</a><span class="k">def</span> <span class="nf">minimum_variance</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+
+<div class="viewcode-block" id="minimum_variance">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.minimum_variance">[docs]</a>
+<span class="k">def</span> <span class="nf">minimum_variance</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
     <span class="c1"># Given the matrix of returns a (each column is a series of returns) this method</span>
     <span class="c1"># computes the weights for a minimum variance portfolio, e.g.</span>
 
@@ -363,6 +423,7 @@
         <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
         <span class="c1"># return the series of weights</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
 </pre></div>
 
            </div>
