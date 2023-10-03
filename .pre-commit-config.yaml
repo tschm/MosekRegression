@@ -44,9 +44,3 @@ repos:
           files: ^(mosek_tools)
           args:
             ['--license-filepath', 'copyright.txt', '--no-extra-eol']
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.11.2
-    hooks:
-      - id: isort
-        name: isort (python)
