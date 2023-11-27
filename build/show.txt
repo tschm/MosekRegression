@@ -1,4 +1,4 @@
-mosek 10.1.17 Python API for Mosek
+mosek 10.1.19 Python API for Mosek
 └── numpy *
 pandas 2.1.3 Powerful data structures for data analysis, time series, and statistics
 ├── numpy >=1.22.4,<2
