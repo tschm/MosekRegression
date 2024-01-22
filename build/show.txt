@@ -1,11 +1,11 @@
-mosek 10.1.21 Python API for Mosek
+mosek 10.1.22 Python API for Mosek
 └── numpy *
-pandas 2.1.4 Powerful data structures for data analysis, time series, and statistics
+pandas 2.2.0 Powerful data structures for data analysis, time series, and statistics
 ├── numpy >=1.22.4,<2
 ├── numpy >=1.23.2,<2
 ├── python-dateutil >=2.8.2
 │   └── six >=1.5 
 ├── pytz >=2020.1
-└── tzdata >=2022.1
+└── tzdata >=2022.7
 scipy 1.12.0 Fundamental algorithms for scientific computing in Python
 └── numpy >=1.22.4,<1.29.0
