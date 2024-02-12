@@ -10,19 +10,19 @@ jobs:
   sphinx:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cvxgrp/.github/actions/sphinx@main
 
   test:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cvxgrp/.github/actions/test@main
 
   jupyter:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cvxgrp/.github/actions/jupyter@main
 
   book:
@@ -35,7 +35,7 @@ jobs:
     steps:
 
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download Book
         uses: actions/download-artifact@v4
