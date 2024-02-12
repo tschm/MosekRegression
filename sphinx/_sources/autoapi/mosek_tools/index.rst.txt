@@ -1,0 +1,15 @@
+:py:mod:`mosek_tools`
+=====================
+
+.. py:module:: mosek_tools
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   solver/index.rst
+
+

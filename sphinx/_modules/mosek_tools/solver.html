@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mosek_tools.solver &mdash; Mosek Tools Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=c267ad58" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Mosek Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mosek Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mosek_tools.solver</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mosek_tools.solver</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 Thomas Schmelzer</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#       http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mosek.fusion</span> <span class="kn">import</span> <span class="n">Domain</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">ObjectiveSense</span>
+
+
+<div class="viewcode-block" id="__sum_weighted">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__sum_weighted">[docs]</a>
+<span class="k">def</span> <span class="nf">__sum_weighted</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">expr2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">expr1</span><span class="p">),</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">expr2</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="__residual">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__residual">[docs]</a>
+<span class="k">def</span> <span class="nf">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Introduce the residual matrix*expr - rhs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">__mat_vec_prod</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">expr</span><span class="p">),</span> <span class="n">rhs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="__quad_cone">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__quad_cone">[docs]</a>
+<span class="k">def</span> <span class="nf">__quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inQCone</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="__rotated_quad_cone">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__rotated_quad_cone">[docs]</a>
+<span class="k">def</span> <span class="nf">__rotated_quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">,</span> <span class="n">expr3</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">expr1</span><span class="p">,</span> <span class="n">expr2</span><span class="p">,</span> <span class="n">expr3</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRotatedQCone</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="__absolute">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__absolute">[docs]</a>
+<span class="k">def</span> <span class="nf">__absolute</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">getShape</span><span class="p">(),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
+
+    <span class="c1"># (t_i, w_i) \in Q2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">getShape</span><span class="p">())):</span>
+        <span class="n">__quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">expr</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">t</span></div>
+
+
+
+<div class="viewcode-block" id="__l1_norm">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l1_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">__l1_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an expression (e.g. a vector) this returns the L1-norm of this vector</span>
+<span class="sd">    as an expression.</span>
+<span class="sd">    It also introduces n (where n is the size of the expression) auxiliary</span>
+<span class="sd">    variables. Mosek requires a name</span>
+<span class="sd">    for any variable that is added to a model. The user has to specify</span>
+<span class="sd">    this name explicitly.</span>
+<span class="sd">    This requirement may disappear in future version of this API.</span>
+
+<span class="sd">    ATTENTION: THIS WORKS ONLY IF expr is a VARIABLE</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">__absolute</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="__l2_norm">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l2_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an expression (e.g. a vector) this returns the L2-norm of</span>
+<span class="sd">    this vector as an expression.</span>
+<span class="sd">    It also introduces an auxiliary variables. Mosek requires a name</span>
+<span class="sd">    for any variable that is added to a model. The user has to specify</span>
+<span class="sd">    this name explicitly.</span>
+<span class="sd">    This requirement may disappear in future version of this API.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
+    <span class="n">__quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span></div>
+
+
+
+<div class="viewcode-block" id="__l2_norm_squared">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__l2_norm_squared">[docs]</a>
+<span class="k">def</span> <span class="nf">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an expression (e.g. a vector) this returns the squared</span>
+<span class="sd">    L2-norm of this vector as an expression.</span>
+<span class="sd">    It also introduces an auxiliary variables.</span>
+<span class="sd">    Mosek requires a name</span>
+<span class="sd">    for any variable that is added to a model. The user has to</span>
+<span class="sd">    specify this name explicitly.</span>
+<span class="sd">    This requirement may disappear in future version of this API.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
+    <span class="n">__rotated_quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span></div>
+
+
+
+<div class="viewcode-block" id="__linfty_norm">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__linfty_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">__linfty_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
+
+    <span class="c1"># (t, w_i) \in Q2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">size</span><span class="p">()):</span>
+        <span class="n">__quad_cone</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">t</span></div>
+
+
+
+<div class="viewcode-block" id="__mat_vec_prod">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__mat_vec_prod">[docs]</a>
+<span class="k">def</span> <span class="nf">__mat_vec_prod</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">Matrix</span><span class="o">.</span><span class="n">dense</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="n">expr</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="__stdev">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__stdev">[docs]</a>
+<span class="k">def</span> <span class="nf">__stdev</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covar</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">covar</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">__mat_vec_prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">weights</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="__variance">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.__variance">[docs]</a>
+<span class="k">def</span> <span class="nf">__variance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covar</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">covar</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">__mat_vec_prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">weights</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="lsq_ls">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_ls">[docs]</a>
+<span class="k">def</span> <span class="nf">lsq_ls</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    min 2-norm (matrix*w - rhs)^2</span>
+<span class="sd">    s.t. e&#39;w = 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># define model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;lsqPos&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span>
+            <span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># e&#39;*w = 1</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">equalsTo</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="n">v</span> <span class="o">=</span> <span class="n">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;2-norm(res)&quot;</span><span class="p">,</span> <span class="n">expr</span><span class="o">=</span><span class="n">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+
+        <span class="c1"># minimization of the residual</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span><span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Minimize</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="c1"># solve the problem</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="lsq_pos">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_pos">[docs]</a>
+<span class="k">def</span> <span class="nf">lsq_pos</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    min 2-norm (matrix*w - rhs)^2</span>
+<span class="sd">    s.t. e&#39;w = 1</span>
+<span class="sd">           w &gt;= 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># define model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;lsqPos&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="c1"># introduce n non-negative weight variables</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="c1"># e&#39;*w = 1</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">equalsTo</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="n">v</span> <span class="o">=</span> <span class="n">__l2_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;2-norm(res)&quot;</span><span class="p">,</span> <span class="n">expr</span><span class="o">=</span><span class="n">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+
+        <span class="c1"># minimization of the residual</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span><span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Minimize</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="c1"># solve the problem</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="lsq_pos_l1_penalty">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lsq_pos_l1_penalty">[docs]</a>
+<span class="k">def</span> <span class="nf">lsq_pos_l1_penalty</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">cost_multiplier</span><span class="p">,</span> <span class="n">weights_0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    min 2-norm (matrix*w - rhs)** + 1-norm(cost_multiplier*(w-w0))</span>
+<span class="sd">    s.t. e&#39;w = 1</span>
+<span class="sd">           w &gt;= 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># define model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;lsqSparse&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="c1"># introduce n non-negative weight variables</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span>
+            <span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># e&#39;*w = 1</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">equalsTo</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="c1"># sum of squared residuals</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;2-norm(res)**&quot;</span><span class="p">,</span> <span class="n">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+
+        <span class="c1"># \Gamma*(w - w0), p is an expression</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mulElm</span><span class="p">(</span><span class="n">cost_multiplier</span><span class="p">,</span> <span class="n">Expr</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">weights_0</span><span class="p">))</span>
+
+        <span class="n">cost</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="s2">&quot;cost&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Domain</span><span class="o">.</span><span class="n">unbounded</span><span class="p">())</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">equalsTo</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="n">__l1_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;abs(weights)&quot;</span><span class="p">,</span> <span class="n">cost</span><span class="p">)</span>
+
+        <span class="c1"># Minimise v + t</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span><span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Minimize</span><span class="p">,</span> <span class="n">__sum_weighted</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+        <span class="c1"># solve the problem</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="lasso">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.lasso">[docs]</a>
+<span class="k">def</span> <span class="nf">lasso</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">lamb</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    min 2-norm (matrix*w - rhs)^2 + lamb * 1-norm(w)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># define model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;lasso&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span>
+            <span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>  <span class="c1"># , Domain.inRange(-np.infty, +np.infty))</span>
+        <span class="c1"># introduce variables and constraints</span>
+
+        <span class="n">v</span> <span class="o">=</span> <span class="n">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;2-norm(res)**&quot;</span><span class="p">,</span> <span class="n">__residual</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">__l1_norm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;1-norm(w)&quot;</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span>
+            <span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Minimize</span><span class="p">,</span> <span class="n">__sum_weighted</span><span class="p">(</span><span class="n">c1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">expr1</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="n">lamb</span><span class="p">,</span> <span class="n">expr2</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># solve the problem</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="markowitz_riskobjective">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.markowitz_riskobjective">[docs]</a>
+<span class="k">def</span> <span class="nf">markowitz_riskobjective</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+    <span class="c1"># define model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;mean var&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="c1"># set of n weights (unconstrained)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="c1"># standard deviation induced by covariance matrix</span>
+        <span class="n">stdev</span> <span class="o">=</span> <span class="n">__stdev</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">)</span>
+
+        <span class="c1"># impose a bound on this standard deviation</span>
+        <span class="c1"># mBound.upper(model, stdev, bound)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">stdev</span><span class="p">,</span> <span class="n">Domain</span><span class="o">.</span><span class="n">lessThan</span><span class="p">(</span><span class="n">bound</span><span class="p">))</span>
+
+        <span class="c1"># mModel.maximise(model=model, expr=Expr.dot(exp_ret, weights))</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span><span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Maximize</span><span class="p">,</span> <span class="n">Expr</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+        <span class="c1"># solve the problem</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="markowitz">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.markowitz">[docs]</a>
+<span class="k">def</span> <span class="nf">markowitz</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">,</span> <span class="n">aversion</span><span class="p">):</span>
+    <span class="c1"># define model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;mean var&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="c1"># set of n weights (unconstrained)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span>
+            <span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">,</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">equalsTo</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+
+        <span class="c1"># standard deviation induced by covariance matrix</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">__variance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;var&quot;</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">covariance_mat</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span>
+            <span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Maximize</span><span class="p">,</span>
+            <span class="n">Expr</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">exp_ret</span><span class="p">,</span> <span class="n">weights</span><span class="p">),</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">aversion</span><span class="p">,</span> <span class="n">var</span><span class="p">)),</span>
+        <span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="minimum_variance">
+<a class="viewcode-back" href="../../autoapi/mosek_tools/solver/index.html#mosek_tools.solver.minimum_variance">[docs]</a>
+<span class="k">def</span> <span class="nf">minimum_variance</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="c1"># Given the matrix of returns a (each column is a series of returns) this method</span>
+    <span class="c1"># computes the weights for a minimum variance portfolio, e.g.</span>
+
+    <span class="c1"># min   2-Norm[a*w]^2</span>
+    <span class="c1"># s.t.</span>
+    <span class="c1">#         w &gt;= 0</span>
+    <span class="c1">#     sum[w] = 1</span>
+
+    <span class="c1"># This is the left-most point on the efficiency frontier in the classic</span>
+    <span class="c1"># Markowitz theory</span>
+
+    <span class="c1"># build the model</span>
+    <span class="k">with</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;Minimum Variance&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+        <span class="c1"># introduce the weight variable</span>
+
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">variable</span><span class="p">(</span><span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Domain</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+        <span class="c1"># sum of weights has to be 1</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">Expr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">Domain</span><span class="o">.</span><span class="n">equalsTo</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+        <span class="c1"># returns</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">Matrix</span><span class="o">.</span><span class="n">dense</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="c1"># compute l2_norm squared of those returns</span>
+        <span class="c1"># minimize this l2_norm</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span>
+            <span class="n">ObjectiveSense</span><span class="o">.</span><span class="n">Minimize</span><span class="p">,</span> <span class="n">__l2_norm_squared</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;2-norm^2(r)&quot;</span><span class="p">,</span> <span class="n">expr</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># solve the problem</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+        <span class="c1"># return the series of weights</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">level</span><span class="p">())</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
