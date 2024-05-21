@@ -1,15 +1,11 @@
-:py:mod:`mosek_tools.solver`
-============================
+mosek_tools.solver
+==================
 
 .. py:module:: mosek_tools.solver
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -34,9 +30,10 @@ Functions
    mosek_tools.solver.minimum_variance
 
 
+Module Contents
+---------------
 
 .. py:function:: __sum_weighted(c1, expr1, c2, expr2)
-
 
 .. py:function:: __residual(matrix, rhs, expr)
 
@@ -45,12 +42,9 @@ Functions
 
 .. py:function:: __quad_cone(model, expr1, expr2)
 
-
 .. py:function:: __rotated_quad_cone(model, expr1, expr2, expr3)
 
-
 .. py:function:: __absolute(model, name, expr)
-
 
 .. py:function:: __l1_norm(model, name, expr)
 
@@ -88,15 +82,11 @@ Functions
 
 .. py:function:: __linfty_norm(model, name, expr)
 
-
 .. py:function:: __mat_vec_prod(matrix, expr)
-
 
 .. py:function:: __stdev(model, name, weights, covar)
 
-
 .. py:function:: __variance(model, name, weights, covar)
-
 
 .. py:function:: lsq_ls(matrix, rhs)
 
@@ -125,10 +115,7 @@ Functions
 
 .. py:function:: markowitz_riskobjective(exp_ret, covariance_mat, bound)
 
-
 .. py:function:: markowitz(exp_ret, covariance_mat, aversion)
 
-
 .. py:function:: minimum_variance(matrix)
-
 
