@@ -1,49 +1,35 @@
 name: "book"
 
 on:
-  push:
-    branches:
-      - main
-
+- push
 
 jobs:
+  marimo:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: cvxgrp/.github/actions/uv/marimo@main
+
   sphinx:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v4
-      - uses: cvxgrp/.github/actions/sphinx@v1.1.0
+      - uses: cvxgrp/.github/actions/uv/sphinx@main
 
   test:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v4
-      - uses: cvxgrp/.github/actions/coverage@v1.1.0
+      - uses: cvxgrp/.github/actions/uv/coverage@main
 
   jupyter:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v4
-      - uses: cvxgrp/.github/actions/jupyter@v1.1.0
+      - uses: cvxgrp/.github/actions/uv/jupyter@main
 
   book:
     runs-on: "ubuntu-latest"
-    needs: [test, sphinx, jupyter]
+    needs: [test, sphinx, jupyter, marimo]
 
     permissions:
       contents: write
 
     steps:
-
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Download Book
-        uses: actions/download-artifact@v4
-        with:
-          path: .book
-
-      - name: GitHub Pages action
-        uses: JamesIves/github-pages-deploy-action@v4.7.2
-        with:
-          branch: gh-pages          # The branch the action should deploy to.
-          folder: .book              # The folder the action should deploy.
+      - uses: cvxgrp/.github/actions/book@main
