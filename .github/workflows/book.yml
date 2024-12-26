@@ -11,19 +11,19 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
-      - uses: cvxgrp/.github/actions/sphinx@main
+      - uses: cvxgrp/.github/actions/sphinx@v1.1.0
 
   test:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
-      - uses: cvxgrp/.github/actions/coverage@main
+      - uses: cvxgrp/.github/actions/coverage@v1.1.0
 
   jupyter:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
-      - uses: cvxgrp/.github/actions/jupyter@main
+      - uses: cvxgrp/.github/actions/jupyter@v1.1.0
 
   book:
     runs-on: "ubuntu-latest"
