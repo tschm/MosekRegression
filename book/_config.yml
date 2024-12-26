@@ -5,9 +5,6 @@ title: Mosek Regression with Fusion
 author: Thomas Schmelzer
 only_build_toc_files: true
 
-execute:
-  execute_notebooks: 'off'   # notebooks would need a Mosek license
-  timeout: 240
 
 parse:
   myst_enable_extensions:

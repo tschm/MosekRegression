@@ -1,7 +1,6 @@
 name: pre-commit
 
 on:
-  pull_request:
   push:
 
 jobs:
@@ -15,14 +14,16 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: cvxgrp/.github/actions/coverage@v1.1.0
-      with:
-        source-folder: 'mosek_tools'
+      - uses: cvxgrp/.github/actions/uv/coverage@main
 
-    - name: Coveralls GitHub Action
-      uses: coverallsapp/github-action@v2
-      with:
-        files: artifacts/tests/coverage/coverage.info
-        format: lcov
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2
+        with:
+          files: artifacts/tests/coverage/coverage.info
+          format: lcov
+
+  deptry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cvxgrp/.github/actions/uv/deptry@main
