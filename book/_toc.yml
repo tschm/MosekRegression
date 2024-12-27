@@ -3,6 +3,4 @@
 format: jb-book
 root: docs/index
 chapters:
-    - file: docs/MinVariance
-    - file: docs/Predictor
-    - file: docs/loadData
+    - file: docs/api
