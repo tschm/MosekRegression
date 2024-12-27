@@ -18,11 +18,13 @@ def __(mo):
 def __():
     import yfinance as yf
 
-    data = yf.download(tickers = "SPY AAPL GOOG MSFT GS IBM T ^GSPC",  # list of tickers
-                       period = "10y",                  # time period
-                       interval = "1d",                 # trading interval
-                       prepost = False,                 # download pre/post market hours data?
-                       repair = True)                   # repair obvious price errors e.g. 100x?
+    data = yf.download(
+        tickers="SPY AAPL GOOG MSFT GS IBM T ^GSPC",  # list of tickers
+        period="10y",  # time period
+        interval="1d",  # trading interval
+        prepost=False,  # download pre/post market hours data?
+        repair=True,
+    )  # repair obvious price errors e.g. 100x?
 
     prices = data["Adj Close"]
     prices.to_csv("data/data.csv")
@@ -32,6 +34,7 @@ def __():
 @app.cell
 def __():
     import marimo as mo
+
     return (mo,)
 
 

@@ -21,13 +21,12 @@ def __():
 
     from mosek_tools.solver import lasso as ll
 
-
     def normalize(ts):
-        return ts/np.linalg.norm(ts.values,2)
-
+        return ts / np.linalg.norm(ts.values, 2)
 
     def lasso(X, y, lamb):
         return pd.Series(index=X.columns, data=ll(X.values, y.values, lamb))
+
     return lasso, ll, normalize, np, pd
 
 
@@ -54,13 +53,14 @@ app._unparsable_cell(
         print(w)
         print(np.corrcoef((X*w).sum(axis=1), y))
     """,
-    name="__"
+    name="__",
 )
 
 
 @app.cell
 def __():
     import marimo as mo
+
     return (mo,)
 
 
