@@ -8,7 +8,7 @@ app = marimo.App()
 def __(mo):
     mo.md(
         r"""
-        # Minimum Variance 
+        # Minimum Variance
         """
     )
     return
@@ -22,21 +22,21 @@ def __():
 
     from mosek_tools.solver import lsq_pos as ll
 
-
     def lsq_pos(matrix, rhs):
-        return pd.Series(index=matrix.columns,
-                         data=ll(matrix.values, rhs.values))
-
+        return pd.Series(index=matrix.columns, data=ll(matrix.values, rhs.values))
 
     def Sharpe_Ratio(ts):
         return 16 * ts.mean() / ts.std()
+
     return Sharpe_Ratio, ll, lsq_pos, os, pd
 
 
 @app.cell
 def __(os, pd):
     # load data from csv file
-    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True).ffill()
+    data = pd.read_csv(
+        os.path.join("data", "data.csv"), index_col=0, parse_dates=True
+    ).ffill()
     returns = data.pct_change().fillna(0.0)
 
     stocks = ["GOOG", "T", "AAPL", "GS", "IBM"]
@@ -70,6 +70,7 @@ def __(Sharpe_Ratio, data, index, lsq_pos, pd, returns, stocks):
 @app.cell
 def __():
     import marimo as mo
+
     return (mo,)
 
 
