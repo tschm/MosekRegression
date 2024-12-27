@@ -27,3 +27,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: cvxgrp/.github/actions/uv/deptry@main
+        with:
+          source-folder: 'mosek_tools'
