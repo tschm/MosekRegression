@@ -1,4 +1,4 @@
-# MosekTools
+# [MosekTools](https://tschm.github.io/MosekRegression/book)
 
 Building tools on the shoulders of [Mosek](http://www.mosek.com).
 
