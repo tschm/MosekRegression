@@ -7,10 +7,9 @@ readme = "README.md"
 repository = "https://github.com/tschm/mosekregression"
 requires-python = ">=3.10"
 dependencies = [
-"pandas",
-"mosek",
-"scipy",
-    ]
+    "mosek>=10.2.12",
+    "numpy>=2.2.1",
+]
 
 [project.urls]
 repository = "https://github.com/tschm/MosekRegression"
