@@ -121,9 +121,7 @@ def lsq_ls(matrix, rhs):
     """
     # define model
     with Model("lsqPos") as model:
-        weights = model.variable(
-            "weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty)
-        )
+        weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty))
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -171,9 +169,7 @@ def lsq_pos_l1_penalty(matrix, rhs, cost_multiplier, weights_0):
     # define model
     with Model("lsqSparse") as model:
         # introduce n non-negative weight variables
-        weights = model.variable(
-            "weights", matrix.shape[1], Domain.inRange(0.0, +np.infty)
-        )
+        weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, +np.infty))
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -203,17 +199,13 @@ def lasso(matrix, rhs, lamb):
     """
     # define model
     with Model("lasso") as model:
-        weights = model.variable(
-            "weights", matrix.shape[1]
-        )  # , Domain.inRange(-np.infty, +np.infty))
+        weights = model.variable("weights", matrix.shape[1])  # , Domain.inRange(-np.infty, +np.infty))
         # introduce variables and constraints
 
         v = __l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
         t = __l1_norm(model, "1-norm(w)", weights)
 
-        model.objective(
-            ObjectiveSense.Minimize, __sum_weighted(c1=1.0, expr1=v, c2=lamb, expr2=t)
-        )
+        model.objective(ObjectiveSense.Minimize, __sum_weighted(c1=1.0, expr1=v, c2=lamb, expr2=t))
         # solve the problem
         model.solve()
 
@@ -245,9 +237,7 @@ def markowitz(exp_ret, covariance_mat, aversion):
     # define model
     with Model("mean var") as model:
         # set of n weights (unconstrained)
-        weights = model.variable(
-            "weights", len(exp_ret), Domain.inRange(-np.infty, +np.infty)
-        )
+        weights = model.variable("weights", len(exp_ret), Domain.inRange(-np.infty, +np.infty))
 
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
 
@@ -285,9 +275,7 @@ def minimum_variance(matrix):
         r = Expr.mul(Matrix.dense(matrix), weights)
         # compute l2_norm squared of those returns
         # minimize this l2_norm
-        model.objective(
-            ObjectiveSense.Minimize, __l2_norm_squared(model, "2-norm^2(r)", expr=r)
-        )
+        model.objective(ObjectiveSense.Minimize, __l2_norm_squared(model, "2-norm^2(r)", expr=r))
         # solve the problem
         model.solve()
         # return the series of weights

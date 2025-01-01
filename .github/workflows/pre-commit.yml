@@ -4,17 +4,6 @@ on:
   push:
 
 jobs:
-  #test:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - uses: cvxgrp/.github/actions/uv/coverage@main
-  #
-  #    - name: Coveralls GitHub Action
-  #      uses: coverallsapp/github-action@v2
-  #      with:
-  #        files: artifacts/tests/coverage/coverage.info
-  #        format: lcov
-
   deptry:
     runs-on: ubuntu-latest
     steps:

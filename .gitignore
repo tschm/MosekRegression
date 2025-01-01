@@ -1,4 +1,6 @@
 .idea
+.task
+
 *.pyc
 ~*.*
 .ipynb_checkpoints

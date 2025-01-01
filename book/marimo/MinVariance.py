@@ -34,9 +34,7 @@ def __():
 @app.cell
 def __(os, pd):
     # load data from csv file
-    data = pd.read_csv(
-        os.path.join("data", "data.csv"), index_col=0, parse_dates=True
-    ).ffill()
+    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True).ffill()
     returns = data.pct_change().fillna(0.0)
 
     stocks = ["GOOG", "T", "AAPL", "GS", "IBM"]
