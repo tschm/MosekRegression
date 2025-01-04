@@ -63,3 +63,9 @@ repos:
     rev: 1.8.0
     hooks:
     - id: bandit
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.5
+    hooks:
+      - id: actionlint
+        args: [-ignore, SC]
