@@ -4,16 +4,6 @@ on:
 - push
 
 jobs:
-  #marimo:
-  #  runs-on: "ubuntu-latest"
-  #  steps:
-  #    - uses: cvxgrp/.github/actions/uv/marimo@v2.0.0
-
-  #sphinx:
-  #  runs-on: "ubuntu-latest"
-  #  steps:
-  #    - uses: cvxgrp/.github/actions/uv/sphinx@v2.0.0
-
   test:
     runs-on: "ubuntu-latest"
     steps:
