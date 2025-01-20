@@ -12,7 +12,7 @@ jobs:
 
       - uses: cvxgrp/.github/actions/uv/coverage@v2.0.6
         with:
-          source-folder: mosek_tools
+          source-folder: src/mosek_tools
           tests-folder: src/tests
 
   jupyter:
@@ -31,7 +31,7 @@ jobs:
 
       - uses: cvxgrp/.github/actions/uv/pdoc@v2.0.6
         with:
-          source-folder: mosek_tools
+          source-folder: src/mosek_tools
 
   book:
     runs-on: "ubuntu-latest"

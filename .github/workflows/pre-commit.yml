@@ -12,4 +12,4 @@ jobs:
 
       - uses: cvxgrp/.github/actions/uv/deptry@v2.0.6
         with:
-          source-folder: 'mosek_tools'
+          source-folder: src/mosek_tools
