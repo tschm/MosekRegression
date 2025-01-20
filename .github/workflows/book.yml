@@ -13,6 +13,7 @@ jobs:
       - uses: cvxgrp/.github/actions/uv/coverage@v2.0.6
         with:
           source-folder: mosek_tools
+          tests-folder: src/tests
 
   jupyter:
     runs-on: "ubuntu-latest"
