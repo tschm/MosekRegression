@@ -10,6 +10,6 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      - uses: cvxgrp/.github/actions/uv/deptry@v2.0.10
+      - uses: cvxgrp/.github/actions/uv/deptry@v2.0.11
         with:
           source-folder: src/mosek_tools
