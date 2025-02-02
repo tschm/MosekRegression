@@ -1,50 +1,17 @@
 name: Bump version and publish
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: [ "CI" ]
-    types: [ completed ]
+  workflow_dispatch
 
 jobs:
   tag:
     permissions:
       contents: write
 
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.head_branch == 'main')
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
-
       - name: Generate Tag
         uses: cvxgrp/.github/actions/uv/tag@v2.0.16
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-#  publish:
-#    needs: tag
-#    runs-on: ubuntu-latest
-#    environment: release
-#
-#    permissions:
-#      contents: read
-#      # This permission is required for trusted publishing.
-#      id-token: write
-#
-#    steps:
-#      - name: Checkout [${{ github.repository }}]
-#        uses: actions/checkout@v4
-#
-#      - uses: actions/download-artifact@v4
-#        with:
-#          name: dist
-#          path: dist
-#
-#      - name: Publish to PyPI
-#        uses: pypa/gh-action-pypi-publish@release/v1
