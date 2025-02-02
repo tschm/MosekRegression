@@ -7,28 +7,20 @@ jobs:
   test:
     runs-on: "ubuntu-latest"
     steps:
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
-
       - uses: cvxgrp/.github/actions/uv/coverage@v2.0.16
         with:
           source-folder: src/mosek_tools
           tests-folder: src/tests
+          covaralls: 'false'
 
   jupyter:
     runs-on: "ubuntu-latest"
     steps:
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
-
       - uses: cvxgrp/.github/actions/uv/jupyter@v2.0.16
 
   pdoc:
     runs-on: "ubuntu-latest"
     steps:
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
-
       - uses: cvxgrp/.github/actions/uv/pdoc@v2.0.16
         with:
           source-folder: src/mosek_tools
@@ -41,7 +33,4 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
-
       - uses: cvxgrp/.github/actions/book@v2.0.16
