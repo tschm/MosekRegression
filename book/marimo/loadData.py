@@ -1,21 +1,17 @@
 import marimo
 
-__generated_with = "0.9.27"
+__generated_with = "0.10.19"
 app = marimo.App()
 
 
 @app.cell
-def __(mo):
-    mo.md(
-        r"""
-        # Load Data
-        """
-    )
+def _(mo):
+    mo.md(r"""# Load Data""")
     return
 
 
 @app.cell
-def __():
+def _():
     import yfinance as yf
 
     data = yf.download(
@@ -32,7 +28,7 @@ def __():
 
 
 @app.cell
-def __():
+def _():
     import marimo as mo
 
     return (mo,)
