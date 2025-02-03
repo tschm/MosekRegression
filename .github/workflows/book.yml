@@ -30,7 +30,8 @@ jobs:
 
       - uses: cvxgrp/.github/actions/coverage@v2.1.1
         with:
-          source-folder: 'pyamber'
+          source-folder: 'src/mosek_tools'
+          tests-folder: 'src/tests'
 
   jupyter:
     runs-on: "ubuntu-latest"
