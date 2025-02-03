@@ -13,6 +13,9 @@ jobs:
         os: [ ubuntu-latest, macos-latest ]
         python-version: [ '3.10', '3.11', '3.12', '3.13' ]
 
+    env:
+      MOSEK_CI_BASE64: ${{ secrets.MOSEK_CI_BASE64 }}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
@@ -20,8 +23,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Set Additional Envs
+        run: |
+          echo $MOSEK_CI_BASE64 | base64 -d > mosek.lic
+          echo "MOSEKLM_LICENSE_FILE=$( [[ $RUNNER_OS == 'macOS' ]] && echo $(pwd)/mosek.lic || echo $(realpath mosek.lic) )" >> $GITHUB_ENV
+
       - uses: cvxgrp/.github/actions/test@v2.1.1
-        env:
-          MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEKLM_LICENSE_FILE }}
+        #env:
+        #  #MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEKLM_LICENSE_FILE }}
+
         with:
           tests-folder: 'src/tests'
