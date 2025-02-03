@@ -7,11 +7,11 @@ jobs:
   deptry:
     runs-on: ubuntu-latest
     steps:
-      - uses: cvxgrp/.github/actions/uv/deptry@v2.0.17
+      - uses: cvxgrp/.github/actions/uv/deptry@v2.1.1
         with:
           source-folder: src/mosek_tools
 
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: cvxgrp/.github/actions/uv/pre-commit@v2.0.17
+      - uses: cvxgrp/.github/actions/uv/pre-commit@v2.1.1
