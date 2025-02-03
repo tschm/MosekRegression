@@ -1,26 +1,25 @@
 import marimo
 
-__generated_with = "0.9.27"
+__generated_with = "0.10.19"
 app = marimo.App()
 
 
 @app.cell
-def __(mo):
-    mo.md(
-        r"""
-        # Minimum Variance
-        """
-    )
+def _(mo):
+    mo.md(r"""# Minimum Variance""")
     return
 
 
 @app.cell
-def __():
+def _(__file__):
     import os
+    from pathlib import Path
 
     import pandas as pd
 
     from mosek_tools.solver import lsq_pos as ll
+
+    path = Path(__file__).parent
 
     def lsq_pos(matrix, rhs):
         return pd.Series(index=matrix.columns, data=ll(matrix.values, rhs.values))
@@ -28,13 +27,13 @@ def __():
     def Sharpe_Ratio(ts):
         return 16 * ts.mean() / ts.std()
 
-    return Sharpe_Ratio, ll, lsq_pos, os, pd
+    return Path, Sharpe_Ratio, ll, lsq_pos, os, path, pd
 
 
 @app.cell
-def __(os, pd):
+def _(path, pd):
     # load data from csv file
-    data = pd.read_csv(os.path.join("data", "data.csv"), index_col=0, parse_dates=True).ffill()
+    data = pd.read_csv(path / "data" / "data.csv", index_col=0, parse_dates=True).ffill()
     returns = data.pct_change().fillna(0.0)
 
     stocks = ["GOOG", "T", "AAPL", "GS", "IBM"]
@@ -43,7 +42,7 @@ def __(os, pd):
 
 
 @app.cell
-def __(Sharpe_Ratio, data, index, lsq_pos, pd, returns, stocks):
+def _(Sharpe_Ratio, data, index, lsq_pos, pd, returns, stocks):
     # construct a rhs
     rhsZero = pd.Series(index=data.index, data=0.0)
 
@@ -66,7 +65,7 @@ def __(Sharpe_Ratio, data, index, lsq_pos, pd, returns, stocks):
 
 
 @app.cell
-def __():
+def _():
     import marimo as mo
 
     return (mo,)
