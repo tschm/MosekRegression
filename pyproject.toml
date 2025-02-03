@@ -38,3 +38,6 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mosek_tools"]
+
+[tool.bandit]
+exclude_dirs = [".venv", "tests"]
