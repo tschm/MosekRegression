@@ -1,17 +1,24 @@
 name: pre-commit
 
+permissions:
+  contents: read
+
 on:
   push:
 
 jobs:
   deptry:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: cvxgrp/.github/actions/uv/deptry@v2.0.17
+      - name: "Build the virtual environment for ${{ github.repository }}"
+        uses: cvxgrp/.github/actions/uv/environment@v2.1.1
+
+      - uses: cvxgrp/.github/actions/deptry@v2.1.1
         with:
-          source-folder: src/mosek_tools
+          source-folder: 'src/mosek_tools'
 
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: cvxgrp/.github/actions/uv/pre-commit@v2.0.17
+      - uses: cvxgrp/.github/actions/pre-commit@v2.1.1
