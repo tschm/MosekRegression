@@ -12,7 +12,7 @@ def Sharpe_Ratio(ts):
 
 
 def test_lsq(resource_dir):
-    data = pd.read_csv(resource_dir / "data" / "data.csv", index_col=0, parse_dates=True).ffill()
+    data = pd.read_csv(resource_dir / "data.csv", index_col=0, parse_dates=True).ffill()
     returns = data.pct_change().fillna(0.0)
 
     stocks = ["GOOG", "T", "AAPL", "GS", "IBM"]
