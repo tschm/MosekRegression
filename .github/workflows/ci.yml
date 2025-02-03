@@ -23,3 +23,6 @@ jobs:
       - uses: cvxgrp/.github/actions/test@v2.1.1
         with:
           tests-folder: 'src/tests'
+
+    env:
+      MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEKLM_LICENSE_FILE }}
