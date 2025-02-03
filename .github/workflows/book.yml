@@ -20,7 +20,7 @@ jobs:
 
       - uses: cvxgrp/.github/actions/pdoc@v2.1.1
         with:
-          source-folder: 'pyamber'
+          source-folder: 'src/mosek_tools'
 
   test:
     runs-on: "ubuntu-latest"
