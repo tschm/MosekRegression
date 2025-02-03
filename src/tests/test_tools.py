@@ -14,4 +14,4 @@ def test_min_variance(resource_dir):
 
 
 def test_license():
-    print(os.environ("MOSEKLM_LICENSE_FILE"))
+    print(os.environ["MOSEKLM_LICENSE_FILE"])
