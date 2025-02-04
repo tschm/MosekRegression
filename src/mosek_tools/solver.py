@@ -11,7 +11,7 @@ def _model():
     print(license_file)
     with Model("mosek") as model:
         model.putlicensepath(license_file)
-        yield model
+        return model
 
 
 def __sum_weighted(c1, expr1, c2, expr2):
