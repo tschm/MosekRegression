@@ -23,8 +23,6 @@ def create_model():
     """
     # Get license path from environment or use default
     license_path = os.environ.get("MOSEKLM_LICENSE_FILE", "~/mosek/mosek.lic")
-    print(license_path)
-    assert False
 
     # Expand user path and make absolute
     license_path = Path(license_path).expanduser().resolve()
