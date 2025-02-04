@@ -16,7 +16,7 @@ jobs:
           mkdir mosek
           echo ${{ secrets.MOSEK_LICENSE }} > mosek/mosek.lic
           ls -all mosek
-          cat mosek\mosek.lic
+          cat mosek/mosek.lic
           echo "End of story"
 
       - uses: cvxgrp/.github/actions/marimo@v2.1.1
