@@ -14,7 +14,7 @@ jobs:
         shell: bash
         run: |
           mkdir mosek
-          echo ${{ secrets.MOSEK_LICENSE }} > mosek\mosek.lic
+          echo ${{ secrets.MOSEK_LICENSE }} > mosek/mosek.lic
           ls -all mosek
           cat mosek\mosek.lic
           echo "End of story"
