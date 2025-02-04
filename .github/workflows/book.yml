@@ -15,9 +15,10 @@ jobs:
         run: |
           mkdir mosek
           printf "%s" "${{ secrets.MOSEK_BASE64 }}" | base64 -d > mosek/mosek.lic
-          ls -all mosek
+          #ls -all mosek
           cat mosek/mosek.lic
-          echo "End of story"
+          pwd
+          #echo "End of story"
 
       - uses: cvxgrp/.github/actions/marimo@v2.1.1
         #env:
