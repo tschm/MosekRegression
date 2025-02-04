@@ -11,6 +11,7 @@ jobs:
         uses: cvxgrp/.github/actions/uv/environment@v2.1.1
 
       - name: "Build the file"
+        shell: bash
         run: |
           mkdir mosek
           echo ${{ secrets.MOSEK_LICENSE }} > mosek\mosek.lic
