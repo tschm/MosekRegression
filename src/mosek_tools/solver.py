@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+
 import numpy as np
 from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense
 
@@ -107,7 +109,11 @@ def lsq_ls(matrix, rhs):
     s.t. e'w = 1
     """
     # define model
+    license_file = os.environ["MOSEKLM_LICENSE_FILE"]
+    print(license_file)
     with Model("lsqPos") as model:
+        model.putlicensepath(license_file)
+
         weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty))
 
         # e'*w = 1
