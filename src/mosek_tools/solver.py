@@ -6,6 +6,13 @@ import numpy as np
 from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense
 
 
+def _model():
+    license_file = os.environ["MOSEKLM_LICENSE_FILE"]
+    print(license_file)
+    with Model("mosek") as model:
+        yield model
+
+
 def __sum_weighted(c1, expr1, c2, expr2):
     return Expr.add(Expr.mul(c1, expr1), Expr.mul(c2, expr2))
 
@@ -109,11 +116,7 @@ def lsq_ls(matrix, rhs):
     s.t. e'w = 1
     """
     # define model
-    license_file = os.environ["MOSEKLM_LICENSE_FILE"]
-    print(license_file)
-    with Model("lsqPos") as model:
-        model.putlicensepath(license_file)
-
+    with _model() as model:
         weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty))
 
         # e'*w = 1
@@ -136,7 +139,7 @@ def lsq_pos(matrix, rhs):
            w >= 0
     """
     # define model
-    with Model("lsqPos") as model:
+    with _model() as model:
         # introduce n non-negative weight variables
         weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, 1.0))
 
