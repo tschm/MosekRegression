@@ -13,10 +13,10 @@ jobs:
       - name: "Build the file"
         shell: bash
         run: |
-          mkdir mosek
-          printf "%s" "${{ secrets.MOSEK_BASE64 }}" | base64 -d > mosek/mosek.lic
-          #ls -all mosek
-          cat mosek/mosek.lic
+          mkdir -p ${{ github.workspace }}/mosek
+          printf "%s" "${{ secrets.MOSEK_BASE64 }}" | base64 -d > ${{ github.workspace }}/mosek/mosek.lic
+          # ls -all mosek
+          # cat mosek/mosek.lic
           pwd
           #echo "End of story"
 
