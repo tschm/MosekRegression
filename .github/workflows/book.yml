@@ -20,8 +20,8 @@ jobs:
           echo "End of story"
 
       - uses: cvxgrp/.github/actions/marimo@v2.1.1
-        env:
-          MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEK_LICENSE }}
+        #env:
+        #  MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEK_LICENSE }}
 
   pdoc:
     runs-on: "ubuntu-latest"
