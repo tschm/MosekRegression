@@ -10,6 +10,7 @@ def _model():
     license_file = os.environ["MOSEKLM_LICENSE_FILE"]
     print(license_file)
     with Model("mosek") as model:
+        model.putlicensepath(license_file)
         yield model
 
 
