@@ -10,6 +10,14 @@ jobs:
       - name: "Build the virtual environment for ${{ github.repository }}"
         uses: cvxgrp/.github/actions/uv/environment@v2.1.1
 
+      - name: "Build the file"
+        run: |
+          mkdir -p mosek
+          echo ${{ secrets.MOSEK_LICENSE }} > mosek\mosek.lic
+          ls -all mosek
+          cat mosek\mosek.lic
+          echo "End of story"
+
       - uses: cvxgrp/.github/actions/marimo@v2.1.1
         env:
           MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEK_LICENSE }}
