@@ -12,7 +12,8 @@ jobs:
 
       - uses: cvxgrp/.github/actions/marimo@v2.1.1
         env:
-          MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEKLM_LICENSE_FILE }}
+          MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEK_LICENSE }}
+
   pdoc:
     runs-on: "ubuntu-latest"
     steps:
