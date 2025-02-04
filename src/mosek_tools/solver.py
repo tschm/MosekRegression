@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import os
 from contextlib import contextmanager
-from pathlib import Path
 
 import numpy as np
 from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense
@@ -11,34 +9,13 @@ from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense
 @contextmanager
 def create_model():
     """
-    Creates a Mosek optimization model with proper license handling.
-    Uses environment variable MOSEKLM_LICENSE_FILE or falls back to default license path.
+    Creates a Mosek optimization model.
 
     Yields:
         Model: Configured Mosek model instance
-
-    Raises:
-        MosekError: If license cannot be loaded or other Mosek-related errors occur
-        FileNotFoundError: If the license file doesn't exist
     """
-    # Get license path from environment or use default
-    license_path = os.environ.get("MOSEKLM_LICENSE_FILE", "~/mosek/mosek.lic")
-
-    # Expand user path and make absolute
-    license_path = Path(license_path).expanduser().resolve()
-
-    # Check if license file exists
-    if not license_path.exists():
-        raise FileNotFoundError(f"Mosek license file not found at: {license_path}")
-
-    # try:
     with Model("mosek") as model:
-        model.putlicensepath(str(license_path))
         yield model
-    # except Exception as e:
-    #    raise e
-    # except MosekError as e:
-    #    raise MosekError(f"Failed to initialize Mosek model: {str(e)}")
 
 
 def __sum_weighted(c1, expr1, c2, expr2):
