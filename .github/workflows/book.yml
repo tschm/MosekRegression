@@ -12,7 +12,7 @@ jobs:
 
       - name: "Build the file"
         run: |
-          mkdir -p mosek
+          mkdir mosek
           echo ${{ secrets.MOSEK_LICENSE }} > mosek\mosek.lic
           ls -all mosek
           cat mosek\mosek.lic
