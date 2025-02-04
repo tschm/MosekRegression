@@ -38,3 +38,7 @@ def test_lsq(resource_dir):
     print(frame.apply(Sharpe_Ratio))
     print("Standard deviation of returns")
     print(frame.std())
+
+
+def test_ci():
+    is_ci_environment()
