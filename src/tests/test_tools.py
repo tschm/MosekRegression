@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import os
-
 import pandas as pd
 
 
@@ -11,7 +9,3 @@ def test_min_variance(resource_dir):
     cov = rets.cov()
     print(cov)
     # can't really test Mosek based fcts without the license :-)
-
-
-def test_license():
-    print(os.environ.get("MOSEKLM_LICENSE_FILE"))

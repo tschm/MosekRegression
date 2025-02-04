@@ -1,7 +1,21 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
+
 import numpy as np
 from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense
+
+
+@contextmanager
+def create_model():
+    """
+    Creates a Mosek optimization model.
+
+    Yields:
+        Model: Configured Mosek model instance
+    """
+    with Model("mosek") as model:
+        yield model
 
 
 def __sum_weighted(c1, expr1, c2, expr2):
@@ -107,7 +121,7 @@ def lsq_ls(matrix, rhs):
     s.t. e'w = 1
     """
     # define model
-    with Model("lsqPos") as model:
+    with create_model() as model:
         weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty))
 
         # e'*w = 1
@@ -130,7 +144,7 @@ def lsq_pos(matrix, rhs):
            w >= 0
     """
     # define model
-    with Model("lsqPos") as model:
+    with create_model() as model:
         # introduce n non-negative weight variables
         weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, 1.0))
 

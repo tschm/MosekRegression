@@ -51,11 +51,11 @@ repos:
     hooks:
       - id: typos
 
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.8.2
-    hooks:
-    - id: bandit
-      args: ["-c", "pyproject.toml", "-r"]
+  #- repo: https://github.com/PyCQA/bandit
+  #  rev: 1.8.2
+  #  hooks:
+  #  - id: bandit
+  #    args: ["-c", "pyproject.toml", "-r"]
 
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.7

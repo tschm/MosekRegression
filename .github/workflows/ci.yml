@@ -20,25 +20,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Set up Mosek license
-        run: |
-          # Create a directory to store the Mosek license
-          mkdir -p $HOME/mosek_licenses
-
-          # Inject the license content into a file
-          echo "${{ secrets.MOSEK_LICENSE }}" > $HOME/mosek_licenses/mosek.lic
-
-          # Set the environment variable to point to the license file
-          export MOSEKLM_LICENSE_FILE=$HOME/mosek_licenses/mosek.lic
-
-          # Optionally, if you need to make the license file globally available
-          echo "MOSEKLM_LICENSE_FILE=$HOME/mosek_licenses/mosek.lic" >> $GITHUB_ENV
-
-          cat $HOME/mosek_licenses/mosek.lic
-
       - uses: cvxgrp/.github/actions/test@v2.1.1
-        #env:
-        #  #MOSEKLM_LICENSE_FILE: ${{ secrets.MOSEKLM_LICENSE_FILE }}
-
         with:
           tests-folder: 'src/tests'

@@ -20,6 +20,7 @@ dev = [
     "pre-commit>=4.0.1",
     "pandas>=2.2.3",
     "plotly>=5.24.1",
+    "yfinance>=0.2.52",
 ]
 
 [tool.ruff]
