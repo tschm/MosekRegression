@@ -221,11 +221,11 @@ wheels = [
 
 [[package]]
 name = "identify"
-version = "2.6.7"
+version = "2.6.8"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/83/d1/524aa3350f78bcd714d148ade6133d67d6b7de2cdbae7d99039c024c9a25/identify-2.6.7.tar.gz", hash = "sha256:3fa266b42eba321ee0b2bb0936a6a6b9e36a1351cbb69055b3082f4193035684", size = 99260 }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/fa/5eb460539e6f5252a7c5a931b53426e49258cde17e3d50685031c300a8fd/identify-2.6.8.tar.gz", hash = "sha256:61491417ea2c0c5c670484fd8abbb34de34cdae1e5f39a73ee65e48e4bb663fc", size = 99249 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/03/00/1fd4a117c6c93f2dcc5b7edaeaf53ea45332ef966429be566ca16c2beb94/identify-2.6.7-py2.py3-none-any.whl", hash = "sha256:155931cb617a401807b09ecec6635d6c692d180090a1cedca8ef7d58ba5b6aa0", size = 99097 },
+    { url = "https://files.pythonhosted.org/packages/78/8c/4bfcab2d8286473b8d83ea742716f4b79290172e75f91142bc1534b05b9a/identify-2.6.8-py2.py3-none-any.whl", hash = "sha256:83657f0f766a3c8d0eaea16d4ef42494b39b34629a4b3192a9d020d349b3e255", size = 99109 },
 ]
 
 [[package]]
@@ -248,16 +248,16 @@ wheels = [
 
 [[package]]
 name = "mosek"
-version = "11.0.8"
+version = "11.0.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/76/c7/bcc6d593c89c71200eff8d2086688d82f1ce68b233b88a4c4c554eb17061/Mosek-11.0.8-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:50887919d1a139d9e5d2d4c297931470ddb6c317d9f179b91fdf4138a0f67f78", size = 8336164 },
-    { url = "https://files.pythonhosted.org/packages/4f/1d/8102651fd4a1388f7718c3c62ce642d63cac8407de8310f579fd73ff3724/Mosek-11.0.8-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:f767b53222bd4377c00500ed90260958cfd3c74accbf98cfa85f8e157d74786e", size = 14715862 },
-    { url = "https://files.pythonhosted.org/packages/6a/a8/cfd2055893e642299ddf052f76e1b802145093434fc2210cf789f4ffc0d3/Mosek-11.0.8-cp39-abi3-manylinux_2_29_aarch64.whl", hash = "sha256:15a956b0fff2d37349ba02575f0aff68687b8eddc3009ce73072e573c6ab846c", size = 10605641 },
-    { url = "https://files.pythonhosted.org/packages/32/70/419ceb3a2801f5befa7d13e327a4023c04e7c150492119b3b2e5fd9ef4b6/Mosek-11.0.8-cp39-abi3-win_amd64.whl", hash = "sha256:169dcf4f26322260ba1ce6162805a4a263bb294aa075a1ea80449215fe2b4e4c", size = 10629172 },
+    { url = "https://files.pythonhosted.org/packages/0d/08/09fca7a7216a6be62b6eeacf8283227851b10b7ec476956dba4000536b61/Mosek-11.0.9-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:6c4082f56e39556c3d15d5f4661f7eff7ac1c34fc7d8ca9688d0f5cc15d538b0", size = 8337018 },
+    { url = "https://files.pythonhosted.org/packages/26/7d/2d415d31e42952acf778c965fdd29b6f8f5ef4b0bc1f7949f939d9f0cdee/Mosek-11.0.9-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:5ef7c07e4adb9f2fbcda0c58bffb8346b73e2290b18004d908286101e622247d", size = 14714699 },
+    { url = "https://files.pythonhosted.org/packages/7f/33/891b22061f486bbe437579b1f67b86f4dc977812f73d25e712648fb9d4b8/Mosek-11.0.9-cp39-abi3-manylinux_2_29_aarch64.whl", hash = "sha256:181126596d75b0fc0bc86b74b879cd0e9ad99cb5a392014c62226b1b3d4cc23d", size = 10605941 },
+    { url = "https://files.pythonhosted.org/packages/11/7d/207ad070b67733c57a4b55e342d99ae2e3083973de629762e8f362091027/Mosek-11.0.9-cp39-abi3-win_amd64.whl", hash = "sha256:96b11a07cfe595eb4222d6753749317cbbb2a38f999ff7b5c075243ecd1fa55a", size = 10638245 },
 ]
 
 [[package]]
@@ -306,11 +306,11 @@ wheels = [
 
 [[package]]
 name = "narwhals"
-version = "1.27.1"
+version = "1.28.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/5a/d6/1dadff863b95e4ec74eaba7979278e446699532136c74183a398778b1949/narwhals-1.27.1.tar.gz", hash = "sha256:68505d0cee1e6c00382ac8b65e922f8b694a11cbe482a057fa63139de8d0ea03", size = 251670 }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/65/cc4f1d02d418e587fc5b9b31f3cbb8db83f4b35f91d7b59adfa8d947f644/narwhals-1.28.0.tar.gz", hash = "sha256:a2213fa44a039f724278fb15609889319e7c240403413f2606cc856c8d8f708d", size = 252143 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ed/ea/dc14822a0a75e027562f081eb638417b1b7845e1e01dd85c5b6573ebf1b2/narwhals-1.27.1-py3-none-any.whl", hash = "sha256:71e4a126007886e3dd9d71d0d5921ebd2e8c1f9be9c405fe11850ece2b066c59", size = 308837 },
+    { url = "https://files.pythonhosted.org/packages/73/aa/eedf2ade0c16a60541ca7acd48665c62dc0d11e1e910467b6c7e6b1eda34/narwhals-1.28.0-py3-none-any.whl", hash = "sha256:45d909ad6240944d447b0dae38074c5a919830dff3868d57b05a5526c1f06fe4", size = 308950 },
 ]
 
 [[package]]
