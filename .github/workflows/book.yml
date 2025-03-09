@@ -39,8 +39,8 @@ jobs:
       - name: "Build the virtual environment for ${{ github.repository }}"
         uses: cvxgrp/.github/actions/environment@v2.2.6
 
-      - uses: cvxgrp/.github/actions/ager@v2.2.6
-      
+      - uses: cvxgrp/.github/actions/age@v2.2.6  
+
   book:
     runs-on: "ubuntu-latest"
     needs: [test, pdoc, jupyter]
