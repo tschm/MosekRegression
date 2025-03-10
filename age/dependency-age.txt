@@ -1,3 +1,0 @@
-Dependency Age Report:
-mosek (latest: 11.0.11) - Last updated: 2025-03-06T07:13:18
-numpy (latest: 2.2.3) - Last updated: 2025-02-13T17:17:41
