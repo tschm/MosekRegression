@@ -20,7 +20,7 @@ jobs:
       - name: "Build the virtual environment for ${{ github.repository }}"
         uses: cvxgrp/.github/actions/environment@v2.2.8
 
-      - uses: cvxgrp/.github/actions/coverage@v2.2.8
+      - uses: tschm/cradle/actions/coverage@v0.1.56
         with:
           source-folder: 'src/mosek_tools'
           tests-folder: 'src/tests'
