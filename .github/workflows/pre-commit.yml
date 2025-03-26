@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.56
+        uses: tschm/cradle/actions/environment@v0.1.57
 
       - uses: cvxgrp/.github/actions/deptry@v2.2.8
         with:
