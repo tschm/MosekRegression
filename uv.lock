@@ -248,16 +248,16 @@ wheels = [
 
 [[package]]
 name = "mosek"
-version = "11.0.13"
+version = "11.0.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/70/fa/a5bf46a3d0583dae3424757e2cab195c422ee833cf7540aba6c3e128c0d9/mosek-11.0.13-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:7dfc9fee27cbaaea87e0759feff44762579c75868ff540ab2b7a800780eefe25", size = 8335884 },
-    { url = "https://files.pythonhosted.org/packages/ed/80/696a6d29b97f92e1a6723fb510301fdba8a31ae54550d94ce40212b4896a/mosek-11.0.13-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:40caf8c43dab47f57dad2a6c1f9bcf13a8c33c29d46b3d22ffb63c08c64a4599", size = 14715106 },
-    { url = "https://files.pythonhosted.org/packages/d0/22/3320707145e637d5795323d75b09844fb16f04d5facf9f4c4c0a4ae733ad/mosek-11.0.13-cp39-abi3-manylinux_2_29_aarch64.whl", hash = "sha256:e34e8b6a57f7b812e218ae7dde37dd584e9d82c3507f3dab2885c9a4b53dbe0f", size = 10607204 },
-    { url = "https://files.pythonhosted.org/packages/97/14/d0afcb4a09c19131521cca08b2375bded63f2aee8a35b9cf3544a677dcd0/mosek-11.0.13-cp39-abi3-win_amd64.whl", hash = "sha256:36f869016cb9331e2ce7643cec2a5841fdb99136779c589b60cd3268d4ca0bba", size = 10638207 },
+    { url = "https://files.pythonhosted.org/packages/9c/70/af9620e832c00e15ea4a7b2db0150af1e5d18a5108000eed119d4619aac9/mosek-11.0.14-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:bcc9e0a5928d2fc036047200f2666cacb6838968ea8c5aa7dbd1b96104fd22c5", size = 8336444 },
+    { url = "https://files.pythonhosted.org/packages/f2/cb/63b77186139eb01fa9cfda5b285d0a870cf2fec88db86bcfd9378be0ed55/mosek-11.0.14-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:275a9be59c7b136a9ddd8d470d1cc9dd811815b7aebcb8dd4d05e878588d16a8", size = 14714163 },
+    { url = "https://files.pythonhosted.org/packages/1c/fe/0853a7f45583986eca9bb253aa41581c163cc16d8e88a88c6d60dffa1cf4/mosek-11.0.14-cp39-abi3-manylinux_2_29_aarch64.whl", hash = "sha256:784ab691bb33ba82d360aba327c361ed3c8098d7e10eeb950516c1d04a27fe1f", size = 10607953 },
+    { url = "https://files.pythonhosted.org/packages/c8/8d/82965691e0ab54daf8729e0415d511bad8e7c56f3e95ae97f54764ac16bd/mosek-11.0.14-cp39-abi3-win_amd64.whl", hash = "sha256:42719eb0890658d9fd46a6b465bbf1ced0a2e18f29d74b2964536e5127c0f145", size = 10642638 },
 ]
 
 [[package]]
