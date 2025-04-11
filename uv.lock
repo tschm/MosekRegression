@@ -248,16 +248,16 @@ wheels = [
 
 [[package]]
 name = "mosek"
-version = "11.0.14"
+version = "11.0.16"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9c/70/af9620e832c00e15ea4a7b2db0150af1e5d18a5108000eed119d4619aac9/mosek-11.0.14-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:bcc9e0a5928d2fc036047200f2666cacb6838968ea8c5aa7dbd1b96104fd22c5", size = 8336444 },
-    { url = "https://files.pythonhosted.org/packages/f2/cb/63b77186139eb01fa9cfda5b285d0a870cf2fec88db86bcfd9378be0ed55/mosek-11.0.14-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:275a9be59c7b136a9ddd8d470d1cc9dd811815b7aebcb8dd4d05e878588d16a8", size = 14714163 },
-    { url = "https://files.pythonhosted.org/packages/1c/fe/0853a7f45583986eca9bb253aa41581c163cc16d8e88a88c6d60dffa1cf4/mosek-11.0.14-cp39-abi3-manylinux_2_29_aarch64.whl", hash = "sha256:784ab691bb33ba82d360aba327c361ed3c8098d7e10eeb950516c1d04a27fe1f", size = 10607953 },
-    { url = "https://files.pythonhosted.org/packages/c8/8d/82965691e0ab54daf8729e0415d511bad8e7c56f3e95ae97f54764ac16bd/mosek-11.0.14-cp39-abi3-win_amd64.whl", hash = "sha256:42719eb0890658d9fd46a6b465bbf1ced0a2e18f29d74b2964536e5127c0f145", size = 10642638 },
+    { url = "https://files.pythonhosted.org/packages/c1/b7/5cc18837861188310ae978cc672b53ae711eafe0a552ced865e3f67b6abb/mosek-11.0.16-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:3130b7932a4435538152722765bf6042e1bb4ea9a89aabcfcce1a076f0dd2932", size = 8336638 },
+    { url = "https://files.pythonhosted.org/packages/c0/dc/231b3057b464238200639e07a0f06f2b2c0936883ef482b6ee8ad228f4f8/mosek-11.0.16-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:a91d1e12b645b08a50879492baf33031eb31a6ebc265474a6c1846a6dc2dc501", size = 14717874 },
+    { url = "https://files.pythonhosted.org/packages/b9/5b/7ff171ab10b6501bc92b8a55f026a17bf88af98ecd5a7a9f01edfef4458c/mosek-11.0.16-cp39-abi3-manylinux_2_29_aarch64.whl", hash = "sha256:609cc95a5db55a753822cdc57306e8facb4e435761996bf62eb6db195d9921ec", size = 10607743 },
+    { url = "https://files.pythonhosted.org/packages/8c/1a/768827bd2419e72f8ade0ff30f180eac504eb8f451514876b546728f11f5/mosek-11.0.16-cp39-abi3-win_amd64.whl", hash = "sha256:a9d848092911cae3e90978185034d60d57d87e0f87ac4b228a9c1ca229c56d2d", size = 10642997 },
 ]
 
 [[package]]
@@ -303,11 +303,11 @@ wheels = [
 
 [[package]]
 name = "narwhals"
-version = "1.33.0"
+version = "1.34.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/85/fd/484aa8bb557f97a1781f38c78b79f795a2fa320e4165c4230f679937d1e8/narwhals-1.33.0.tar.gz", hash = "sha256:6233d2457debf4b5fe4a1da54530c6fe2d84326f4a8e3bca35bbbff580a347cb", size = 262554 }
+sdist = { url = "https://files.pythonhosted.org/packages/f5/6d/0ad9e8fe41dba509f1c3241a46e52c9677eb9f67f7eb3c8018b1ae088469/narwhals-1.34.1.tar.gz", hash = "sha256:8941a08cf62f39ae67be945090b20a19c51fb9048ac909cad2f95aee23f9e302", size = 265602 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/41/c1/e9bc6b67c774e7c1f939c91ea535f18f7644fedc61b20d6baa861ad52b34/narwhals-1.33.0-py3-none-any.whl", hash = "sha256:f653319112fd121a1f1c18a40cf70dada773cdacfd53e62c2aa0afae43c17129", size = 322750 },
+    { url = "https://files.pythonhosted.org/packages/b0/a2/2ea3f2058ae661b06fad1a14c0f29f1cc8e49478d02a2d68f0eac3872b86/narwhals-1.34.1-py3-none-any.whl", hash = "sha256:aee49a30d1624371ad975ede2bab16cd125ab5df0fd185e2f4757e103b074d27", size = 325548 },
 ]
 
 [[package]]
@@ -510,15 +510,15 @@ wheels = [
 
 [[package]]
 name = "pytest-cov"
-version = "6.1.0"
+version = "6.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "coverage", extra = ["toml"] },
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/34/8c/039a7793f23f5cb666c834da9e944123f498ccc0753bed5fbfb2e2c11f87/pytest_cov-6.1.0.tar.gz", hash = "sha256:ec55e828c66755e5b74a21bd7cc03c303a9f928389c0563e50ba454a6dbe71db", size = 66651 }
+sdist = { url = "https://files.pythonhosted.org/packages/25/69/5f1e57f6c5a39f81411b550027bf72842c4567ff5fd572bed1edc9e4b5d9/pytest_cov-6.1.1.tar.gz", hash = "sha256:46935f7aaefba760e716c2ebfbe1c216240b9592966e7da99ea8292d4d3e2a0a", size = 66857 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e1/c5/8d6ffe9fc8f7f57b3662156ae8a34f2b8e7a754c73b48e689ce43145e98c/pytest_cov-6.1.0-py3-none-any.whl", hash = "sha256:cd7e1d54981d5185ef2b8d64b50172ce97e6f357e6df5cb103e828c7f993e201", size = 23743 },
+    { url = "https://files.pythonhosted.org/packages/28/d0/def53b4a790cfb21483016430ed828f64830dd981ebe1089971cd10cab25/pytest_cov-6.1.1-py3-none-any.whl", hash = "sha256:bddf29ed2d0ab6f4df17b4c55b0a657287db8684af9c42ea546b21b1041b3dde", size = 23841 },
 ]
 
 [[package]]
@@ -660,11 +660,11 @@ wheels = [
 
 [[package]]
 name = "typing-extensions"
-version = "4.13.1"
+version = "4.13.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/76/ad/cd3e3465232ec2416ae9b983f27b9e94dc8171d56ac99b345319a9475967/typing_extensions-4.13.1.tar.gz", hash = "sha256:98795af00fb9640edec5b8e31fc647597b4691f099ad75f469a2616be1a76dff", size = 106633 }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/37/23083fcd6e35492953e8d2aaaa68b860eb422b34627b13f2ce3eb6106061/typing_extensions-4.13.2.tar.gz", hash = "sha256:e6c81219bd689f51865d9e372991c540bda33a0379d5573cddb9a3a23f7caaef", size = 106967 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/c5/e7a0b0f5ed69f94c8ab7379c599e6036886bffcde609969a5325f47f1332/typing_extensions-4.13.1-py3-none-any.whl", hash = "sha256:4b6cf02909eb5495cfbc3f6e8fd49217e6cc7944e145cdda8caa3734777f9e69", size = 45739 },
+    { url = "https://files.pythonhosted.org/packages/8b/54/b1ae86c0973cc6f0210b53d508ca3641fb6d0c56823f288d108bc7ab3cc8/typing_extensions-4.13.2-py3-none-any.whl", hash = "sha256:a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c", size = 45806 },
 ]
 
 [[package]]
@@ -678,11 +678,11 @@ wheels = [
 
 [[package]]
 name = "urllib3"
-version = "2.3.0"
+version = "2.4.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/aa/63/e53da845320b757bf29ef6a9062f5c669fe997973f966045cb019c3f4b66/urllib3-2.3.0.tar.gz", hash = "sha256:f8c5449b3cf0861679ce7e0503c7b44b5ec981bec0d1d3795a07f1ba96f0204d", size = 307268 }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/78/16493d9c386d8e60e442a35feac5e00f0913c0f4b7c217c11e8ec2ff53e0/urllib3-2.4.0.tar.gz", hash = "sha256:414bc6535b787febd7567804cc015fee39daab8ad86268f1310a9250697de466", size = 390672 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/19/4ec628951a74043532ca2cf5d97b7b14863931476d117c471e8e2b1eb39f/urllib3-2.3.0-py3-none-any.whl", hash = "sha256:1cee9ad369867bfdbbb48b7dd50374c0967a0bb7710050facf0dd6911440e3df", size = 128369 },
+    { url = "https://files.pythonhosted.org/packages/6b/11/cc635220681e93a0183390e26485430ca2c7b5f9d33b15c74c2861cb8091/urllib3-2.4.0-py3-none-any.whl", hash = "sha256:4e16665048960a0900c702d4a66415956a584919c03361cac9f1df5c5dd7e813", size = 128680 },
 ]
 
 [[package]]
