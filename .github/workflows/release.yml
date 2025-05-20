@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Publish with cradle
-        uses: tschm/cradle/publish@dock
+        uses: tschm/cradle/actions/publish@dock
 
       #- name: Checkout [${{ github.repository }}]
       #  uses: actions/checkout@v4
