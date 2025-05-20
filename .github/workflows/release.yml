@@ -24,10 +24,10 @@ jobs:
     needs: tagging
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Needed for version tagging
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
+      #  with:
+      #    fetch-depth: 0  # Needed for version tagging
 
       - name: Build
         uses: tschm/cradle/actions/build@v0.1.66
@@ -44,11 +44,14 @@ jobs:
       id-token: write  # Required for trusted publishing
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
 
       - name: Publish
         uses: tschm/cradle/actions/publish@main
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
 
       #- name: Checkout [${{ github.repository }}]
       #  uses: actions/checkout@v4
