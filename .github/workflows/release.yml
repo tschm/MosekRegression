@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write  # Required for trusted publishing
 
 jobs:
   tagging:
@@ -20,27 +21,33 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
-    runs-on: ubuntu-latest
     needs: tagging
+    runs-on: ubuntu-latest
     steps:
-      - name: build
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed for version tagging
+
+      - name: Build
         uses: tschm/cradle/actions/build@v0.1.66
         with:
           tag: ${{ needs.tagging.outputs.new_tag }}
-
 
   publish:
     needs: build
     runs-on: ubuntu-latest
     environment: release
-
     permissions:
       contents: read
-      # This permission is required for trusted publishing.
-      id-token: write
+      packages: write  # Add if publishing to GitHub Packages
+      id-token: write  # Required for trusted publishing
 
     steps:
-      - name: Publish with cradle
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Publish
         uses: tschm/cradle/actions/publish@main
 
       #- name: Checkout [${{ github.repository }}]
