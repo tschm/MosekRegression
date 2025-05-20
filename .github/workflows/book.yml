@@ -44,4 +44,4 @@ jobs:
       #- name: Checkout [${{ github.repository }}]
       #  uses: actions/checkout@v4
 
-      - uses: tschm/cradle/actions/book@dock
+      - uses: tschm/cradle/actions/book@main
