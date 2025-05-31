@@ -1,2 +1,2 @@
 import importlib.metadata
-__version__ = importlib.metadata.version("antarctic")
+__version__ = importlib.metadata.version("mosektools")
