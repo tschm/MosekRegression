@@ -42,10 +42,11 @@ jobs:
     needs: [test, pdoc, jupyter]
 
     permissions:
-      contents: write
+      pages: write            # Permission to deploy to Pages
+      id-token: write         # Permission to verify deployment origin
 
     steps:
       #- name: Checkout [${{ github.repository }}]
       #  uses: actions/checkout@v4
 
-      - uses: tschm/cradle/actions/book@main
+      - uses: tschm/cradle/actions/book@v0.1.71
