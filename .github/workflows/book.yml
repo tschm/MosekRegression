@@ -12,9 +12,9 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.69
+        uses: tschm/cradle/actions/environment@v0.1.71
 
-      - uses: tschm/cradle/actions/pdoc@v0.1.69
+      - uses: tschm/cradle/actions/pdoc@v0.1.71
         with:
           source-folder: 'src/mosek_tools'
 
@@ -22,9 +22,9 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.69
+        uses: tschm/cradle/actions/environment@v0.1.71
 
-      - uses: tschm/cradle/actions/coverage@v0.1.69
+      - uses: tschm/cradle/actions/coverage@v0.1.71
         with:
           source-folder: 'src/mosek_tools'
           tests-folder: 'src/tests'
@@ -33,9 +33,9 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.69
+        uses: tschm/cradle/actions/environment@v0.1.71
 
-      - uses: tschm/cradle/actions/jupyter@v0.1.69
+      - uses: tschm/cradle/actions/jupyter@v0.1.71
 
   book:
     runs-on: "ubuntu-latest"
