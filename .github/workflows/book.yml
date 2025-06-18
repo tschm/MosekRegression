@@ -20,6 +20,8 @@ jobs:
 
   test:
     runs-on: "ubuntu-latest"
+    permissions:
+      contents: read          # Minimal permissions for read-only operations
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
         uses: tschm/cradle/actions/environment@v0.1.72
