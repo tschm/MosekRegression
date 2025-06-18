@@ -6,8 +6,6 @@
 
 Building tools on the shoulders of [Mosek](http://www.mosek.com).
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/tschm/MosekRegression)
-
 ## Motivation
 
 We created this package to support the experiments given in the [paper](http://arxiv.org/abs/1310.3397)
