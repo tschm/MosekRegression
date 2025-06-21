@@ -1,17 +1,15 @@
-import marimo
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "loguru==0.7.2",
+#     "yfinance==0.2.63",
+#     "scipy==1.15.0"
+# ]
+# ///
+from loguru import logger
 
-__generated_with = "0.10.19"
-app = marimo.App()
 
-
-@app.cell
-def _(mo):
-    mo.md(r"""# Load Data""")
-    return
-
-
-@app.cell
-def _():
+def _download():
     import yfinance as yf
 
     data = yf.download(
@@ -22,17 +20,13 @@ def _():
         repair=True,
     )  # repair obvious price errors e.g. 100x?
 
-    prices = data["Adj Close"]
-    prices.to_csv("data/data.csv")
-    return data, prices, yf
+    logger.info(data.head())
+    logger.info(data["Close"].tail())
 
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
+    prices = data["Close"]
+    prices.to_csv("book/data/data.csv")
+    return prices
 
 
 if __name__ == "__main__":
-    app.run()
+    _download()
