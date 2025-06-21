@@ -25,6 +25,9 @@ jobs:
   deptry:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
       - uses: tschm/cradle/actions/deptry@v0.1.72
         with:
           source-folder: 'src/mosek_tools'
