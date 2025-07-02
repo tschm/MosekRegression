@@ -8,6 +8,17 @@ on:
       - main
 
 jobs:
+  marimo:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    permissions:
+      contents: read
+    steps:
+      - uses: jebel-quant/marimushka/@v0.1.1
+        with:
+          notebooks_wasm: book/marimo
+          notebooks: ''
+          apps: ''
+
   pdoc:
     runs-on: "ubuntu-latest"
     steps:
@@ -31,19 +42,19 @@ jobs:
           source-folder: 'src/mosek_tools'
           tests-folder: 'src/tests'
 
-  jupyter:
-    runs-on: "ubuntu-latest"
-    permissions:
-      contents: read          # Minimal permissions for read-only operations
-    steps:
-      - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.72
-
-      - uses: tschm/cradle/actions/jupyter@v0.1.72
+  #jupyter:
+  #  runs-on: "ubuntu-latest"
+  #  permissions:
+  #    contents: read          # Minimal permissions for read-only operations
+  #  steps:
+  #    - name: "Build the virtual environment for ${{ github.repository }}"
+  #      uses: tschm/cradle/actions/environment@v0.1.72
+  #
+  #    - uses: tschm/cradle/actions/jupyter@v0.1.72
 
   book:
     runs-on: "ubuntu-latest"
-    needs: [test, pdoc, jupyter]
+    needs: [marimo, test, pdoc] #, jupyter]
 
     permissions:
       pages: write            # Permission to deploy to Pages
