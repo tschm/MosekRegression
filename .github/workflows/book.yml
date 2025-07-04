@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: jebel-quant/marimushka/@v0.1.2
+      - uses: jebel-quant/marimushka/@v0.1.3
         with:
           notebooks_wasm: book/marimo
           notebooks: ''
