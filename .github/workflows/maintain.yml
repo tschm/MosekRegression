@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Run pre-commit checks using the cradle action
-      - uses: tschm/cradle/actions/pre-commit@v0.1.75
+      - uses: tschm/cradle/actions/pre-commit@v0.1.80
 
   test-notebooks:
     uses: jebel-quant/marimushka/.github/workflows/test.yml@v0.1.3
@@ -31,6 +31,6 @@ jobs:
       - name: Set up Python 3.12
         uses: astral-sh/setup-uv@v6  # Official action for setting up uv
 
-      - uses: tschm/cradle/actions/deptry@v0.1.75
+      - uses: tschm/cradle/actions/deptry@v0.1.80
         with:
           source-folder: 'src/mosek_tools'
