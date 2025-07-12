@@ -23,9 +23,9 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.2.1
+        uses: tschm/cradle/actions/environment@v0.3.01
 
-      - uses: tschm/cradle/actions/pdoc@v0.2.1
+      - uses: tschm/cradle/actions/pdoc@v0.3.01
         with:
           source-folder: 'src/mosek_tools'
 
@@ -35,9 +35,9 @@ jobs:
       contents: read          # Minimal permissions for read-only operations
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.2.1
+        uses: tschm/cradle/actions/environment@v0.3.01
 
-      - uses: tschm/cradle/actions/coverage@v0.2.1
+      - uses: tschm/cradle/actions/coverage@v0.3.01
         with:
           source-folder: 'src/mosek_tools'
           tests-folder: 'src/tests'
@@ -51,7 +51,7 @@ jobs:
       id-token: write         # Permission to verify deployment origin
 
     steps:
-      - uses: tschm/cradle/actions/book@v0.2.1
+      - uses: tschm/cradle/actions/book@v0.3.01
         with:
           title: MosekRegression
           links: |
