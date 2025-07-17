@@ -362,12 +362,8 @@ dev = [
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-cov" },
-    { name = "yfinance" },
-]
-
-[package.dev-dependencies]
-dev = [
     { name = "python-dotenv" },
+    { name = "yfinance" },
 ]
 
 [package.metadata]
@@ -379,12 +375,10 @@ requires-dist = [
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.0.1" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.3" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.0.0" },
+    { name = "python-dotenv", marker = "extra == 'dev'", specifier = "==1.1.1" },
     { name = "yfinance", marker = "extra == 'dev'", specifier = ">=0.2.52" },
 ]
 provides-extras = ["dev"]
-
-[package.metadata.requires-dev]
-dev = [{ name = "python-dotenv", specifier = ">=1.1.1" }]
 
 [[package]]
 name = "multitasking"
