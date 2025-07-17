@@ -1,24 +1,14 @@
-name: pre-commit
-
-permissions:
-  contents: read
+name: "PRE-COMMIT"
 
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
-  deptry:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.3.01
-
-      - uses: tschm/cradle/actions/deptry@v0.3.01
-        with:
-          source-folder: 'src/mosek_tools'
-
   pre-commit:
+    if: github.repository != 'tschm/.config-templates'
     runs-on: ubuntu-latest
     steps:
       - uses: tschm/cradle/actions/pre-commit@v0.3.01
