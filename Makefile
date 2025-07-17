@@ -1,50 +1,88 @@
 # Colors for pretty output
 BLUE := \033[36m
 BOLD := \033[1m
+GREEN := \033[32m
 RESET := \033[0m
+
+include .env
+export $(shell sed 's/=.*//' .env)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help verify install fmt test marimo clean
+.PHONY: help verify install fmt lint test build check marimo clean docs
 
 ##@ Development Setup
 
-venv:
+uv:
 	@printf "$(BLUE)Creating virtual environment...$(RESET)\n"
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
-	@uv venv --python 3.12
 
-install: venv ## Install all dependencies using uv
+install: uv ## Install all dependencies using uv
 	@printf "$(BLUE)Installing dependencies...$(RESET)\n"
-	@uv sync --dev --frozen
+	@uv venv --python 3.12
+	@uv sync --all-extras --frozen
 
 ##@ Code Quality
 
-fmt: venv ## Run code formatting and linting
-	@printf "$(BLUE)Running formatters and linters...$(RESET)\n"
-	@uv pip install pre-commit
-	@uv run pre-commit install
-	@uv run pre-commit run --all-files
+fmt: uv ## Run code formatters only
+	@printf "$(BLUE)Running formatters...$(RESET)\n"
+	@uvx ruff format src
+
+lint: uv ## Run linters only
+	@printf "$(BLUE)Running linters...$(RESET)\n"
+	@uvx pre-commit run --all-files
+
+check: lint test ## Run all checks (lint and test)
+	@printf "$(GREEN)All checks passed!$(RESET)\n"
 
 ##@ Testing
 
 test: install ## Run all tests
 	@printf "$(BLUE)Running tests...$(RESET)\n"
-	@uv pip install pytest
-	@uv run pytest src/tests
+	@uv run pytest $(TESTS_FOLDER) --cov=$(SOURCE_FOLDER) --cov-report=term
+
+##@ Building
+
+build: install ## Build the package
+	@printf "$(BLUE)Building package...$(RESET)\n"
+	@uv pip install hatch
+	@uv run hatch build
+
+##@ Documentation
+
+docs: install ## Build documentation
+	@printf "$(BLUE)Building documentation...$(RESET)\n"
+	@uv pip install pdoc
+	@{ \
+		uv run pdoc -o pdoc $(SOURCE_FOLDER); \
+		if command -v xdg-open >/dev/null 2>&1; then \
+			xdg-open "pdoc/index.html"; \
+		elif command -v open >/dev/null 2>&1; then \
+			open "pdoc/index.html"; \
+		else \
+			echo "Documentation generated. Open pdoc/index.html manually"; \
+		fi; \
+	}
 
 ##@ Cleanup
 
 clean: ## Clean generated files and directories
 	@printf "$(BLUE)Cleaning project...$(RESET)\n"
 	@git clean -d -X -f
+	@rm -rf dist build *.egg-info .coverage .pytest_cache
+	@printf "$(BLUE)Removing local branches with no remote counterpart...$(RESET)\n"
+	@git fetch -p
+	@git branch -vv | grep ': gone]' | awk '{print $$1}' | xargs -r git branch -D
 
 ##@ Marimo & Jupyter
 
-marimo: install ## Start a Marimo server
+marimo: uv ## Start a Marimo server
 	@printf "$(BLUE)Start Marimo server...$(RESET)\n"
-	@uv pip install marimo
-	@uv run marimo edit book/marimo
+	@uvx marimo edit --sandbox $(MARIMO_FOLDER)
+
+#run-marimo: uv ## Run the Marimo notebook from the command line
+#	@printf "$(BLUE)Running Marimo notebook...$(RESET)\n"
+#	@uvx marimo run --sandbox book/marimo/demo.py
 
 ##@ Help
 
