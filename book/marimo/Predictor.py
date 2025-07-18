@@ -1,3 +1,5 @@
+"""Demo of lasso regression predictor."""
+
 import marimo
 
 __generated_with = "0.10.19"
@@ -38,21 +40,21 @@ def _(lasso, normalize, np, path, pd):
     stock = data["GS"]
     r = stock.pct_change()
 
-    X = pd.DataFrame({a: r.ewm(com=a, min_periods=30).mean() for a in [2, 3, 5, 8, 13, 21, 34, 55, 89]})
+    x = pd.DataFrame({a: r.ewm(com=a, min_periods=30).mean() for a in [2, 3, 5, 8, 13, 21, 34, 55, 89]})
 
     # shift returns as we are trying to predict the next day return...
     y = r.shift(-1)
 
-    X = X.truncate(before="01-02-2010").fillna(0.0)
+    x = x.truncate(before="01-02-2010").fillna(0.0)
     y = y.truncate(before="01-02-2010").fillna(0.0)
 
-    X = X.apply(normalize)
+    x = x.apply(normalize)
     y = normalize(y)
-    w = lasso(X, y, 0.005)
+    w = lasso(x, y, 0.005)
 
     print(w)
-    print(np.corrcoef((X * w).sum(axis=1), y))
-    return X, data, r, stock, w, y
+    print(np.corrcoef((x * w).sum(axis=1), y))
+    return x, data, r, stock, w, y
 
 
 @app.cell

@@ -1,3 +1,5 @@
+"""Download data from Yahoo Finance."""
+
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
