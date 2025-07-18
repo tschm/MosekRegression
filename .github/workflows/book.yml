@@ -24,6 +24,8 @@ jobs:
   parse-env:
     if: github.repository != 'tschm/.config-templates'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       source-folder: ${{ steps.export.outputs.SOURCE_FOLDER }}
       tests-folder: ${{ steps.export.outputs.TESTS_FOLDER }}
@@ -63,9 +65,9 @@ jobs:
       contents: read
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.3.01
+        uses: tschm/cradle/actions/environment@v0.3.02
 
-      - uses: tschm/cradle/actions/pdoc@v0.3.01
+      - uses: tschm/cradle/actions/pdoc@v0.3.02
         with:
           source-folder: ${{ needs.parse-env.outputs.source-folder }}
 
@@ -77,9 +79,9 @@ jobs:
       contents: read
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.3.01
+        uses: tschm/cradle/actions/environment@v0.3.02
 
-      - uses: tschm/cradle/actions/coverage@v0.3.01
+      - uses: tschm/cradle/actions/coverage@v0.3.02
         with:
           tests-folder: ${{ needs.parse-env.outputs.tests-folder }}
           source-folder: ${{ needs.parse-env.outputs.source-folder }}
@@ -97,7 +99,7 @@ jobs:
       id-token: write         # Permission to verify deployment origin
 
     steps:
-      - uses: tschm/cradle/actions/book@v0.3.01
+      - uses: tschm/cradle/actions/book@v0.3.02
         with:
           title: ${{ needs.parse-env.outputs.title }}
           links: |
