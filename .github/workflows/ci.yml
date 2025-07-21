@@ -1,3 +1,6 @@
+# This file is part of the tschm/.config-templates repository
+# (https://github.com/tschm/.config-templates).
+#
 # Workflow: Continuous Integration
 # Purpose: This workflow runs tests on multiple Python versions to ensure
 #          compatibility and code quality across different environments.
@@ -31,10 +34,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.3.02
+        uses: tschm/cradle/actions/environment@v0.3.04
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: tschm/cradle/actions/test@v0.3.02
+      - uses: tschm/cradle/actions/test@v0.3.04
         with:
           tests-folder: src/tests
