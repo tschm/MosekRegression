@@ -8,6 +8,7 @@
 #     "numpy==2.3.1"
 # ]
 # ///
+
 import marimo
 
 __generated_with = "0.10.19"
