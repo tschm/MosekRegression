@@ -4,12 +4,23 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #     "marimo",
+#     "pandas==2.3.1",
+#     "numpy==2.3.1"
 # ]
 # ///
 import marimo
 
 __generated_with = "0.10.19"
 app = marimo.App()
+
+with app.setup:
+    from pathlib import Path
+
+    import pandas as pd
+
+    path = Path(__file__).parent
+
+    data = pd.read_csv(path / "data" / "data.csv", index_col=0, parse_dates=True).ffill()
 
 
 @app.cell
@@ -20,14 +31,9 @@ def _(mo):
 
 @app.cell
 def _(__file__):
-    import os
-    from pathlib import Path
-
-    import pandas as pd
-
     from mosek_tools.solver import lsq_pos as ll
 
-    path = Path(__file__).parent
+    # path = Path(__file__).parent
 
     def lsq_pos(matrix, rhs):
         return pd.Series(index=matrix.columns, data=ll(matrix.values, rhs.values))
@@ -35,22 +41,22 @@ def _(__file__):
     def sharpe_ratio(ts):
         return 16 * ts.mean() / ts.std()
 
-    return Path, sharpe_ratio, ll, lsq_pos, os, path, pd
+    return sharpe_ratio, ll, lsq_pos
 
 
 @app.cell
-def _(path, pd):
+def _():
     # load data from csv file
-    data = pd.read_csv(path / "data" / "data.csv", index_col=0, parse_dates=True).ffill()
+    # data = pd.read_csv(path / "data" / "data.csv", index_col=0, parse_dates=True).ffill()
     returns = data.pct_change().fillna(0.0)
 
     stocks = ["GOOG", "T", "AAPL", "GS", "IBM"]
     index = "^GSPC"
-    return data, index, returns, stocks
+    return index, returns, stocks
 
 
 @app.cell
-def _(Sharpe_Ratio, data, index, lsq_pos, pd, returns, stocks):
+def _(Sharpe_Ratio, index, lsq_pos, returns, stocks):
     # construct a rhs
     rhs_zero = pd.Series(index=data.index, data=0.0)
 
