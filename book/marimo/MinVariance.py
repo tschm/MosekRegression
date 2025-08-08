@@ -17,6 +17,7 @@ app = marimo.App()
 with app.setup:
     from pathlib import Path
 
+    import marimo as mo  # noqa: F401
     import pandas as pd
 
     path = Path(__file__).parent
@@ -25,7 +26,7 @@ with app.setup:
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(r"""# Minimum Variance""")
     return
 
