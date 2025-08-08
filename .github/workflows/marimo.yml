@@ -9,7 +9,7 @@ on:
 
 jobs:
   # Parse .env file and build a matrix of notebooks to test
-  parse-env:
+  list-notebooks:
     if: github.repository != 'tschm/.config-templates'
     runs-on: ubuntu-latest
     outputs:
@@ -24,25 +24,40 @@ jobs:
         run: |
           NOTEBOOK_DIR="book/marimo"
           echo "Searching notebooks in: $NOTEBOOK_DIR"
-          notebooks=$(find "$NOTEBOOK_DIR" -name "*.py" -print0 | xargs -0 -n1 echo | jq -R -s -c 'split("\n")[:-1]')
-          echo "matrix=$notebooks" >> "$GITHUB_OUTPUT"
+          # Check if directory exists
+          if [ ! -d "$NOTEBOOK_DIR" ]; then
+            echo "Directory $NOTEBOOK_DIR does not exist. Setting empty matrix."
+            echo "matrix=[]" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          
+          # Find notebooks and handle empty results
+          if [ -z "$(find "$NOTEBOOK_DIR" -name "*.py" 2>/dev/null)" ]; then
+            echo "No notebooks found in $NOTEBOOK_DIR. Setting empty matrix."
+            echo "matrix=[]" >> "$GITHUB_OUTPUT"
+          else
+            notebooks=$(find "$NOTEBOOK_DIR" -name "*.py" -print0 | xargs -0 -n1 echo | jq -R -s -c 'split("\n")[:-1]')
+            echo "matrix=$notebooks" >> "$GITHUB_OUTPUT"
+          fi
         shell: bash
 
   # Create one job per notebook using the matrix strategy for parallel execution
   test-notebooks:
-    if: github.repository != 'tschm/.config-templates'
+    if: github.repository != 'tschm/.config-templates' && needs.list-notebooks.outputs.notebook-list != '[]'
     runs-on: ubuntu-latest
-    needs: parse-env
+    needs: list-notebooks
     strategy:
       matrix:
-        notebook: ${{ fromJson(needs.parse-env.outputs.notebook-list) }}
+        notebook: ${{ fromJson(needs.list-notebooks.outputs.notebook-list) }}
+      # Don't fail the entire workflow if one notebook fails
+      fail-fast: false
     name: Run notebook ${{ matrix.notebook }}
     steps:
       # Check out the repository code
       - uses: actions/checkout@v4
 
-      # Install the uv package manager for Python dependencies
-      - name: Install uv
+      # Install Python dependencies
+      - name: Install uv, uvx and the environment
         run: |
           make install
         shell: bash
@@ -50,16 +65,6 @@ jobs:
       # Execute the notebook with the appropriate runner based on its content
       - name: Run notebook
         run: |
-          NOTEBOOK="${{ matrix.notebook }}"
-          echo "Running $NOTEBOOK"
-          # Check if the notebook contains a SCRIPT section with dependencies
-          # If it does, use uv run to handle dependencies automatically
-          # Otherwise, use standard python interpreter
-          #if grep -q "# /// script" "$NOTEBOOK"; then
-          # echo "SCRIPT section found, using uv run"
-          uv run "$NOTEBOOK"
-          #else
-          #  echo "No SCRIPT section found, using python"
-          #  uv run python "$NOTEBOOK"
-          #fi
+          uv run "${{ matrix.notebook }}"
         shell: bash
+
