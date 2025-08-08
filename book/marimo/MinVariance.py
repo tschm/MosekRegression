@@ -1,14 +1,5 @@
 """Demo of minimum variance portfolio optimization."""
 
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "marimo",
-#     "pandas==2.3.1",
-#     "numpy==2.3.1"
-# ]
-# ///
-
 import marimo
 
 __generated_with = "0.10.19"
