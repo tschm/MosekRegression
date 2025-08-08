@@ -52,7 +52,6 @@ jobs:
         run: |
           NOTEBOOK="${{ matrix.notebook }}"
           echo "Running $NOTEBOOK"
-          
           # Check if the notebook contains a SCRIPT section with dependencies
           # If it does, use uv run to handle dependencies automatically
           # Otherwise, use standard python interpreter
