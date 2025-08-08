@@ -5,17 +5,10 @@ import marimo
 __generated_with = "0.10.19"
 app = marimo.App()
 
-
-@app.cell
-def _(mo):
-    mo.md(r"""# Predictor""")
-    return
-
-
-@app.cell
-def _(__file__):
+with app.setup:
     from pathlib import Path
 
+    import marimo as mo  # noqa: F401
     import numpy as np
     import pandas as pd
 
@@ -23,20 +16,46 @@ def _(__file__):
 
     path = Path(__file__).parent
 
-    def normalize(ts):
-        return ts / np.linalg.norm(ts.values, 2)
-
-    def lasso(X, y, lamb):
-        return pd.Series(index=X.columns, data=ll(X.values, y.values, lamb))
-
-    return Path, lasso, ll, normalize, np, path, pd
-
-
-@app.cell
-def _(lasso, normalize, np, path, pd):
     # load data from csv files
     data = pd.read_csv(path / "data" / "data.csv", index_col=0, parse_dates=True)
 
+
+@app.cell
+def _(mo):
+    mo.md(r"""# Predictor""")
+    return
+
+
+@app.function
+def normalize(ts):
+    """Normalize a time series by its L2 norm.
+
+    Args:
+        ts: Time series data to normalize.
+
+    Returns:
+        Normalized time series.
+    """
+    return ts / np.linalg.norm(ts.values, 2)
+
+
+@app.function
+def lasso(X, y, lamb):
+    """Perform LASSO regression.
+
+    Args:
+        X: Feature matrix.
+        y: Target vector.
+        lamb: Regularization parameter.
+
+    Returns:
+        pandas.Series: Coefficient vector.
+    """
+    return pd.Series(index=X.columns, data=ll(X.values, y.values, lamb))
+
+
+@app.cell
+def _():
     stock = data["GS"]
     r = stock.pct_change()
 
@@ -50,18 +69,16 @@ def _(lasso, normalize, np, path, pd):
 
     x = x.apply(normalize)
     y = normalize(y)
-    w = lasso(x, y, 0.005)
 
-    print(w)
-    print(np.corrcoef((x * w).sum(axis=1), y))
-    return x, data, r, stock, w, y
+    x = x.apply(normalize)
+    y = normalize(y)
 
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
+    # only works on machines with an active Mosek license
+    # w = lasso(x, y, 0.005)
+    #
+    # print(w)
+    # print(np.corrcoef((x * w).sum(axis=1), y))
+    return
 
 
 if __name__ == "__main__":
