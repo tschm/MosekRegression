@@ -55,11 +55,11 @@ jobs:
           # Check if the notebook contains a SCRIPT section with dependencies
           # If it does, use uv run to handle dependencies automatically
           # Otherwise, use standard python interpreter
-          if grep -q "# /// script" "$NOTEBOOK"; then
-            echo "SCRIPT section found, using uv run"
-            uv run "$NOTEBOOK"
-          else
-            echo "No SCRIPT section found, using python"
-            uv run python "$NOTEBOOK"
-          fi
+          #if grep -q "# /// script" "$NOTEBOOK"; then
+          # echo "SCRIPT section found, using uv run"
+          uv run "$NOTEBOOK"
+          #else
+          #  echo "No SCRIPT section found, using python"
+          #  uv run python "$NOTEBOOK"
+          #fi
         shell: bash
