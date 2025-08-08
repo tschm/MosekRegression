@@ -21,7 +21,7 @@ dev = [
     "pandas>=2.2.3",
     "plotly>=5.24.1",
     "yfinance>=0.2.52",
-    "python-dotenv==1.1.1"
+    "marimo==0.14.16"
 ]
 
 [build-system]
