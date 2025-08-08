@@ -61,6 +61,6 @@ jobs:
             uv run "$NOTEBOOK"
           else
             echo "No SCRIPT section found, using python"
-            python "$NOTEBOOK"
+            uv run python -m "$NOTEBOOK"
           fi
         shell: bash
