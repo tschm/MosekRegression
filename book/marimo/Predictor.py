@@ -26,11 +26,6 @@ def _(mo):
     return
 
 
-# @app.cell
-# def _(__file__):
-#    from mosek_tools.solver import lasso as ll
-
-
 @app.function
 def normalize(ts):
     """Normalize a time series by its L2 norm.
@@ -58,14 +53,9 @@ def lasso(X, y, lamb):
     """
     return pd.Series(index=X.columns, data=ll(X.values, y.values, lamb))
 
-    return lasso, ll, normalize
-
 
 @app.cell
 def _():
-    # load data from csv files
-    # data = pd.read_csv(path / "data" / "data.csv", index_col=0, parse_dates=True)
-
     stock = data["GS"]
     r = stock.pct_change()
 
@@ -79,11 +69,16 @@ def _():
 
     x = x.apply(normalize)
     y = normalize(y)
-    w = lasso(x, y, 0.005)
 
-    print(w)
-    print(np.corrcoef((x * w).sum(axis=1), y))
-    return x, data, r, stock, w, y
+    x = x.apply(normalize)
+    y = normalize(y)
+
+    # only works on machines with an active Mosek license
+    # w = lasso(x, y, 0.005)
+    #
+    # print(w)
+    # print(np.corrcoef((x * w).sum(axis=1), y))
+    return
 
 
 if __name__ == "__main__":
