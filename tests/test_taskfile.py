@@ -266,7 +266,15 @@ class TestTaskfile:
         # This is a meta-task that runs other tasks
         result = self.run_task("check", check=False)
         # We don't expect this to pass necessarily, just to run
-        assert result.returncode == 0 or "All checks passed" in result.stdout or "Running" in result.stdout, (
+        # Check for any of the expected messages from the dependent tasks
+        expected_msgs = [
+            "All checks passed",
+            "Running formatters",
+            "Running linters",
+            "Running deptry",
+            "No pyproject.toml found",
+        ]
+        assert result.returncode == 0 or any(msg in result.stdout for msg in expected_msgs), (
             f"Check task failed: {result.stderr}"
         )
 

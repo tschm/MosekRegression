@@ -46,17 +46,17 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      #- name: "Make the docs"
-      #  run: |
-      #    task docs:docs
+      - name: "Make the docs"
+        run: |
+          task docs:docs
 
-      #- name: "Make the tests"
-      #  run: |
-      #    task test:test
+      - name: "Make the tests"
+        run: |
+          task docs:test
 
-      #- name: "Make the notebooks"
-      #  run: |
-      #    task docs:marimushka
+      - name: "Make the notebooks"
+        run: |
+          task docs:marimushka
 
       - name: "Make the book"
         run: |
