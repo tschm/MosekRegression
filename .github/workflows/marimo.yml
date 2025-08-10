@@ -59,7 +59,7 @@ jobs:
       # Install Python dependencies
       - name: Install uv, uvx and the environment
         run: |
-          make install
+          task build:install -s
         shell: bash
 
       # Execute the notebook with the appropriate runner based on its content
@@ -67,4 +67,3 @@ jobs:
         run: |
           uv run "${{ matrix.notebook }}"
         shell: bash
-
