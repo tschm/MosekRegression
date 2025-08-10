@@ -84,7 +84,6 @@ tasks:
   
   book:
     desc: Build the companion book with test results and notebooks
-    deps: [test, docs, marimushka]
     cmds:
       - printf "${BLUE}[INFO] Building combined documentation...${RESET}\n"
       - |
