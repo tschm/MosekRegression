@@ -65,7 +65,17 @@ jobs:
     steps:
       # Check out the repository code
       - uses: actions/checkout@v4
+      
+      # install uv
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
 
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          
       # Install Python dependencies
       - name: Install uv, uvx and the environment
         run: |
