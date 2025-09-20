@@ -21,7 +21,7 @@ dev = [
     "pandas>=2.3.0",
     "plotly>=6.0",
     "yfinance>=0.2.65",
-    "marimo==0.15.5"
+    "marimo==0.16.0"
 ]
 
 [build-system]
