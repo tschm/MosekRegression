@@ -5,7 +5,28 @@ from __future__ import annotations
 from contextlib import AbstractContextManager, contextmanager
 
 import numpy as np
-from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense, Variable
+
+# Optional import of Mosek Fusion API to allow test collection without Mosek installed
+try:  # pragma: no cover - exercised only in environments without Mosek
+    from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense, Variable
+
+    _MOSEK_AVAILABLE = True
+except Exception:  # pragma: no cover
+    Domain = Expr = Matrix = Model = ObjectiveSense = Variable = None  # type: ignore
+    _MOSEK_AVAILABLE = False
+
+
+def _require_mosek() -> None:
+    """Ensure that the Mosek Fusion API is available.
+
+    Raises:
+        ImportError: If the Mosek Fusion API cannot be imported in this environment.
+    """
+    if not _MOSEK_AVAILABLE:
+        raise ImportError(
+            "Mosek Fusion API is not available. Install 'mosek' and ensure a valid "
+            "license is present to use solver functions."
+        )
 
 
 @contextmanager
@@ -16,6 +37,7 @@ def create_model() -> AbstractContextManager[Model]:
         Model: Configured Mosek model instance
 
     """
+    _require_mosek()
     with Model("mosek") as model:
         yield model
 
