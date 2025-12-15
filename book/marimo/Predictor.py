@@ -1,5 +1,18 @@
 """Demo of lasso regression predictor."""
 
+
+# /// script
+# dependencies = [
+#     "marimo==0.18.4",
+#     "pandas",
+#     "mosek_tools",
+# ]
+#
+# [tool.uv.sources]
+# mosek_tools = { path = "../..", editable=true }
+#
+# ///
+
 import marimo
 
 __generated_with = "0.10.19"
