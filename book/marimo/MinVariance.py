@@ -1,5 +1,18 @@
 """Demo of minimum variance portfolio optimization."""
 
+
+# /// script
+# dependencies = [
+#     "marimo==0.18.4",
+#     "pandas",
+#     "mosektools",
+# ]
+#
+# [tool.uv.sources]
+# mosektools = { path = "../..", editable=true }
+#
+# ///
+
 import marimo
 
 __generated_with = "0.10.19"
