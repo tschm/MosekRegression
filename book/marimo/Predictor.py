@@ -5,11 +5,11 @@
 # dependencies = [
 #     "marimo==0.18.4",
 #     "pandas",
-#     "mosek_tools",
+#     "mosektools",
 # ]
 #
 # [tool.uv.sources]
-# mosek_tools = { path = "../..", editable=true }
+# mosektools = { path = "../..", editable=true }
 #
 # ///
 
