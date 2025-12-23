@@ -565,7 +565,7 @@ wheels = [
 
 [[package]]
 name = "mosektools"
-version = "0.0.0"
+version = "0.1.2"
 source = { editable = "." }
 dependencies = [
     { name = "mosek" },
