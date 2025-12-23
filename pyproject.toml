@@ -1,17 +1,35 @@
 [project]
 name = "mosektools"
 version = "0.1.2"
-description = "..."
+description = "Mosek optimization tools for portfolio optimization and regression problems"
 authors = [{name = "Thomas Schmelzer", email = "thomas.schmelzer@gmail.com"}]
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.11"
+keywords = ["mosek", "optimization", "regression", "portfolio", "markowitz", "lasso"]
+classifiers = [
+    "Private :: Do Not Upload",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
     "mosek>=11.0.29",
     "numpy>=2.3.4",
 ]
 
 [project.urls]
-repository = "https://github.com/tschm/MosekRegression"
+Repository = "https://github.com/tschm/MosekRegression"
+Homepage = "https://tschm.github.io/MosekRegression/book"
+Documentation = "https://tschm.github.io/MosekRegression/book"
+Issues = "https://github.com/tschm/MosekRegression/issues"
 
 [project.optional-dependencies]
 dev = [
