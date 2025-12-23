@@ -1,7 +1,7 @@
 [project]
 name = "mosektools"
-version = "0.1.2"
-description = "Mosek optimization tools for portfolio optimization and regression problems"
+version = "0.1.3"
+description = "..."
 authors = [{name = "Thomas Schmelzer", email = "thomas.schmelzer@gmail.com"}]
 readme = "README.md"
 license = {text = "MIT"}
