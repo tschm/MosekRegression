@@ -1,6 +1,6 @@
 [project]
 name = "mosektools"
-version = "0.0.0"
+version = "0.1.2"
 description = "..."
 authors = [{name = "Thomas Schmelzer", email = "thomas.schmelzer@gmail.com"}]
 readme = "README.md"
