@@ -39,6 +39,8 @@ pip install mosektools
 
 **Important**: You need a valid [MOSEK license](https://www.mosek.com/products/academic-licenses/) to use this package. Academic licenses are available free of charge.
 
+**Note**: The package is installed as `mosektools` (no underscore), but imported as `mosek_tools` (with underscore).
+
 ### Basic Usage
 
 #### Least Squares Regression
