@@ -1,4 +1,4 @@
-# [MosekTools](https://tschm.github.io/MosekRegression/book)
+# [MosekTools](https://tschm.github.io/MosekRegression)  
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/MosekRegression/badge)](https://www.codefactor.io/repository/github/tschm/MosekRegression)
