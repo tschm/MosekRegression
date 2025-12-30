@@ -13,5 +13,6 @@ include:
 - renovate.json
 - .rhiza
 exclude:
-- .github/workflows/docker.yml
-- .github/workflows/devcontainer.yml
+- .github/workflows/rhiza_docker.yml
+- .github/workflows/rhiza_devcontainer.yml
+- .github/workflows/rhiza_ci.yml
