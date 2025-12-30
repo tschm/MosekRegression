@@ -2,7 +2,6 @@
 .idea
 .venv
 .ruff_cache
-.env
 
 __marimo__
 
@@ -30,7 +29,7 @@ presentation.pdf
 # C extensions
 *.so
 
-# .DS_Store
+# .DS_Store 
 .DS_Store
 
 # Distribution / packaging
