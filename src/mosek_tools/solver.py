@@ -357,8 +357,12 @@ def lsq_pos_l1_penalty(
 
         # Minimise v + t
         model.objective(ObjectiveSense.Minimize, __sum_weighted(1.0, v, 1.0, t))
-        # solve the problem
-        model.solve()
+
+        try:
+            model.solve()
+        except mosek.Error as e:
+            print(e)
+            return np.array([0.0] * matrix.shape[1])
 
         return np.array(weights.level())
 
