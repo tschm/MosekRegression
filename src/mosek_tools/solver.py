@@ -299,7 +299,7 @@ def lsq_ls(matrix: np.ndarray, rhs: np.ndarray) -> np.ndarray:
 
         try:
             model.solve()
-        except mosek.Error as e:
+        except Exception as e:
             print(e)
             return np.array([0.0] * matrix.shape[1])
 
