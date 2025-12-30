@@ -133,7 +133,7 @@ def __absolute(model: Model, name: str, expr: Expr) -> Variable:
     t = model.variable(name, expr.getShape(), Domain.unbounded())
 
     # (t_i, w_i) \in Q2
-    for i in range(0, int(expr.getShape())):
+    for i in range(0, int(np.prod(expr.getShape()))):
         __quad_cone(model, t.index(i), expr.index(i))
 
     return t
@@ -207,7 +207,7 @@ def __linfty_norm(model: Model, name: str, expr: Expr) -> Variable:
     t = model.variable(name, 1, Domain.unbounded())
 
     # (t, w_i) \in Q2
-    for i in range(0, expr.size()):
+    for i in range(0, int(np.prod(expr.getShape()))):
         __quad_cone(model, t, expr.index(i))
 
     return t
@@ -286,7 +286,7 @@ def lsq_ls(matrix: np.ndarray, rhs: np.ndarray) -> np.ndarray:
     """
     # define model
     with create_model() as model:
-        weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.inf, +np.inf))
+        weights = model.variable("weights", matrix.shape[1], Domain.unbounded())
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -369,7 +369,7 @@ def lasso(matrix: np.ndarray, rhs: np.ndarray, lamb: float) -> np.ndarray:
     """
     # define model
     with Model("lasso") as model:
-        weights = model.variable("weights", matrix.shape[1])  # , Domain.inRange(-np.inf, +np.inf))
+        weights = model.variable("weights", matrix.shape[1], Domain.unbounded())
         # introduce variables and constraints
 
         v = __l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
@@ -442,7 +442,7 @@ def markowitz(exp_ret: np.ndarray, covariance_mat: np.ndarray, aversion: float) 
     # define model
     with Model("mean var") as model:
         # set of n weights (unconstrained)
-        weights = model.variable("weights", len(exp_ret), Domain.inRange(-np.inf, +np.inf))
+        weights = model.variable("weights", len(exp_ret), Domain.unbounded())
 
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
 
