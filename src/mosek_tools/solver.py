@@ -296,8 +296,12 @@ def lsq_ls(matrix: np.ndarray, rhs: np.ndarray) -> np.ndarray:
 
         # minimization of the residual
         model.objective(ObjectiveSense.Minimize, v)
-        # solve the problem
-        model.solve()
+
+        try:
+            model.solve()
+        except mosek.Error as e:
+            print(e)
+            return np.array([0.0] * matrix.shape[1])
 
         return np.array(weights.level())
 
@@ -321,8 +325,12 @@ def lsq_pos(matrix: np.ndarray, rhs: np.ndarray) -> np.ndarray:
 
         # minimization of the residual
         model.objective(ObjectiveSense.Minimize, v)
-        # solve the problem
-        model.solve()
+
+        try:
+            model.solve()
+        except mosek.Error as e:
+            print(e)
+            return np.array([0.0] * matrix.shape[1])
 
         return np.array(weights.level())
 
@@ -420,8 +428,12 @@ def markowitz_riskobjective(exp_ret: np.ndarray, covariance_mat: np.ndarray, bou
 
         # mModel.maximise(model=model, expr=Expr.dot(exp_ret, weights))
         model.objective(ObjectiveSense.Maximize, Expr.dot(exp_ret, weights))
-        # solve the problem
-        model.solve()
+
+        try:
+            model.solve()
+        except mosek.Error as e:
+            print(e)
+            return np.array([0.0] * len(exp_ret))
 
         return np.array(weights.level())
 
@@ -512,7 +524,12 @@ def minimum_variance(matrix: np.ndarray) -> np.ndarray:
         # compute l2_norm squared of those returns
         # minimize this l2_norm
         model.objective(ObjectiveSense.Minimize, __l2_norm_squared(model, "2-norm^2(r)", expr=r))
-        # solve the problem
-        model.solve()
+
+        try:
+            model.solve()
+        except mosek.Error as e:
+            print(e)
+            return np.array([0.0] * matrix.shape[1])
+
         # return the series of weights
         return np.array(weights.level())
