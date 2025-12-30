@@ -286,7 +286,7 @@ def lsq_ls(matrix: np.ndarray, rhs: np.ndarray) -> np.ndarray:
     """
     # define model
     with create_model() as model:
-        weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.infty, +np.infty))
+        weights = model.variable("weights", matrix.shape[1], Domain.inRange(-np.inf, +np.inf))
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -338,7 +338,7 @@ def lsq_pos_l1_penalty(
     # define model
     with Model("lsqSparse") as model:
         # introduce n non-negative weight variables
-        weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, +np.infty))
+        weights = model.variable("weights", matrix.shape[1], Domain.inRange(0.0, +np.inf))
 
         # e'*w = 1
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
@@ -369,7 +369,7 @@ def lasso(matrix: np.ndarray, rhs: np.ndarray, lamb: float) -> np.ndarray:
     """
     # define model
     with Model("lasso") as model:
-        weights = model.variable("weights", matrix.shape[1])  # , Domain.inRange(-np.infty, +np.infty))
+        weights = model.variable("weights", matrix.shape[1])  # , Domain.inRange(-np.inf, +np.inf))
         # introduce variables and constraints
 
         v = __l2_norm_squared(model, "2-norm(res)**", __residual(matrix, rhs, weights))
@@ -442,7 +442,7 @@ def markowitz(exp_ret: np.ndarray, covariance_mat: np.ndarray, aversion: float) 
     # define model
     with Model("mean var") as model:
         # set of n weights (unconstrained)
-        weights = model.variable("weights", len(exp_ret), Domain.inRange(-np.infty, +np.infty))
+        weights = model.variable("weights", len(exp_ret), Domain.inRange(-np.inf, +np.inf))
 
         model.constraint(Expr.sum(weights), Domain.equalsTo(1.0))
 
