@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from contextlib import AbstractContextManager, contextmanager
 
+import mosek
 import numpy as np
 
 # Optional import of Mosek Fusion API to allow test collection without Mosek installed
@@ -453,7 +454,12 @@ def markowitz(exp_ret: np.ndarray, covariance_mat: np.ndarray, aversion: float) 
             ObjectiveSense.Maximize,
             Expr.sub(Expr.dot(exp_ret, weights), Expr.mul(aversion, var)),
         )
-        model.solve()
+        try:
+            model.solve()
+        except mosek.Error as e:
+            print(e)
+            return np.array([0.0] * len(exp_ret))
+
         return np.array(weights.level())
 
 
