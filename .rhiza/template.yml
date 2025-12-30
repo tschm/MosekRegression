@@ -1,0 +1,19 @@
+template-repository: jebel-quant/rhiza
+template-branch: main
+include:
+- .github/workflows
+- tests
+- .gitignore
+- .editorconfig
+- .pre-commit-config.yaml
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+- Makefile
+- ruff.toml
+- book
+- renovate.json
+- .rhiza
+exclude:
+- .github/workflows/rhiza_docker.yml
+- .github/workflows/rhiza_devcontainer.yml
+- .github/workflows/rhiza_ci.yml
