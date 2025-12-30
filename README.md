@@ -14,12 +14,12 @@
   - Least Squares (unconstrained and positivity-constrained)
   - LASSO Regression (L1-regularized)
   - L1-penalized Least Squares
-  
+
 - **Portfolio Optimization**
   - Markowitz Mean-Variance Optimization
   - Minimum Variance Portfolio
   - Risk-Objective Portfolio Optimization
-  
+
 - **Built on MOSEK Fusion API**
   - Efficient conic optimization
   - Production-grade solver performance
@@ -54,7 +54,8 @@ A = np.random.randn(100, 10)
 b = np.random.randn(100)
 
 # Solve unconstrained least squares: min ||Ax - b||_2^2
-x = lsq_ls(A, b)
+# Mosek License needed here:
+# x = lsq_ls(A, b)
 ```
 
 #### LASSO Regression
@@ -64,7 +65,8 @@ from mosek_tools.solver import lasso
 
 # Solve LASSO: min ||Ax - b||_2^2 + lambda * ||x||_1
 lambda_param = 0.1
-x = lasso(A, b, lambda_param)
+# Mosek License needed here:
+# x = lasso(A, b, lambda_param)
 ```
 
 #### Portfolio Optimization
@@ -84,7 +86,8 @@ covariance = np.array([
 
 # Solve Markowitz problem with risk aversion parameter
 risk_aversion = 2.0
-weights = markowitz(expected_returns, covariance, risk_aversion)
+# Mosek License needed here:
+# weights = markowitz(expected_returns, covariance, risk_aversion)
 ```
 
 ## 📖 API Reference
@@ -114,8 +117,8 @@ weights = markowitz(expected_returns, covariance, risk_aversion)
 ## 💡 Motivation
 
 This package was created to support the experiments described in the paper:
-> **"A Least Squares Approach to Direct Data-Driven Control"**  
-> Schmelzer, Hauser, Dahl, and Andersen  
+> **"A Least Squares Approach to Direct Data-Driven Control"**
+> Schmelzer, Hauser, Dahl, and Andersen
 > [arXiv:1310.3397](http://arxiv.org/abs/1310.3397)
 
 The tools have since been extended to support a broader range of optimization problems in regression and portfolio management.
