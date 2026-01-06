@@ -5,7 +5,7 @@ description = "..."
 authors = [{name = "Thomas Schmelzer", email = "thomas.schmelzer@gmail.com"}]
 readme = "README.md"
 license = {text = "MIT"}
-requires-python = ">=3.14,<3.15"
+requires-python = ">=3.11,<3.14"
 keywords = ["mosek", "optimization", "regression", "portfolio", "markowitz", "lasso"]
 classifiers = [
     "Private :: Do Not Upload",
