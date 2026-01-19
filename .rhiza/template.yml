@@ -1,7 +1,7 @@
 template-repository: jebel-quant/rhiza
 template-branch: main
 include:
-- .github/workflows
+- .github
 - tests
 - .gitignore
 - .editorconfig
@@ -17,3 +17,4 @@ exclude:
 - .github/workflows/rhiza_docker.yml
 - .github/workflows/rhiza_devcontainer.yml
 - .github/workflows/rhiza_ci.yml
+- .github/dependabot.yml
