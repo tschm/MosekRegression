@@ -19,8 +19,7 @@ except Exception:  # pragma: no cover
     _MOSEK_AVAILABLE = False
 
 _MOSEK_IMPORT_ERROR_MSG = (
-    "Mosek Fusion API is not available. Install 'mosek' and ensure a valid "
-    "license is present to use solver functions."
+    "Mosek Fusion API is not available. Install 'mosek' and ensure a valid license is present to use solver functions."
 )
 
 
