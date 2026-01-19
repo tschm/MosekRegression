@@ -46,3 +46,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mosek_tools"]
+
+[tool.deptry.package_module_name_map]
+mosek = "mosek"
+numpy = "numpy"
+pandas = "pandas"
+plotly = "plotly"
+yfinance = "yfinance"
+marimo = "marimo"
