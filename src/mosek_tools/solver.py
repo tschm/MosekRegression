@@ -2,18 +2,20 @@
 
 from __future__ import annotations
 
-from contextlib import AbstractContextManager, contextmanager
+from collections.abc import Generator
+from contextlib import contextmanager
+from typing import Any
 
-import mosek
-import numpy as np
+import mosek  # type: ignore[import-not-found]
+import numpy as np  # type: ignore[import-not-found]
 
 # Optional import of Mosek Fusion API to allow test collection without Mosek installed
 try:  # pragma: no cover - exercised only in environments without Mosek
-    from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense, Variable
+    from mosek.fusion import Domain, Expr, Matrix, Model, ObjectiveSense, Variable  # type: ignore[import-not-found]
 
     _MOSEK_AVAILABLE = True
 except Exception:  # pragma: no cover
-    Domain = Expr = Matrix = Model = ObjectiveSense = Variable = None  # type: ignore
+    Domain = Expr = Matrix = Model = ObjectiveSense = Variable = None
     _MOSEK_AVAILABLE = False
 
 _MOSEK_IMPORT_ERROR_MSG = (
@@ -33,7 +35,7 @@ def _require_mosek() -> None:
 
 
 @contextmanager
-def create_model() -> AbstractContextManager[Model]:
+def create_model() -> Generator[Any, None, None]:
     """Create a Mosek optimization model.
 
     Yields:
@@ -45,7 +47,7 @@ def create_model() -> AbstractContextManager[Model]:
         yield model
 
 
-def __sum_weighted(c1, expr1, c2, expr2):
+def __sum_weighted(c1: float, expr1: Any, c2: float, expr2: Any) -> Any:
     """Calculate the weighted sum of two expressions.
 
     Combines two expressions by multiplying each with its respective coefficient
