@@ -21,7 +21,7 @@ app = marimo.App()
 with app.setup:
     from pathlib import Path
 
-    import marimo as mo  # noqa: F401
+    import marimo as mo
     import pandas as pd
 
     from mosek_tools.solver import lsq_pos as ll
@@ -84,7 +84,7 @@ def _(index, returns, stocks):
     # w_min = lsq_pos(matrix=data[stocks].pct_change().fillna(0.0), rhs=rhs_zero)
     # w_track = lsq_pos(matrix=data[stocks], rhs=data[index])
 
-    d = dict()
+    d = {}
     # d["Min Variance"] = (returns[stocks] * w_min).sum(axis=1)
     d["Index"] = returns[index]
     d["1/N"] = returns[stocks].mean(axis=1)

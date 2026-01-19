@@ -16,6 +16,11 @@ except Exception:  # pragma: no cover
     Domain = Expr = Matrix = Model = ObjectiveSense = Variable = None  # type: ignore
     _MOSEK_AVAILABLE = False
 
+_MOSEK_IMPORT_ERROR_MSG = (
+    "Mosek Fusion API is not available. Install 'mosek' and ensure a valid "
+    "license is present to use solver functions."
+)
+
 
 def _require_mosek() -> None:
     """Ensure that the Mosek Fusion API is available.
@@ -24,10 +29,7 @@ def _require_mosek() -> None:
         ImportError: If the Mosek Fusion API cannot be imported in this environment.
     """
     if not _MOSEK_AVAILABLE:
-        raise ImportError(
-            "Mosek Fusion API is not available. Install 'mosek' and ensure a valid "
-            "license is present to use solver functions."
-        )
+        raise ImportError(_MOSEK_IMPORT_ERROR_MSG)
 
 
 @contextmanager

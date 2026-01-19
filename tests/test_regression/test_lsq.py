@@ -102,7 +102,7 @@ def test_lsq(resource_dir: Path) -> None:
     w_min = lsq_pos(matrix=data[stocks].pct_change().fillna(0.0), rhs=rhs_zero)
     w_track = lsq_pos(matrix=data[stocks], rhs=data[index])
 
-    d: dict[str, pd.Series] = dict()
+    d: dict[str, pd.Series] = {}
     d["Min Variance"] = (returns[stocks] * w_min).sum(axis=1)
     d["Index"] = returns[index]
     d["1/N"] = returns[stocks].mean(axis=1)
