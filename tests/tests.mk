@@ -26,7 +26,7 @@ test: install ## run all tests
 	  --cov=${SOURCE_FOLDER} \
 	  --cov-report=term \
 	  --cov-report=html:_tests/html-coverage \
-	  --cov-fail-under=90 \
+	  --cov-fail-under=${COVERAGE_FAIL_UNDER} \
 	  --cov-report=json:_tests/coverage.json \
 	  --html=_tests/html-report/report.html; \
 	else \
