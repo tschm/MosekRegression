@@ -1,1 +1,1 @@
-# Rhiza tests package
+"""Rhiza tests package."""

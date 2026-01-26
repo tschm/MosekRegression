@@ -1,1 +1,1 @@
-# Regression tests package
+"""Regression tests package."""
