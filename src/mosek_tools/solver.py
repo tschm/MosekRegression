@@ -6,7 +6,7 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from typing import Any
 
-import mosek  # type: ignore[import-not-found]
+from mosek import Error  # type: ignore[import-not-found]
 import numpy as np  # type: ignore[import-not-found]
 
 # Optional import of Mosek Fusion API to allow test collection without Mosek installed
@@ -331,7 +331,7 @@ def lsq_pos(matrix: np.ndarray, rhs: np.ndarray) -> np.ndarray:
 
         try:
             model.solve()
-        except mosek.Error as e:
+        except Error as e:
             print(e)
             return np.array([0.0] * matrix.shape[1])
 
@@ -371,7 +371,7 @@ def lsq_pos_l1_penalty(
 
         try:
             model.solve()
-        except mosek.Error as e:
+        except Error as e:
             print(e)
             return np.array([0.0] * matrix.shape[1])
 
@@ -434,7 +434,7 @@ def markowitz_riskobjective(exp_ret: np.ndarray, covariance_mat: np.ndarray, bou
 
         try:
             model.solve()
-        except mosek.Error as e:
+        except Error as e:
             print(e)
             return np.array([0.0] * len(exp_ret))
 
@@ -475,7 +475,7 @@ def markowitz(exp_ret: np.ndarray, covariance_mat: np.ndarray, aversion: float) 
         )
         try:
             model.solve()
-        except mosek.Error as e:
+        except Error as e:
             print(e)
             return np.array([0.0] * len(exp_ret))
 
@@ -530,7 +530,7 @@ def minimum_variance(matrix: np.ndarray) -> np.ndarray:
 
         try:
             model.solve()
-        except mosek.Error as e:
+        except Error as e:
             print(e)
             return np.array([0.0] * matrix.shape[1])
 
