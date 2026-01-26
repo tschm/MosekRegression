@@ -6,8 +6,8 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from typing import Any
 
-from mosek import Error  # type: ignore[import-not-found]
 import numpy as np  # type: ignore[import-not-found]
+from mosek import Error  # type: ignore[import-not-found]
 
 # Optional import of Mosek Fusion API to allow test collection without Mosek installed
 try:  # pragma: no cover - exercised only in environments without Mosek

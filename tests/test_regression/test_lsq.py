@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 try:
-    from mosek import Env, feature, Error
+    from mosek import Env, Error, feature
 
     MOSEK_AVAILABLE = True
 except ImportError:
