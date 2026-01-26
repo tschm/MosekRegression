@@ -54,3 +54,7 @@ pandas = "pandas"
 plotly = "plotly"
 yfinance = "yfinance"
 marimo = "marimo"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["mutants"]

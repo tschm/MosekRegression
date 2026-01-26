@@ -1,10 +1,9 @@
-## Makefile.tests - Testing and benchmarking targets
+## Makefile.tests - Testing targets
 # This file is included by the main Makefile.
-# It provides targets for running the test suite with coverage and
-# executing performance benchmarks.
+# It provides targets for running the test suite with coverage
 
 # Declare phony targets (they don't produce files)
-.PHONY: test benchmark typecheck security mutate docs-coverage
+.PHONY: test typecheck security docs-coverage
 
 # Default directory for tests
 TESTS_FOLDER := tests
@@ -63,33 +62,6 @@ security: install ## run security scans (pip-audit and bandit)
 	@${UVX_BIN} pip-audit
 	@printf "${BLUE}[INFO] Running bandit security scan...${RESET}\n"
 	@${UVX_BIN} bandit -r ${SOURCE_FOLDER} -ll -q
-
-# The 'mutate' target performs mutation testing using mutmut.
-# 1. Runs mutmut to apply mutations to the source code and check if tests fail.
-# 2. Displays the results of the mutation testing.
-mutate: install ## run mutation testing with mutmut (slow, for CI or thorough testing)
-	@printf "${BLUE}[INFO] Running mutation testing with mutmut...${RESET}\n"
-	@printf "${YELLOW}[WARN] This may take a while...${RESET}\n"
-	@${UVX_BIN} mutmut run --paths-to-mutate=${SOURCE_FOLDER}
-	@${UVX_BIN} mutmut results
-
-# The 'benchmark' target runs performance benchmarks using pytest-benchmark.
-# 1. Installs benchmarking dependencies (pytest-benchmark, pygal).
-# 2. Executes benchmarks found in the benchmarks/ subfolder.
-# 3. Generates histograms and JSON results.
-# 4. Runs a post-analysis script to process the results.
-benchmark: install ## run performance benchmarks
-	@if [ -d "${TESTS_FOLDER}/benchmarks" ]; then \
-	  printf "${BLUE}[INFO] Running performance benchmarks...${RESET}\n"; \
-	  ${UV_BIN} pip install pytest-benchmark==5.2.3 pygal==3.1.0; \
-	  ${VENV}/bin/python -m pytest "${TESTS_FOLDER}/benchmarks/" \
-	  		--benchmark-only \
-			--benchmark-histogram=tests/test_rhiza/benchmarks/benchmarks \
-			--benchmark-json=tests/test_rhiza/benchmarks/benchmarks.json; \
-	  ${VENV}/bin/python tests/test_rhiza/benchmarks/analyze_benchmarks.py ; \
-	else \
-	  printf "${YELLOW}[WARN] Benchmarks folder not found, skipping benchmarks${RESET}\n"; \
-	fi
 
 # The 'docs-coverage' target checks documentation coverage using interrogate.
 # 1. Checks if SOURCE_FOLDER exists.

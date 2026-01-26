@@ -3,19 +3,30 @@
 import os
 from pathlib import Path
 
-import mosek
 import pandas as pd
 import pytest
 
-from mosek_tools.solver import lsq_pos as ll
+try:
+    from mosek import Env, feature, Error
+
+    MOSEK_AVAILABLE = True
+except ImportError:
+    MOSEK_AVAILABLE = False
+
+try:
+    from mosek_tools.solver import lsq_pos as ll
+except ImportError:
+    ll = None
 
 
 def has_valid_mosek_license() -> bool:
     """Check if Mosek has a valid license."""
+    if not MOSEK_AVAILABLE:
+        return False
     try:
-        with mosek.Env() as env:
-            env.checkoutlicense(mosek.feature.pton)
-    except mosek.Error:
+        with Env() as env:
+            env.checkoutlicense(feature.pton)
+    except Error:
         return False
     else:
         return True
@@ -86,7 +97,7 @@ def sharpe_ratio(ts):
 
 
 @pytest.mark.skipif(
-    is_ci_environment() or not has_valid_mosek_license(),
+    not MOSEK_AVAILABLE or is_ci_environment() or not has_valid_mosek_license(),
     reason="Test requires valid Mosek license",
 )
 def test_lsq(resource_dir: Path) -> None:
