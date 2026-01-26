@@ -1,7 +1,7 @@
 # MosekTools
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![CI](https://github.com/tschm/MosekRegression/actions/workflows/ci.yml/badge.svg)](https://github.com/tschm/MosekRegression/actions/workflows/ci.yml)
+[![CI](https://github.com/tschm/MosekRegression/actions/workflows/rhiza_ci.yml/badge.svg)](https://github.com/tschm/MosekRegression/actions/workflows/rhiza_ci.yml)
 [![CodeQL](https://github.com/tschm/MosekRegression/actions/workflows/codeql.yml/badge.svg)](https://github.com/tschm/MosekRegression/actions/workflows/codeql.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/MosekRegression/badge)](https://www.codefactor.io/repository/github/tschm/MosekRegression)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://github.com/renovatebot/renovate)
