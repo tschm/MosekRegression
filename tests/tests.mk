@@ -11,7 +11,7 @@ TESTS_FOLDER := tests
 
 # Minimum coverage percent for tests to pass
 # (Can be overridden in local.mk or via environment variable)
-COVERAGE_FAIL_UNDER ?= 20
+COVERAGE_FAIL_UNDER ?= 90
 
 ##@ Development and Testing
 
