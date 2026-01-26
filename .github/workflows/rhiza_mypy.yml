@@ -29,6 +29,5 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # to brutal for now
-      # - name: Run mypy
-      #   run: make -f .rhiza/rhiza.mk mypy
+      - name: Run mypy
+        run: make -f .rhiza/rhiza.mk mypy

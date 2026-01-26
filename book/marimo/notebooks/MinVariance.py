@@ -9,7 +9,7 @@
 # ]
 #
 # [tool.uv.sources]
-# mosektools = { path = "../..", editable=true }
+# mosektools = { path = "../../..", editable=true }
 #
 # ///
 
