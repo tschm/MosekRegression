@@ -3,10 +3,22 @@
 import os
 from pathlib import Path
 
+import mosek
 import pandas as pd
 import pytest
 
 from mosek_tools.solver import lsq_pos as ll
+
+
+def has_valid_mosek_license() -> bool:
+    """Check if Mosek has a valid license."""
+    try:
+        with mosek.Env() as env:
+            env.checkoutlicense(mosek.feature.pton)
+    except mosek.Error:
+        return False
+    else:
+        return True
 
 
 def is_ci_environment() -> bool:
@@ -73,7 +85,10 @@ def sharpe_ratio(ts):
     return 16 * ts.mean() / ts.std()
 
 
-@pytest.mark.skipif(is_ci_environment(), reason="Test requires local Mosek license")
+@pytest.mark.skipif(
+    is_ci_environment() or not has_valid_mosek_license(),
+    reason="Test requires valid Mosek license",
+)
 def test_lsq(resource_dir: Path) -> None:
     """Test the least squares (LSQ) portfolio optimization for different strategies.
 
