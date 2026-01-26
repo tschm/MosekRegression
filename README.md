@@ -1,7 +1,7 @@
 # MosekTools
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![CI](https://github.com/tschm/MosekRegression/actions/workflows/ci.yml/badge.svg)](https://github.com/tschm/MosekRegression/actions/workflows/ci.yml)
+[![CI](https://github.com/tschm/MosekRegression/actions/workflows/rhiza_ci.yml/badge.svg)](https://github.com/tschm/MosekRegression/actions/workflows/rhiza_ci.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/MosekRegression/badge)](https://www.codefactor.io/repository/github/tschm/MosekRegression)
 
 **MosekTools** is a Python package providing high-level optimization tools for regression and portfolio optimization problems, built on top of the powerful [MOSEK](https://www.mosek.com/) optimization solver.
