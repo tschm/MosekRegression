@@ -1,1 +1,0 @@
-"""Rhiza tests package."""
